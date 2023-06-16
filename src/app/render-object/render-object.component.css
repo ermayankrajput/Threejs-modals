@@ -1,0 +1,7 @@
+#object_canvas {
+    border: 1px solid black;
+}
+#object_canvas canvas{
+    width: 100%;
+    height: 100%;
+}
