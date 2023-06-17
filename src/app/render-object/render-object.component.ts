@@ -33,24 +33,8 @@ export class RenderObjectComponent implements OnInit {
   }
 
   ngOnChanges() {
-    // console.log(this.file3dInput);
-    
-  }
-  ngOnInit(): void {
 
-
-    // console.log(this.file3dInput);
-    // if (this.file3dInput) {
-    //   const file = this.file3dInput;
-    //   const reader = new FileReader();
-    //   reader.onload = e => {
-    //     this.finalReadFile = reader.result;
-    //     console.log(this.finalReadFile);
-    //   } 
-    //   reader.readAsDataURL(file);
-    // }
-
-
+    this.scene?.remove()
     console.log(this.file3dInput);
     this.scene = new THREE.Scene()
     this.scene.add(new THREE.AxesHelper(5))
@@ -71,6 +55,7 @@ export class RenderObjectComponent implements OnInit {
     this.container = document.getElementById('object_canvas');
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.setPixelRatio(window.devicePixelRatio);
+    this.container.innerHTML = "";
     this.container.appendChild(this.renderer.domElement);
     this.controls = new OrbitControls(this.camera, this.renderer.domElement)
     this.controls.enableDamping = true
@@ -80,6 +65,10 @@ export class RenderObjectComponent implements OnInit {
     this.addEventListeners();
     this.animate();
 
+
+
+    
+    // console.log(this.file3dInput);
     const material = new THREE.MeshPhysicalMaterial({
       color: 0xFFFFFF,
       metalness: 0.25,
@@ -89,9 +78,11 @@ export class RenderObjectComponent implements OnInit {
       clearcoat: 1.0,
       clearcoatRoughness: 0.25
     })
-    // if(this.scene){
-      // this.scene?.remove()
-    // };
+
+
+      
+
+
     // console.log(this.scene);
     const loader = new STLLoader()
     loader.load(
@@ -108,6 +99,41 @@ export class RenderObjectComponent implements OnInit {
         console.log(error)
       }
     );
+    
+  }
+  ngOnInit(): void {
+
+
+    // console.log(this.file3dInput);
+    // this.scene = new THREE.Scene()
+    // this.scene.add(new THREE.AxesHelper(5))
+
+    // /////////////////////////// HemisphereLight ///////////////
+    // const light = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
+    // this.scene.add(light);
+    // /////////////////////////// HemisphereLight ///////////////
+
+    // console.log('size' + window.innerWidth / window.innerHeight);
+    // this.camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight,0.1,1000)
+    // this.camera.position.z = 3
+    // this.camera.position.x = 1
+    // this.camera.position.y = 1
+    // this.renderer = new THREE.WebGLRenderer()
+    // this.renderer.outputEncoding = THREE.sRGBEncoding
+    // this.renderer.setSize(window.innerWidth, window.innerHeight)
+    // this.container = document.getElementById('object_canvas');
+    // this.renderer = new THREE.WebGLRenderer();
+    // this.renderer.setPixelRatio(window.devicePixelRatio);
+    // this.container.appendChild(this.renderer.domElement);
+    // this.controls = new OrbitControls(this.camera, this.renderer.domElement)
+    // this.controls.enableDamping = true
+
+    
+    // this.stats = new Stats()
+    // this.addEventListeners();
+    // this.animate();
+
+    
 
 
 
