@@ -22,7 +22,7 @@ export class FileUploadComponent implements OnInit {
     this.onFileUpload.emit(event.target.files[0])
     if (file) {
       this.converterService.upload(file).subscribe((response) => {
-        console.log(response)
+        console.log(response, 'kberjknjn')
       });
     }
 

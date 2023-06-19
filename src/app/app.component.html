@@ -1,5 +1,5 @@
 <app-header></app-header>
 <app-file-upload (onFileUpload) = 'renderFile($event)'></app-file-upload>
-
+<app-quote-info [quoteInfo] = 'quoteInfo'></app-quote-info>
 <app-render-object *ngIf = 'file3d' [file3dInput] = 'file3d'></app-render-object>
 <app-footer></app-footer>

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ConverterService {
-  apiBase = 'https://faa3-223-233-74-152.in.ngrok.io';
+  apiBase = 'https://0721-223-233-74-152.in.ngrok.io';
   constructor(private http: HttpClient) { }
 
   upload(file:any): Observable<HttpEvent<any>> {

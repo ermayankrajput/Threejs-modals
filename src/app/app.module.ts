@@ -8,6 +8,11 @@ import { FooterComponent } from './footer/footer.component';
 import { RenderObjectComponent } from './render-object/render-object.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { HttpClientModule } from '@angular/common/http';
+import { QuoteInfoComponent } from './quote-info/quote-info.component';
+import { UnitQuoteComponent } from './quote-info/unit-quote/unit-quote.component';
+import { ButtonComponent } from './button/button.component';
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -15,11 +20,15 @@ import { HttpClientModule } from '@angular/common/http';
     FooterComponent,
     RenderObjectComponent,
     FileUploadComponent,
+    QuoteInfoComponent,
+    UnitQuoteComponent,
+    ButtonComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
