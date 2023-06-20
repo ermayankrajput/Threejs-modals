@@ -12,6 +12,7 @@ export class QuoteInfoComponent implements OnInit {
   @Input() quoteInfo!: QuoteInfo; 
   @Input() index!:number;
   @Output() clonedQuote = new EventEmitter() 
+  @Output() removeQuote = new EventEmitter() 
   
   constructor(private quoteInfoFactory: QuoteInfoFactory) { }
 
@@ -30,5 +31,14 @@ export class QuoteInfoComponent implements OnInit {
     this.clonedQuote.emit({quoteInfo: this.quoteInfoFactory.buildQuoteInfo(this.quoteInfo.image || ""),index:this.index+1})
   }
 
+  removeQuoteInfo(){
+    if (confirm("Want to delete?") == true) {
+      this.removeQuote.emit(this.index)
+    }
+    // this.quoteInfo.unitQuote.pop(this.quoteInfoFactory.buildUnitQuote())
+  }
+  removeUnitQuote(event:number){
+    this.quoteInfo.unitQuote.splice(event, 1)
+  }
 
 }

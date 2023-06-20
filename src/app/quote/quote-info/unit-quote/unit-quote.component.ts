@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
 import { UnitQuote } from '../../../interface/unit-quote';
 
 @Component({
@@ -7,12 +7,11 @@ import { UnitQuote } from '../../../interface/unit-quote';
   styleUrls: ['./unit-quote.component.css']
 })
 export class UnitQuoteComponent implements OnInit {
-  @Input()
-    unitQuote!: UnitQuote;
-
+  @Input() unitQuote!: UnitQuote;
   constructor() { }
 
   ngOnInit(): void {
   }
+
 
 }

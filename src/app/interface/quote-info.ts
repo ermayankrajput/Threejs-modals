@@ -6,4 +6,7 @@ export interface QuoteInfo {
     finishing: string|null;
     unitQuote: UnitQuote[];
     image: string;
+    x: number|null;
+    y:number|null;
+    z:number|null;
 }

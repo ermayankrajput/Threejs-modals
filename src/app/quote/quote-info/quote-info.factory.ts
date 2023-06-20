@@ -15,6 +15,9 @@ export class QuoteInfoFactory{
             technique: '', 
             finishing: '', 
             image: image,
+            x: null,
+            y: null,
+            z: null,
             unitQuote: [
                 {
                     id: Math.random(),

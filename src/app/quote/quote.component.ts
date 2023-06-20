@@ -26,5 +26,8 @@ export class QuoteComponent implements OnInit {
   onClonedQuote(event:{quoteInfo: QuoteInfo, index: number}){
     this.quote.quoteInfo.splice(event.index, 0, event.quoteInfo);
   }
+  onRemoveQuote(event:number){
+    this.quote.quoteInfo.splice(event, 1)
+  }
 
 }

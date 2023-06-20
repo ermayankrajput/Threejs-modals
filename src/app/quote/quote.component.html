@@ -1,4 +1,4 @@
-<app-quote-info (clonedQuote)='onClonedQuote($event)' *ngFor="let quoteInfo of quote.quoteInfo; let i = index"
+<app-quote-info (removeQuote)='onRemoveQuote($event)' (clonedQuote)='onClonedQuote($event)' *ngFor="let quoteInfo of quote.quoteInfo; let i = index"
     [quoteInfo]='quoteInfo' [index] = 'i'></app-quote-info>
 <app-file-upload (onFileUpload)='renderFile($event)'></app-file-upload>
-<app-render-object *ngIf='file3d' [file3dInput]='file3d'></app-render-object>
+<!-- <app-render-object *ngIf='file3d' [file3dInput]='file3d'></app-render-object> -->

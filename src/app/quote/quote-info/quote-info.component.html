@@ -1,4 +1,5 @@
-<div class="container mt-4 bg-gray-200 py-4">
+<div class="container mt-4 bg-gray-200 py-4 position-relative"> 
+    <div (click) = 'removeQuoteInfo()' class="text-right position-absolute end-0 top-0" role="button"><span class="badge rounded-pill bg-danger">Remove</span></div>
     <div class="row">
         <div class="col-lg-2">
             <br>
@@ -9,16 +10,16 @@
         <div class="col-lg-8">
             <div class="row">
                 <div class="col-lg-3">
-                    <h4 class="text-center">Unit Price</h4>
+                    <h4 class="text-center">Unit Price <span class="fs-6">(in USD)</span></h4>
                 </div>
                 <div class="col-lg-3">
                     <h4 class="text-center">Quantity</h4>
                 </div>
                 <div class="col-lg-3">
-                    <h4 class="text-center">Amount</h4>
+                    <h4 class="text-center">Amount <span class="fs-6">(in USD)</span></h4>
                 </div>
                 <div class="col-lg-3">
-                    <h4 class="text-center">Lead Time</h4>
+                    <h4 class="text-center">Lead Time <span class="fs-6">(in days)</span></h4>
                 </div>
             </div>
         </div>
@@ -28,6 +29,7 @@
             <img class="w-100"
                 src="{{quoteInfo.image}}"
                 alt="testing">
+                <div class="text-center pt-2">X:{{quoteInfo.x}}mm, Y: {{quoteInfo.y}}mm, Z: {{quoteInfo.z}}mm</div>
         </div>
         <div class="col-lg-2 ">
             <input type="text" class="form-control" placeholder="Material" [(ngModel)] = 'quoteInfo.material'>
@@ -35,7 +37,12 @@
             <input type="text" class="form-control mt-2" placeholder="Finishing" [(ngModel)] = 'quoteInfo.finishing'>
         </div>
         <div class="col-lg-8">
-            <app-unit-quote *ngFor="let unitQuote of quoteInfo.unitQuote" [unitQuote] = 'unitQuote'></app-unit-quote>
+            <div class="position-relative" *ngFor="let unitQuote of quoteInfo.unitQuote; let i = index" >
+                <app-unit-quote [unitQuote]='unitQuote' ></app-unit-quote>
+                <div class="position-absolute end-0 top-0" role="button" *ngIf="quoteInfo.unitQuote.length > 1" (click) = 'removeUnitQuote(i)'>
+                    <span class="badge rounded-pill bg-danger"> - </span>
+                </div>
+            </div>
             <div class="row mt-2">
                 <div class="col-lg-3 offset-lg-9">
                     <app-button [text]="'Add Row'" (click) = 'addUnitQuote()'></app-button>
