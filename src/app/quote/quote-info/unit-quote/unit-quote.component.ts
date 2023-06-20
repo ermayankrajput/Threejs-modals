@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { UnitQuote } from '../../interface/quoteinfo/unitquote/unit-quote';
+import { UnitQuote } from '../../../interface/unit-quote';
 
 @Component({
   selector: 'app-unit-quote',

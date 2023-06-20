@@ -19,13 +19,15 @@ export class FileUploadComponent implements OnInit {
   upload3dfile(event:any){
     console.log(event.target.files[0].name)
     const file:File = event.target.files[0];
-    this.onFileUpload.emit(event.target.files[0])
-    if (file) {
+    // this.onFileUpload.emit(event.target.files[0])
+    if (file && 0) {
       this.converterService.upload(file).subscribe((response) => {
         console.log(response, 'kberjknjn')
       });
     }
-
+    if(file){
+      this.onFileUpload.emit(this.converterService.mockUpload(file))
+    }
   }
 
 

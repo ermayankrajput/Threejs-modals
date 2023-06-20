@@ -8,10 +8,11 @@ import { FooterComponent } from './footer/footer.component';
 import { RenderObjectComponent } from './render-object/render-object.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { HttpClientModule } from '@angular/common/http';
-import { QuoteInfoComponent } from './quote-info/quote-info.component';
-import { UnitQuoteComponent } from './quote-info/unit-quote/unit-quote.component';
+import { QuoteInfoComponent } from './quote/quote-info/quote-info.component';
+import { UnitQuoteComponent } from './quote/quote-info/unit-quote/unit-quote.component';
 import { ButtonComponent } from './button/button.component';
 import { FormsModule } from '@angular/forms';
+import { QuoteComponent } from './quote/quote.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { FormsModule } from '@angular/forms';
     QuoteInfoComponent,
     UnitQuoteComponent,
     ButtonComponent,
+    QuoteComponent,
   ],
   imports: [
     BrowserModule,
