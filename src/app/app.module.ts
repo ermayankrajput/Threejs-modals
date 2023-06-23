@@ -13,6 +13,8 @@ import { UnitQuoteComponent } from './quote/quote-info/unit-quote/unit-quote.com
 import { ButtonComponent } from './button/button.component';
 import { FormsModule } from '@angular/forms';
 import { QuoteComponent } from './quote/quote.component';
+import { SamplePdfComponent } from './sample-pdf/sample-pdf.component';
+import { QuotePdfComponent } from './quote/quote-pdf/quote-pdf.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { QuoteComponent } from './quote/quote.component';
     UnitQuoteComponent,
     ButtonComponent,
     QuoteComponent,
+    SamplePdfComponent,
+    QuotePdfComponent,
   ],
   imports: [
     BrowserModule,

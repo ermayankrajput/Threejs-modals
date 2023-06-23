@@ -1,0 +1,187 @@
+<div class="position-relative p-3">
+    <button class="btn btn-primary mt-2 position-absolute" (click)="downloadAsPDF()">Export To PDF</button>
+</div>
+<div class="pdf-container mx-auto" id="pdfContainer" #pdfContainer>
+    <div class="container main-container">
+        <div class="row">
+            <div class="col-9 offset-3 px-0">
+                <div class="dark-hr"></div>
+            </div>
+        </div>
+        <div class="row mb-4 pb-2">
+            <div class="col-3 px-0">
+                <img width="90px" src="./assets/logo.png" alt="3erp logo" style="width: 90px;">
+            </div>
+            <div class="col-4 mt-3 ps-0">
+                <h1 class="blue fs-16">QUOTATION</h1>
+                <div class="light-hr my-1"></div>
+                <div class="fs-8 mb-0">Quotation no: <span class="green">#332267</span></div>
+                <div class="light-hr my-1"></div>
+                <div class="fs-8 mb-0">Date: <span class="black-70">12-Oct-2022</span></div>
+                <div class="light-hr my-1"></div>
+                <div class="fs-8 mb-0">Validity: <span class="black-70">30 Days</span></div>
+                <div class="light-hr my-1"></div>
+            </div>
+            <div class="col-5 mt-3 fs-8">
+                <div class="">SUPLIER</div>
+                <div class="blue  mb-0 mt-12">Ronan Ye</div>
+                <div class="mt-0 black-50 ">Ronan@3erp.com</div>
+                <div class=" mt-12">Address:<span class="black-70">GangKou, ZhongShan City, GuangDong Province, China</span></div>
+                <div class="blue mt-12 ">+1 586-449-4689</div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="hr-dash my-1 col-12 px-0"></div>
+        </div>
+        <div class="row fs-8 mt-3">
+            <div class="col-3 ps-0">
+                <div class="">Quote To</div>
+                <div class="blue  mb-0 mt-12">Michael Bolf</div>
+                <div class="mt-0 black-50 ">General Motors</div>
+                <div class=" mt-12"><span class="black-70">GM Global Technical Center - Cole Engineering Center</span></div>
+                <div class="blue mt-12 ">+1 586-449-4689</div>
+            </div>
+            <div class="col-4">
+                <div class="">Adress</div>
+                <div class=" mt-12"><span class="black-70">GangKou, ZhongShan City,GuangDong Province, China</span></div>
+            </div>
+            <div class="col-5 pe-0">
+                <div class="">Payment Method <span style="padding-left: 20px;" class="black-70">Bank Transfer</span></div>
+                <div class=" mt-12 mb-0">Currency: <span class="black-70">U. S. Dollar</span></div>
+                <div class="light-hr my-1"></div>
+                <div class=" ">Terms: <span class="black-70">Pay in advance</span></div>
+                <div class="light-hr my-1"></div>
+            </div>
+        </div>
+        <div class="row text-center fs-6 white bg-black align-center mt-3 ">
+            <div class="col-1 border-right">Item</div>
+            <div class="col-2 border-right">Part Name</div>
+            <div class="col-3 border-right">Article Description</div>
+            <div class="col-2 border-right">Unit Price(USD)</div>
+            <div class="col-1 border-right">Quantity</div>
+            <div class="col-2 border-right">Amount(USD)</div>
+            <div class="col-1 border-right">Lead Time</div>
+        </div>
+        <div class="row fs-6 align-center bg-gray align-items-stretch">
+            <div class="col-1 border-right-white border-bottom-white py-11 text-center px-2 d-flex align-items-center justify-content-around">001</div>
+            <div class="col-2 border-right-white border-bottom-white py-11 px-2 d-flex align-items-center">Prototype Mold</div>
+            <div class="col-3 border-right-white border-bottom-white py-11 d-flex flex-column align-items-start justify-content-center">
+                <div>Process: <span class="black-70">CNC Machining & EDM</span></div>
+                <div>Material: <span class="black-70">H13</span></div>
+                <div>Finish: <span class="black-70">N/A</span></div>
+            </div>
+            <div class="col-2 border-right-white border-bottom-white text-center px-0 d-flex flex-column align-items-start justify-content-center">
+                <div class="px-2 py-1 w-100">2,940.00</div>
+                <div class="hr-dash w-100"></div>
+                <div class="px-2 py-1 w-100">2,940.00</div>
+                <div class="hr-dash w-100"></div>
+                <div class="px-2 py-1 w-100">2,940.00</div>
+            </div>
+            <div class="col-1 border-right-white border-bottom-white py-11 text-center px-0 d-flex flex-column align-items-start justify-content-center">
+                <div class="px-2 py-1 w-100">1</div>
+                <div class="hr-dash w-100"></div>
+                <div class="px-2 py-1 w-100">1</div>
+                <div class="hr-dash w-100"></div>
+                <div class="px-2 py-1 w-100">1</div>
+            </div>
+            <div class="col-2 border-right-white border-bottom-white py-11 text-center px-0 d-flex flex-column align-items-start justify-content-center">
+                <div class="px-2 py-1 w-100">2,940.00</div>
+                <div class="hr-dash w-100"></div>
+                <div class="px-2 py-1 w-100">2,940.00</div>
+                <div class="hr-dash w-100"></div>
+                <div class="px-2 py-1 w-100">2,940.00</div>
+            </div>
+            <div class="col-1 border-right-white border-bottom-white py-11 text-center px-2 d-flex align-items-center justify-content-around">25 days</div>
+        </div>
+        <div class="row fs-6 align-center bg-gray align-items-stretch">
+            <div
+                class="col-1 border-right-white border-bottom-white py-11 text-center px-2 d-flex align-items-center justify-content-around">
+                002</div>
+            <div class="col-2 border-right-white border-bottom-white py-11 px-2 d-flex align-items-center">Prototype Mold</div>
+            <div
+                class="col-3 border-right-white border-bottom-white py-11 d-flex flex-column align-items-start justify-content-center">
+                <div>Process: <span class="black-70">Extruded</span></div>
+                <div>Material: <span class="black-70">AI 6063</span></div>
+                <div>Finish: <span class="black-70">Deburred</span></div>
+            </div>
+            <div
+                class="col-2 border-right-white border-bottom-white text-center px-0 d-flex flex-column align-items-start justify-content-center">
+                <div class="px-2 py-1 w-100">76.00</div>
+                <div class="hr-dash w-100"></div>
+                <div class="px-2 py-1 w-100">2,940.00</div>
+            </div>
+            <div
+                class="col-1 border-right-white border-bottom-white py-11 text-center px-0 d-flex flex-column align-items-start justify-content-center">
+                <div class="px-2 py-1 w-100">160</div>
+                <div class="hr-dash w-100"></div>
+                <div class="px-2 py-1 w-100">2,940.00</div>
+            </div>
+            <div
+                class="col-2 border-right-white border-bottom-white py-11 text-center px-0 d-flex flex-column align-items-start justify-content-center">
+                <div class="px-2 py-1 w-100">12,160.00</div>
+                <div class="hr-dash w-100"></div>
+                <div class="px-2 py-1 w-100">2,940.00</div>
+            </div>
+            <div
+                class="col-1 border-right-white border-bottom-white py-11 text-center px-2 d-flex align-items-center justify-content-around">
+                15 days</div>
+        </div>
+        <div class="row fs-6 align-center bg-gray align-items-stretch">
+            <div
+                class="col-1 border-right-white border-bottom-white py-11 text-center px-2 d-flex align-items-center justify-content-around">
+                003</div>
+            <div class="col-2 border-right-white border-bottom-white py-11 px-2 d-flex align-items-center">Prototype Mold</div>
+            <div
+                class="col-3 border-right-white border-bottom-white py-11 d-flex flex-column align-items-start justify-content-center">
+                <div>Process: <span class="black-70">Extruded</span></div>
+                <div>Material: <span class="black-70">AI 6063</span></div>
+                <div>Finish: <span class="black-70">Deburred</span></div>
+            </div>
+            <div
+                class="col-2 border-right-white border-bottom-white text-center px-0 d-flex flex-column align-items-start justify-content-center">
+                <div class="px-2 py-1 w-100">76.00</div>
+            </div>
+            <div
+                class="col-1 border-right-white border-bottom-white py-11 text-center px-0 d-flex flex-column align-items-start justify-content-center">
+                <div class="px-2 py-1 w-100">160</div>
+            </div>
+            <div
+                class="col-2 border-right-white border-bottom-white py-11 text-center px-0 d-flex flex-column align-items-start justify-content-center">
+                <div class="px-2 py-1 w-100">12,160.00</div>
+            </div>
+            <div
+                class="col-1 border-right-white border-bottom-white py-11 text-center px-2 d-flex align-items-center justify-content-around">
+                15 days</div>
+        </div>
+        
+        <div class="row mt-2 align-center">
+            <div class="col-7 fs-6 ps-0">
+                <div>Note:</div>
+                <div>1. Tolerances: As per drawing</div>
+                <div>2. Import Tax: this tax in destination country is not included</div>
+            </div>
+            <div class="col-2 blue fs-8 ">Grand Total</div>
+            <div class="col-3 blue-div text-center fs-8">22,500.00</div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-5 offset-7 pe-0">
+                <div class="fs-8">Please sign and date below</div>
+                <div class="fs-6 black-70">if you wish 3E to proceed with your job</div>
+                <div style="height:32px;background-color:#F5F5F5" class="mt-2"></div>
+                <div class="fs-6 black-70 mt-1">I confirm that I am an authorised signatory of the client company.</div>
+            </div>
+        </div>
+        <div class="row mt-63">
+            <div class="col-12 px-0">
+                <div class="dark-hr"></div>
+                <div class="mt-2">
+                    <div class="fs-8 black-70">
+                        <img src="./assets/rights.svg" width="30px" alt="Rights">
+                        <span class="ps-2">ISO:9001-2015 Certified</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

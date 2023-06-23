@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HostListener } from '@angular/core';
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,4 +16,5 @@ export class AppComponent {
   // showAlertMessageWhenClosingTab($event:any) {
   //     $event.returnValue = 'Your data will be lost!';
   // }
+  
 }

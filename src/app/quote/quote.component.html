@@ -1,4 +1,13 @@
-<app-quote-info (removeQuote)='onRemoveQuote($event)' (clonedQuote)='onClonedQuote($event)' *ngFor="let quoteInfo of quote.quoteInfo; let i = index"
+
+<div id="MyDIv" #MyDIv>
+    <div class="container">
+        <div class="row text-right">
+            <button class="btn btn-primary mt-2" *ngIf="quote.quoteInfo.length > 0" (click)="downloadAsPDF()">Export To PDF</button>
+        </div>
+    </div>
+    <app-quote-info (removeQuote)='onRemoveQuote($event)' (clonedQuote)='onClonedQuote($event)' *ngFor="let quoteInfo of quote.quoteInfo; let i = index"
     [quoteInfo]='quoteInfo' [index] = 'i'></app-quote-info>
+</div>
+
 <app-file-upload (onFileUpload)='renderFile($event)'></app-file-upload>
 <!-- <app-render-object *ngIf='file3d' [file3dInput]='file3d'></app-render-object> -->
