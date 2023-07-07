@@ -1,7 +1,6 @@
 export interface UnitQuote {
     id: number|null;
-    unitPrice: number|null;
+    unit_price: number|null;
     quantity: number|null;
-    amount: number|null;
-    leadTime: number|null;
+    lead_time: number|null;
 }

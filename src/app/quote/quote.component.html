@@ -2,12 +2,28 @@
 <div id="MyDIv" #MyDIv>
     <div class="container">
         <div class="row text-right">
-            <button class="btn btn-primary mt-2" *ngIf="quote.quoteInfo.length > 0" (click)="downloadAsPDF()">Export To PDF</button>
+            <button class="btn btn-primary mt-2" *ngIf="quote.quote_infos.length > 0" (click)="downloadAsPDF()">Export To PDF</button>
         </div>
     </div>
-    <app-quote-info (removeQuote)='onRemoveQuote($event)' (clonedQuote)='onClonedQuote($event)' *ngFor="let quoteInfo of quote.quoteInfo; let i = index"
-    [quoteInfo]='quoteInfo' [index] = 'i'></app-quote-info>
+    <div *ngFor="let quoteInfo of quote.quote_infos; let i = index" class="position-relative">
+        <div (click)='removeQuoteInfo()' class="text-right position-absolute end-0 top-0" role="button"><span
+                class="badge rounded-pill bg-danger">Remove</span></div>
+        <app-quote-info [quoteInfo]='quoteInfo' [index] = 'i'></app-quote-info>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-end pe-0">
+                    <span class="badge rounded-pill badge-radius text-dark px-3 py-2 bg-gray-200 pointer"
+                        (click)='makeCopy()'>Make a Copy </span>
+                    <span class="badge rounded-pill badge-radius text-dark px-3 py-2 bg-gray-200 pointer"
+                        (click)="makeCopyWithNoData()">New Data With No Data</span>
+                    <span class="badge rounded-pill badge-radius text-dark px-3 py-2 bg-gray-200 pointer"
+                        (click)="createQuoteInfo(quoteInfo)">Save Quote Info</span>
+                </div>
+            </div>
+            <span><!--ADD_PAGE--></span>
+        </div>
+    </div>
 </div>
 
-<app-file-upload (onFileUpload)='renderFile($event)'></app-file-upload>
+<!-- <app-file-upload (onFileUpload)='renderFile($event)'></app-file-upload> -->
 <!-- <app-render-object *ngIf='file3d' [file3dInput]='file3d'></app-render-object> -->

@@ -2,6 +2,8 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { QuoteInfo } from '../../interface/quote-info';
 import { QuoteInfoFactory } from './quote-info.factory';
 import * as _ from 'lodash';
+import { QuoteService } from 'src/app/services/quote.service';
+import { UnitQuote } from 'src/app/interface/unit-quote';
 
 @Component({
   selector: 'app-quote-info',
@@ -11,34 +13,28 @@ import * as _ from 'lodash';
 export class QuoteInfoComponent implements OnInit {
   @Input() quoteInfo!: QuoteInfo; 
   @Input() index!:number;
-  @Output() clonedQuote = new EventEmitter() 
-  @Output() removeQuote = new EventEmitter() 
+  resUnitQuote:any;
   
-  constructor(private quoteInfoFactory: QuoteInfoFactory) { }
+  constructor(private quoteInfoFactory: QuoteInfoFactory, private quoteService:QuoteService) { }
 
   ngOnInit(): void {
   }
 
   addUnitQuote(){
-    this.quoteInfo.unitQuote.push(this.quoteInfoFactory.buildUnitQuote())
+    this.quoteService.createUniteQuote(this.quoteInfo.id).subscribe((response) => {
+      console.log(response, 'in quote component ts')
+      this.resUnitQuote = response;
+      this.quoteInfo.unit_quotes.push(this.resUnitQuote)
+    });
+  }
+  
+  removeUnitQuote(unitQuote:UnitQuote){
+    this.quoteService.deleteUniteQuote(unitQuote).subscribe((response) => {
+      console.log(response, 'in quote component ts')
+      // this.quoteInfo.unit_quotes.splice(event, 1)
+    });
   }
 
-  makeCopy(){
-    this.clonedQuote.emit({quoteInfo: _.cloneDeep(this.quoteInfo),index:this.index+1})
-  }
-
-  makeCopyWithNoData(){
-    this.clonedQuote.emit({quoteInfo: this.quoteInfoFactory.buildQuoteInfo(this.quoteInfo.image || ""),index:this.index+1})
-  }
-
-  removeQuoteInfo(){
-    if (confirm("Want to delete?") == true) {
-      this.removeQuote.emit(this.index)
-    }
-    // this.quoteInfo.unitQuote.pop(this.quoteInfoFactory.buildUnitQuote())
-  }
-  removeUnitQuote(event:number){
-    this.quoteInfo.unitQuote.splice(event, 1)
-  }
+  
 
 }

@@ -13,8 +13,13 @@ import { UnitQuoteComponent } from './quote/quote-info/unit-quote/unit-quote.com
 import { ButtonComponent } from './button/button.component';
 import { FormsModule } from '@angular/forms';
 import { QuoteComponent } from './quote/quote.component';
-import { SamplePdfComponent } from './sample-pdf/sample-pdf.component';
 import { QuotePdfComponent } from './quote/quote-pdf/quote-pdf.component';
+import { QuoteIndexComponent } from './quote-index/quote-index.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -27,14 +32,19 @@ import { QuotePdfComponent } from './quote/quote-pdf/quote-pdf.component';
     UnitQuoteComponent,
     ButtonComponent,
     QuoteComponent,
-    SamplePdfComponent,
     QuotePdfComponent,
+    QuoteIndexComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatFormFieldModule, 
+    MatInputModule, 
+    MatTableModule, 
+    MatSortModule, 
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

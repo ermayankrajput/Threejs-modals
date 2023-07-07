@@ -1,0 +1,11 @@
+.bg-gray-200 {
+    background-color: #e9ecef;
+}
+
+.badge-radius {
+    border-radius: 0px 0px 8px 8px !important;
+}
+
+.pointer {
+    cursor: pointer;
+}

@@ -11,32 +11,32 @@ export class QuoteInfoFactory{
     buildQuoteInfo(image:string=''){
         return {
             id: Math.random(), 
-            material: '', 
-            technique: '', 
             finishing: '', 
-            image: image,
-            x: null,
-            y: null,
-            z: null,
-            unitQuote: [
+            image_file: '',
+            technique: '', 
+            transported_file: '',
+            material_search: '', 
+            unit_quotes: [
                 {
                     id: Math.random(),
-                    unitPrice: null,
+                    unit_price: null,
                     quantity: null,
-                    amount: null,
-                    leadTime: null
+                    lead_time: null
                 }
-            ]
+            ],
+            uploded_file: '',
+            x_size: null,
+            y_size: null,
+            z_size: null,
         };
     }
 
     buildUnitQuote(){
         return {
             id: Math.random(),
-            unitPrice: null,
+            unit_price: null,
             quantity: null,
-            amount: null,
-            leadTime: null
+            lead_time: null
         }
     }
 }
