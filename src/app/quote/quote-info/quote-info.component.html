@@ -27,19 +27,19 @@
     <div class="row mt-3">
         <div class="col-lg-2">
             <img class="w-100"
-                src="{{quoteInfo.image_file}}"
+                src="{{rootService.getApiBase()}}/{{quoteInfo.image_file}}"
                 alt="testing">
                 <div class="text-center pt-2">X:{{quoteInfo.x_size}}mm, Y: {{quoteInfo.y_size}}mm, Z: {{quoteInfo.z_size}}mm</div>
         </div>
         <div class="col-lg-2 ">
-            <input type="text" class="form-control" placeholder="Material" [(ngModel)] = 'quoteInfo.material_search'>
-            <input type="text" class="form-control mt-2" placeholder="Technique" [(ngModel)] = 'quoteInfo.technique'>
-            <input type="text" class="form-control mt-2" placeholder="Finishing" [(ngModel)] = 'quoteInfo.finishing'>
+            <input type="text" (change)="updateQuoteInfo(quoteInfo)" class="form-control" placeholder="Material" [(ngModel)] = 'quoteInfo.material_search'>
+            <input type="text" (change)="updateQuoteInfo(quoteInfo)" class="form-control mt-2" placeholder="Technique" [(ngModel)] = 'quoteInfo.technique'>
+            <input type="text" (change)="updateQuoteInfo(quoteInfo)" class="form-control mt-2" placeholder="Finishing" [(ngModel)] = 'quoteInfo.finishing'>
         </div>
         <div class="col-lg-8">
             <div class="position-relative" *ngFor="let unitQuote of quoteInfo.unit_quotes; let i = index" >
                 <app-unit-quote [unitQuote]='unitQuote' ></app-unit-quote>
-                <div class="position-absolute end-0 top-0" role="button" *ngIf="quoteInfo.unit_quotes.length > 1" (click) = 'removeUnitQuote(unitQuote)'>
+                <div class="position-absolute end-0 top-0" role="button" *ngIf="quoteInfo.unit_quotes.length > 1" (click) = 'removeUnitQuote(unitQuote, i)'>
                     <span class="badge rounded-pill bg-danger"> - </span>
                 </div>
             </div>

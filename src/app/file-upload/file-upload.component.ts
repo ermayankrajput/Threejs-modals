@@ -1,7 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpEvent } from '@angular/common/http';
 import { ConverterService } from '../services/converter.service';
 // import { EventEmitter } from 'stream';
+import { QuoteService } from '../services/quote.service';
+import { Router } from '@angular/router';
+import { Quote } from '../interface/quote';
 
 @Component({
   selector: 'app-file-upload',
@@ -10,24 +13,35 @@ import { ConverterService } from '../services/converter.service';
 })
 export class FileUploadComponent implements OnInit {
   @Output() onFileUpload = new EventEmitter() 
-  constructor(private converterService:ConverterService) { }
+  @Output() onCreateQuoteInfo = new EventEmitter() 
+  @Input() quoteId:number = 0;
+  constructor(private converterService:ConverterService, private quoteService:QuoteService, private router:Router) { }
   fileName = '';
-
+  quoteResponse:any;
   ngOnInit(): void {
   }
 
   upload3dfile(event:any){
-    console.log(event.target.files[0].name)
     const file:File = event.target.files[0];
-    // this.onFileUpload.emit(event.target.files[0])
-    if (file && 0) {
+    if (file) {
       this.converterService.upload(file).subscribe((response) => {
-        console.log(response, 'kberjknjn')
+        this.quoteId === 0? this.createQuote(response): this.createQuoteInfo(response);
       });
     }
-    if(file){
-      this.onFileUpload.emit(this.converterService.mockUpload(file))
-    }
+  }
+
+  createQuote(fileResponse:any){
+    this.quoteService.createQuote(fileResponse).subscribe((response) => {
+      this.quoteResponse = response;
+      console.log(response);
+      this.router.navigate(["/quote",this.quoteResponse.id])
+    });
+  }
+
+  createQuoteInfo(fileResponse:any){
+    this.quoteService.createQuoteInfo(fileResponse,this.quoteId).subscribe((response) => {
+      this.onCreateQuoteInfo.emit(response);
+    });
   }
 
 

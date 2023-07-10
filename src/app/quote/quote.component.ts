@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild,ElementRef  } from '@angular/core';
+import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
 import { Quote } from './../interface/quote';
 import { QuoteInfo } from './../interface/quote-info';
 import { QuoteInfoFactory } from './quote-info/quote-info.factory';
@@ -14,42 +14,37 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './quote.component.html',
   styleUrls: ['./quote.component.css']
 })
-export class QuoteComponent implements OnInit {
+export class QuoteComponent implements OnInit  {
   @ViewChild('MyDIv') MyDIv!: ElementRef;
-  // file3d:any;
   api_res:any;
   fileObject:any;
-  quote: Quote = {
-    id: 1,
-    grand_total: null,
-    quote_date: null,
-    quote_infos: [],
-    shipping_cost: null,
-    validity: null,
-  }
+  quote!:Quote;
+  
   constructor(private quoteInfoFactory:QuoteInfoFactory,private converterService:ConverterService,private quoteService:QuoteService,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    console.log('id is: '+id)
     this.quoteService.getSingleQuote(id).subscribe((response) => {
-          console.log(response, 'in quote component ts')
-          this.api_res = response;
-          this.quote = this.api_res;
-        });
+      this.api_res = response;
+      console.log(response);
+      this.quote = this.api_res;
+      this.quote.grand_total = this.quote.grand_total?this.quote.grand_total:0;
+    });
+  }
+
+
+  ngDoCheck(): void {
+    if (this.quote) {
+      if(this.calculateTotalCost() != this.quote.grand_total){
+        this.quote.grand_total = this.calculateTotalCost();
+        this.updateQuote();
+      };
+    }
   }
   
 
   renderFile(event:any){
       this.quote.quote_infos.push(this.quoteInfoFactory.buildQuoteInfo(event.file))
-      // new function to call create quote service
-      console.log('in render file', event)
-      // if (event) {
-      //   this.quoteService.createQuote({files: event.file}).subscribe((response) => {
-      //     console.log(response, 'in quote component ts')
-      //   });
-      // }
-
   }
   onClonedQuote(event:{quoteInfo: QuoteInfo, index: number}){
     this.quote.quote_infos.splice(event.index, 0, event.quoteInfo);
@@ -79,26 +74,45 @@ export class QuoteComponent implements OnInit {
     }); 
   }
 
-  makeCopy(){
-    // this.clonedQuote.emit({quoteInfo: _.cloneDeep(this.quoteInfo),index:this.index+1})
+  addQuoteInfo(event:QuoteInfo){
+    this.quote.quote_infos.push(event);
   }
 
-  makeCopyWithNoData(){
-    // this.clonedQuote.emit({quoteInfo: this.quoteInfoFactory.buildQuoteInfo(this.quoteInfo.image_file || ""),index:this.index+1})
-  }
-
-  removeQuoteInfo(){
+  removeQuoteInfo(quoteInfo:any,i:number){
     if (confirm("Want to delete?") == true) {
-      // this.removeQuote.emit(this.index)
+      this.quoteService.deleteQuoteInfo(quoteInfo).subscribe((response) => {
+        this.quote.quote_infos.splice(i, 1)
+      });
     }
-    // this.quoteInfo.unitQuote.pop(this.quoteInfoFactory.buildUnitQuote())
   }
 
-  createQuoteInfo(quoteInfo:QuoteInfo){
-    this.quoteService.createQuoteInfo(quoteInfo,this.quote.id).subscribe((response) => {
-      console.log(response, 'in quote component ts')
-  
+  createQuoteInfo(quoteInfo:QuoteInfo, index: number){
+    const cloneobj = _.clone(quoteInfo);
+    const newObj = _.omit(cloneobj, ['unit_quotes']);
+    newObj.finishing = "";
+    newObj.technique = "";
+    newObj.material_search = "";
+    this.quoteService.createQuoteInfo(newObj,this.quote.id).subscribe((response) => {
+      const newRes:any = response;
+      this.quote.quote_infos.splice(index+1, 0, newRes);
     });
+  }
+
+  updateQuote(){
+    const cloneobj = _.clone(this.quote);
+    const newObj = _.omit(cloneobj, ['quote_infos']);
+    this.quoteService.updateQuote(newObj).subscribe((response) => {
+    });
+    
+  }
+
+  calculateTotalCost(){
+    let totalCost = _.sumBy(this.quote.quote_infos, ({unit_quotes})=>_.sumBy(unit_quotes,function(o){
+      return (o.unit_price||0)*(o.quantity||0);
+    }));
+    console.log(typeof totalCost, typeof this.quote.shipping_cost)
+    console.log( totalCost,parseFloat(this.quote.shipping_cost))
+    return Math.round((totalCost + parseFloat(this.quote.shipping_cost))*100)/100;
   }
 
 }

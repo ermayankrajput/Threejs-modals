@@ -4,6 +4,6 @@ export interface Quote {
     grand_total: number|null;
     quote_date: string|null;
     quote_infos: QuoteInfo[];
-    shipping_cost: number|null;
+    shipping_cost: string|'0';
     validity:number|null;
 }

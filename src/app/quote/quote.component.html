@@ -1,23 +1,29 @@
 
-<div id="MyDIv" #MyDIv>
-    <div class="container">
+<div id="MyDIv" #MyDIv *ngIf="quote">
+    <div class="container mb-5 mt-5" >
         <div class="row text-right">
-            <button class="btn btn-primary mt-2" *ngIf="quote.quote_infos.length > 0" (click)="downloadAsPDF()">Export To PDF</button>
+            <div class="col-lg-2">Quote Date: <input (change)="updateQuote()" type="date" class="form-control" [ngModel]="quote.quote_date | date: 'yyyy-MM-dd'" (ngModelChange)="quote.quote_date=$event"></div>
+            <div class="col-lg-2 text-right">Validity (in days): <input (change)="updateQuote()" type="number" class="form-control" [(ngModel)] = 'quote.validity'></div>
+            <div class="col-lg-2">Shipping Cost (in USD): <input (change)="updateQuote()" type="number" class="form-control" [(ngModel)]='quote.shipping_cost'></div>
+            <div class="col-lg-2">Total Cost (in USD)<br>{{quote.grand_total}}</div>
+            <div class="col-lg-2 mt-3">
+                <button class="btn btn-primary mt-2" *ngIf="quote.quote_infos.length > 0" (click)="downloadAsPDF()">Export To PDF</button>
+            </div>
         </div>
     </div>
     <div *ngFor="let quoteInfo of quote.quote_infos; let i = index" class="position-relative">
-        <div (click)='removeQuoteInfo()' class="text-right position-absolute end-0 top-0" role="button"><span
+        <div style="z-index: 2;" (click)='removeQuoteInfo(quoteInfo,i)' class="text-right position-absolute end-0 top-0" role="button"><span
                 class="badge rounded-pill bg-danger">Remove</span></div>
         <app-quote-info [quoteInfo]='quoteInfo' [index] = 'i'></app-quote-info>
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-end pe-0">
+                    <!-- <span class="badge rounded-pill badge-radius text-dark px-3 py-2 bg-gray-200 pointer" -->
+                        <!-- (click)='makeCopy()'>Make a Copy </span> -->
                     <span class="badge rounded-pill badge-radius text-dark px-3 py-2 bg-gray-200 pointer"
-                        (click)='makeCopy()'>Make a Copy </span>
-                    <span class="badge rounded-pill badge-radius text-dark px-3 py-2 bg-gray-200 pointer"
-                        (click)="makeCopyWithNoData()">New Data With No Data</span>
-                    <span class="badge rounded-pill badge-radius text-dark px-3 py-2 bg-gray-200 pointer"
-                        (click)="createQuoteInfo(quoteInfo)">Save Quote Info</span>
+                        (click)="createQuoteInfo(quoteInfo,i)">Copy With No Data</span>
+                    <!-- <span class="badge rounded-pill badge-radius text-dark px-3 py-2 bg-gray-200 pointer" -->
+                        <!-- (click)="createQuoteInfo(quoteInfo)">Save Quote Info</span> -->
                 </div>
             </div>
             <span><!--ADD_PAGE--></span>
@@ -25,5 +31,5 @@
     </div>
 </div>
 
-<!-- <app-file-upload (onFileUpload)='renderFile($event)'></app-file-upload> -->
+<app-file-upload *ngIf="quote" [quoteId]="quote.id" (onCreateQuoteInfo)="addQuoteInfo($event)"></app-file-upload>
 <!-- <app-render-object *ngIf='file3d' [file3dInput]='file3d'></app-render-object> -->
