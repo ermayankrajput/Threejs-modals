@@ -1,7 +1,11 @@
-<div class="position-relative p-3">
-    <button class="btn btn-primary mt-2 position-absolute" (click)="downloadAsPDF()">Export To PDF</button>
+<div class="container position-relative p-3 text-right">
+    <div class="row text-right">
+        <div class="col-2 offset-10 text-right">
+            <button class="btn btn-primary mt-2 position-absolute " (click)="downloadAsPDF()">Export To PDF</button>
+        </div>
+    </div>
 </div>
-<div class="pdf-container mx-auto" id="pdfContainer" #pdfContainer>
+<div class="pdf-container mx-auto" id="pdfContainer" #pdfContainer *ngIf="quote">
     <div class="container main-container">
         <div class="row">
             <div class="col-9 offset-3 px-0">
@@ -15,20 +19,19 @@
             <div class="col-4 mt-5 ps-0">
                 <h1 class="blue fs-16">QUOTATION</h1>
                 <div class="light-hr my-2"></div>
-                <div class="fs-8 mb-0">Quotation no: <span class="green">#332267</span></div>
+                <div class="fs-8 mb-0">Quotation no: <span class="green">#{{quote.id}}</span></div>
                 <div class="light-hr my-2"></div>
-                <div class="fs-8 mb-0">Date: <span class="black-70">12-Oct-2022</span></div>
+                <div class="fs-8 mb-0">Date: <span class="black-70">{{quote.quote_date | date: 'dd-MM-yyyy'}}</span></div>
                 <div class="light-hr my-2"></div>
-                <div class="fs-8 mb-0">Validity: <span class="black-70">30 Days</span></div>
+                <div class="fs-8 mb-0">Validity: <span class="black-70">{{quote.validity}} Days</span></div>
                 <div class="light-hr my-2"></div>
             </div>
             <div class="col-5 mt-5 fs-8">
                 <div class="">SUPLIER</div>
                 <div class="blue  mb-0 mt-12">Ronan Ye</div>
                 <div class="mt-0 black-50 ">Ronan@3erp.com</div>
-                <div class=" mt-12">Address:<span class="black-70">GangKou, ZhongShan City, GuangDong Province, China</span></div>
+                <div class=" mt-12">Address: <span class="black-70"> GangKou, ZhongShan City, GuangDong Province, China</span></div>
                 <div class="blue mt-12 ">+1 586-449-4689</div>
-
             </div>
         </div>
         <div class="row">
@@ -56,103 +59,23 @@
         </div>
         <div class="row text-center fs-6 white bg-black align-center mt-5 ">
             <div class="col-1 border-right">Item</div>
-            <div class="col-2 border-right">Part Name</div>
+            <div class="col-2 border-right">Part</div>
             <div class="col-3 border-right">Article Description</div>
             <div class="col-2 border-right">Unit Price(USD)</div>
             <div class="col-1 border-right">Quantity</div>
             <div class="col-2 border-right">Amount(USD)</div>
-            <div class="col-1 border-right">Lead Time</div>
+            <div class="col-1 border-right">Lead Time(days)</div>
         </div>
-        <div class="row fs-6 align-center bg-gray align-items-stretch">
-            <div class="col-1 border-right-white border-bottom-white py-11 text-center px-2 d-flex align-items-center justify-content-around">001</div>
-            <div class="col-2 border-right-white border-bottom-white py-11 px-2 d-flex align-items-center">Prototype Mold</div>
-            <div class="col-3 border-right-white border-bottom-white py-11 d-flex flex-column align-items-start justify-content-center">
-                <div class="my-1">Process: <span class="black-70">CNC Machining & EDM</span></div>
-                <div class="my-1">Material: <span class="black-70">H13</span></div>
-                <div class="my-1">Finish: <span class="black-70">N/A</span></div>
-            </div>
-            <div class="col-2 border-right-white border-bottom-white text-center px-0 d-flex flex-column align-items-start justify-content-center">
-                <div class="px-2 py-2 w-100">2,940.00</div>
-                <div class="hr-dash w-100"></div>
-                <div class="px-2 py-2 w-100">2,940.00</div>
-                <div class="hr-dash w-100"></div>
-                <div class="px-2 py-2 w-100">2,940.00</div>
-            </div>
-            <div class="col-1 border-right-white border-bottom-white py-11 text-center px-0 d-flex flex-column align-items-start justify-content-center">
-                <div class="px-2 py-2 w-100">1</div>
-                <div class="hr-dash w-100"></div>
-                <div class="px-2 py-2 w-100">1</div>
-                <div class="hr-dash w-100"></div>
-                <div class="px-2 py-2 w-100">1</div>
-            </div>
-            <div class="col-2 border-right-white border-bottom-white py-11 text-center px-0 d-flex flex-column align-items-start justify-content-center">
-                <div class="px-2 py-2 w-100">2,940.00</div>
-                <div class="hr-dash w-100"></div>
-                <div class="px-2 py-2 w-100">2,940.00</div>
-                <div class="hr-dash w-100"></div>
-                <div class="px-2 py-2 w-100">2,940.00</div>
-            </div>
-            <div class="col-1 border-right-white border-bottom-white py-11 text-center px-2 d-flex align-items-center justify-content-around">25 days</div>
+        <div *ngFor="let quoteInfo of quote.quote_infos; let i = index">
+            <app-quote-info-pdf [quoteInfo]="quoteInfo" [index]="i"></app-quote-info-pdf>
         </div>
-        <div class="row fs-6 align-center bg-gray align-items-stretch">
-            <div
-                class="col-1 border-right-white border-bottom-white py-11 text-center px-2 d-flex align-items-center justify-content-around">
-                002</div>
-            <div class="col-2 border-right-white border-bottom-white py-11 px-2 d-flex align-items-center">Prototype Mold</div>
-            <div
-                class="col-3 border-right-white border-bottom-white py-11 d-flex flex-column align-items-start justify-content-center">
-                <div class="my-1">Process: <span class="black-70">Extruded</span></div>
-                <div class="my-1">Material: <span class="black-70">AI 6063</span></div>
-                <div class="my-1">Finish: <span class="black-70">Deburred</span></div>
-            </div>
-            <div
-                class="col-2 border-right-white border-bottom-white text-center px-0 d-flex flex-column align-items-start justify-content-center">
-                <div class="px-2 py-2 w-100">76.00</div>
-                <div class="hr-dash w-100"></div>
-                <div class="px-2 py-2 w-100">2,940.00</div>
-            </div>
-            <div
-                class="col-1 border-right-white border-bottom-white py-11 text-center px-0 d-flex flex-column align-items-start justify-content-center">
-                <div class="px-2 py-2 w-100">160</div>
-                <div class="hr-dash w-100"></div>
-                <div class="px-2 py-2 w-100">2,940.00</div>
-            </div>
-            <div
-                class="col-2 border-right-white border-bottom-white py-11 text-center px-0 d-flex flex-column align-items-start justify-content-center">
-                <div class="px-2 py-2 w-100">12,160.00</div>
-                <div class="hr-dash w-100"></div>
-                <div class="px-2 py-2 w-100">2,940.00</div>
-            </div>
-            <div
-                class="col-1 border-right-white border-bottom-white py-11 text-center px-2 d-flex align-items-center justify-content-around">
-                15 days</div>
-        </div>
-        <div class="row fs-6 align-center bg-gray align-items-stretch">
-            <div
-                class="col-1 border-right-white border-bottom-white py-11 text-center px-2 d-flex align-items-center justify-content-around">
-                003</div>
-            <div class="col-2 border-right-white border-bottom-white py-11 px-2 d-flex align-items-center">Prototype Mold</div>
-            <div
-                class="col-3 border-right-white border-bottom-white py-11 d-flex flex-column align-items-start justify-content-center">
-                <div class="my-1">Process: <span class="black-70">Extruded</span></div>
-                <div class="my-1">Material: <span class="black-70">AI 6063</span></div>
-                <div class="my-1">Finish: <span class="black-70">Deburred</span></div>
-            </div>
-            <div
-                class="col-2 border-right-white border-bottom-white text-center px-0 d-flex flex-column align-items-start justify-content-center">
-                <div class="px-2 py-2 w-100">76.00</div>
-            </div>
-            <div
-                class="col-1 border-right-white border-bottom-white py-11 text-center px-0 d-flex flex-column align-items-start justify-content-center">
-                <div class="px-2 py-2 w-100">160</div>
-            </div>
-            <div
-                class="col-2 border-right-white border-bottom-white py-11 text-center px-0 d-flex flex-column align-items-start justify-content-center">
-                <div class="px-2 py-2 w-100">12,160.00</div>
-            </div>
-            <div
-                class="col-1 border-right-white border-bottom-white py-11 text-center px-2 d-flex align-items-center justify-content-around">
-                15 days</div>
+        
+        
+        
+        <div class="row mt-4 align-center">
+            
+            <div class="col-2 offset-9 fs-6 text-center">Shipping Cost</div>
+            <div class="col-1 text-center fs-6">{{quote.shipping_cost}}</div>
         </div>
         
         <div class="row mt-4 align-center">
@@ -162,7 +85,7 @@
                 <div>2. Import Tax: this tax in destination country is not included</div>
             </div>
             <div class="col-2 blue fs-8 ">Grand Total</div>
-            <div class="col-3 blue-div text-center fs-8">22,500.00</div>
+            <div class="col-3 blue-div text-center fs-8">{{quote.grand_total}}</div>
         </div>
         <div class="row mt-5">
             <div class="col-5 offset-7 pe-0">

@@ -1,12 +1,18 @@
 
 <div class="container my-5">
     <div class="row">
-        <div class="col-md-12 pb-2">
+        <!-- <div class="col-md-12 pb-2">
             <h3>Upload Your 3D File</h3>
         </div>
         <div class="col-md-12">
             <input class="form-control form-control-lg" (change)="upload3dfile($event)" id="formFileLg" type="file">
-        </div>
+        </div> -->
+
+        <label for="images" class="drop-container" id="dropcontainer">
+            <span class="drop-title">Drop files here</span>
+            or
+            <input type="file" (change)="upload3dfile($event)" id="formFileLg" >
+        </label>
     </div>
 </div>
 

@@ -1,0 +1,46 @@
+<div class="row fs-6 align-center bg-gray align-items-stretch">
+    <div
+        class="col-1 border-right-white border-bottom-white py-11 text-center px-2 d-flex align-items-center justify-content-around">
+        {{index+1}}</div>
+    <div class="col-2 border-right-white border-bottom-white py-11 px-2 d-flex align-items-center">
+        <img class="w-100 d-none" (load)="drawCanvas()" src="{{rootService.getApiBase()}}/{{quoteInfo.image_file}}" alt="quote_image">
+        <img src="{{imageDataUri}}" alt="" class="w-100">
+    </div>
+    <div
+        class="col-3 border-right-white border-bottom-white py-11 d-flex flex-column align-items-start justify-content-center">
+        <div class="my-1">Process: <span class="black-70">{{quoteInfo.technique}}</span></div>
+        <div class="my-1">Material: <span class="black-70">{{quoteInfo.material_search}}</span></div>
+        <div class="my-1">Finish: <span class="black-70">{{quoteInfo.finishing}}</span></div>
+    </div>
+    <div
+        class="col-2 border-right-white border-bottom-white text-center px-0 d-flex flex-column align-items-start justify-content-center">
+        <div class="px-2 py-2 w-100" *ngFor="let unitQuote of quoteInfo.unit_quotes; let j = index">
+            <div class="px-2 py-2 w-100">{{unitQuote.unit_price}}
+            </div>
+            <div class="hr-dash w-100"></div>
+        </div>
+    </div>
+    <div
+        class="col-1 border-right-white border-bottom-white py-11 text-center px-0 d-flex flex-column align-items-start justify-content-center">
+        <div class="px-2 py-2 w-100" *ngFor="let unitQuote of quoteInfo.unit_quotes; let k = index">
+            <div class="px-2 py-2 w-100">{{unitQuote.quantity}}</div>
+            <div class="hr-dash w-100"></div>
+        </div>
+    </div>
+    <div
+        class="col-2 border-right-white border-bottom-white py-11 text-center px-0 d-flex flex-column align-items-start justify-content-center">
+        <div class="px-2 py-2 w-100" *ngFor="let unitQuote of quoteInfo.unit_quotes; let l = index">
+            <div class="px-2 py-2 w-100">
+                {{(unitQuote.unit_price||0)*(unitQuote.quantity||0)}}</div>
+            <div class="hr-dash w-100"></div>
+        </div>
+    </div>
+    <div
+        class="col-1 border-right-white border-bottom-white py-11 text-center px-0 d-flex flex-column align-items-start justify-content-center">
+        <div class="px-2 py-2 w-100" *ngFor="let unitQuote of quoteInfo.unit_quotes; let m = index">
+            <div class="px-2 py-2 w-100">
+                {{unitQuote.lead_time}}</div>
+            <div class="hr-dash w-100"></div>
+        </div>
+    </div>
+</div>

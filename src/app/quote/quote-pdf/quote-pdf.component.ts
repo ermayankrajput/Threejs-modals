@@ -1,6 +1,10 @@
 import { Component, OnInit, ViewChild,ElementRef } from '@angular/core';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { Quote } from 'src/app/interface/quote';
+import { QuoteService } from 'src/app/services/quote.service';
+import { ActivatedRoute } from '@angular/router';
+import { RootService } from 'src/app/services/root.service';
 
 @Component({
   selector: 'app-quote-pdf',
@@ -9,9 +13,18 @@ import html2canvas from 'html2canvas';
 })
 export class QuotePdfComponent implements OnInit {
   @ViewChild('pdfContainer') pdfContainer!: ElementRef;
-  constructor() { }
+  quote!:Quote;
+  api_res:any;
+  constructor(private quoteService:QuoteService,private route: ActivatedRoute,public rootService:RootService) { }
 
   ngOnInit(): void {
+    // console.log(this.quote);
+    const id = this.route.snapshot.paramMap.get('id');
+    this.quoteService.getSingleQuote(id).subscribe((response) => {
+      this.api_res = response;
+      this.quote = this.api_res;
+      console.log(this.quote);
+    });
   }
 
   public downloadAsPDF(): void {

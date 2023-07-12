@@ -20,6 +20,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { QuoteInfoPdfComponent } from './quote/quote-pdf/quote-info-pdf/quote-info-pdf.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
     QuoteComponent,
     QuotePdfComponent,
     QuoteIndexComponent,
+    QuoteInfoPdfComponent,
   ],
   imports: [
     AppRoutingModule,

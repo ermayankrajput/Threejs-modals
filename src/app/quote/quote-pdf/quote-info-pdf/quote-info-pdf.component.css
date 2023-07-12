@@ -1,0 +1,107 @@
+.pdf-container {
+    max-width: 1190px;
+    padding-top: 40px;
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-bottom: 16px;
+    /* zoom: 2; */
+}
+
+.dark-hr {
+    height: 1px;
+    background-color: #535353;
+}
+
+.blue {
+    color: #0083E1;
+}
+
+.fs-16 {
+    font-size: 32px;
+}
+
+.fs-8 {
+    font-size: 16px;
+}
+
+.green {
+    color: #378C76;
+}
+
+.light-hr {
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.black-50 {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.black-70 {
+    color: rgba(35, 35, 35, 0.5);
+}
+
+.mt-12 {
+    margin-top: 24px;
+}
+
+.bg-black {
+    background-color: #232323;
+}
+
+.white {
+    color: white;
+}
+
+.fs-6 {
+    font-size: 12px !important;
+}
+
+.py-8 {
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.border-right {
+    border-right: 1px solid #F5F5F5;
+}
+
+.border-right-white {
+    border-right: 1px solid #ffffff;
+}
+
+.border-bottom-white {
+    border-bottom: 1px solid #ffffff;
+}
+
+.bg-gray {
+    background-color: #F5F5F5;
+}
+
+.py-11 {
+    padding-top: 22px;
+    padding-bottom: 22px;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.mt-63 {
+    margin-top: 126px;
+}
+
+.blue-div {
+    background-color: #0083E1;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    color: white;
+}
+
+.hr-dash {
+    border-top: 1px dashed rgba(0, 0, 0, 0.2);
+}

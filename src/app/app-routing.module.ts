@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { QuoteComponent } from './quote/quote.component';
 import { QuoteIndexComponent } from './quote-index/quote-index.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
-
+import { QuotePdfComponent } from './quote/quote-pdf/quote-pdf.component';
 const routes: Routes = [
   {
     path:'quotes',
@@ -12,6 +12,10 @@ const routes: Routes = [
   {
     path:'quote/:id',
     component:QuoteComponent
+  },
+  {
+    path:'quote/pdf/:id',
+    component:QuotePdfComponent
   },
   {
     path:'',

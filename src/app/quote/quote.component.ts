@@ -3,11 +3,10 @@ import { Quote } from './../interface/quote';
 import { QuoteInfo } from './../interface/quote-info';
 import { QuoteInfoFactory } from './quote-info/quote-info.factory';
 import * as _ from 'lodash';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 import { ConverterService } from '../services/converter.service';
 import { QuoteService } from '../services/quote.service';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-quote',
@@ -20,7 +19,7 @@ export class QuoteComponent implements OnInit  {
   fileObject:any;
   quote!:Quote;
   
-  constructor(private quoteInfoFactory:QuoteInfoFactory,private converterService:ConverterService,private quoteService:QuoteService,private route: ActivatedRoute) { }
+  constructor(private quoteInfoFactory:QuoteInfoFactory,private converterService:ConverterService,private quoteService:QuoteService,private route: ActivatedRoute, private router:Router) { }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -53,25 +52,26 @@ export class QuoteComponent implements OnInit  {
     this.quote.quote_infos.splice(event, 1)
   }
   public downloadAsPDF(): void {
-      let domElement = this.MyDIv.nativeElement as HTMLElement;
-      html2canvas(domElement).then(canvas => {
-        const contentDataURL = canvas.toDataURL('image/png')  // 'image/jpeg' for lower quality output.
-        const imgWidth = 208;
-        const pageHeight = 295;
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
-        let heightLeft = imgHeight;
-        let position = 0;
-        heightLeft -= pageHeight;
-        const doc = new jsPDF('p', 'mm');
-        doc.addImage(canvas, 'PNG', 0, position, imgWidth, imgHeight, '', 'FAST');
-        while (heightLeft >= 0) {
-          position = heightLeft - imgHeight;
-          doc.addPage();
-          doc.addImage(canvas, 'PNG', 0, position, imgWidth, imgHeight, '', 'FAST');
-          heightLeft -= pageHeight;
-        }
-        doc.save('Filename.pdf');   
-    }); 
+      this.router.navigate(["/quote/pdf/",this.quote.id])
+      // let domElement = this.MyDIv.nativeElement as HTMLElement;
+    //   html2canvas(domElement).then(canvas => {
+    //     const contentDataURL = canvas.toDataURL('image/png')  // 'image/jpeg' for lower quality output.
+    //     const imgWidth = 208;
+    //     const pageHeight = 295;
+    //     const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    //     let heightLeft = imgHeight;
+    //     let position = 0;
+    //     heightLeft -= pageHeight;
+    //     const doc = new jsPDF('p', 'mm');
+    //     doc.addImage(canvas, 'PNG', 0, position, imgWidth, imgHeight, '', 'FAST');
+    //     while (heightLeft >= 0) {
+    //       position = heightLeft - imgHeight;
+    //       doc.addPage();
+    //       doc.addImage(canvas, 'PNG', 0, position, imgWidth, imgHeight, '', 'FAST');
+    //       heightLeft -= pageHeight;
+    //     }
+    //     doc.save('Filename.pdf');   
+    // }); 
   }
 
   addQuoteInfo(event:QuoteInfo){
@@ -110,8 +110,6 @@ export class QuoteComponent implements OnInit  {
     let totalCost = _.sumBy(this.quote.quote_infos, ({unit_quotes})=>_.sumBy(unit_quotes,function(o){
       return (o.unit_price||0)*(o.quantity||0);
     }));
-    console.log(typeof totalCost, typeof this.quote.shipping_cost)
-    console.log( totalCost,parseFloat(this.quote.shipping_cost))
     return Math.round((totalCost + parseFloat(this.quote.shipping_cost))*100)/100;
   }
 
