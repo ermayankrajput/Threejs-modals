@@ -67,9 +67,6 @@
     padding-top: 22px;
     padding-bottom: 22px;
 }
-.w-100{
-    width:100%;
-}
 .mt-63{
     margin-top:126px;
 }
@@ -80,5 +77,20 @@
     color:white;
 }
 .hr-dash{
-        border-top: 1px dashed rgba(0, 0, 0, 0.2);
-        }
+    border-top: 1px dashed rgba(0, 0, 0, 0.2);
+}
+.real-time-pdf{
+    width: 320px;
+    height: 250px;
+    z-index: 2;
+}
+.real-time-pdf iframe{
+    width: 100%;
+    height: 100%;
+}
+.include-spacer .spacer-info{
+    visibility: hidden;
+}
+.include-spacer:hover .spacer-info{
+    visibility: visible;
+}

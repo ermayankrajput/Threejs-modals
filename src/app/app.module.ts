@@ -21,6 +21,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { QuoteInfoPdfComponent } from './quote/quote-pdf/quote-info-pdf/quote-info-pdf.component';
+import { SafePipe } from './pipes/safe.pipe';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { QuoteInfoPdfComponent } from './quote/quote-pdf/quote-info-pdf/quote-in
     QuotePdfComponent,
     QuoteIndexComponent,
     QuoteInfoPdfComponent,
+    SafePipe,
   ],
   imports: [
     AppRoutingModule,

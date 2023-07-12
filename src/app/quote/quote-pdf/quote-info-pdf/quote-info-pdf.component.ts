@@ -12,6 +12,7 @@ export class QuoteInfoPdfComponent {
   @Input() quoteInfo!:QuoteInfo;
   @Input() index!:number;
   imageDataUri:any = "";
+  spacebelow = ''
 
   drawCanvas(){
     console.log('loaded');

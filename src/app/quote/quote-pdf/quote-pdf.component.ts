@@ -15,6 +15,10 @@ export class QuotePdfComponent implements OnInit {
   @ViewChild('pdfContainer') pdfContainer!: ElementRef;
   quote!:Quote;
   api_res:any;
+  pdfDoc: any = '';
+  livePdf = false;
+  enlarge = false;
+  spacebelow = 64;
   constructor(private quoteService:QuoteService,private route: ActivatedRoute,public rootService:RootService) { }
 
   ngOnInit(): void {
@@ -45,8 +49,33 @@ export class QuotePdfComponent implements OnInit {
           doc.addImage(canvas, 'PNG', 0, position, imgWidth, imgHeight, '', 'SLOW');
           heightLeft -= pageHeight;
         }
-        doc.save('Filename.pdf');   
+        doc.save('3ERP-quote-'+this.quote.id+'.pdf');   
     }); 
   }
 
+  realTimePdfViewer(){
+    this.pdfDoc = '';
+    this.livePdf = true;
+    let domElement = this.pdfContainer.nativeElement as HTMLElement;
+    html2canvas(domElement).then(canvas => {
+      const contentDataURL = canvas.toDataURL('image/png')  // 'image/jpeg' for lower quality output.
+      const imgWidth = 208;
+      const pageHeight = 295;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      let heightLeft = imgHeight;
+      let position = 0;
+      heightLeft -= pageHeight;
+      const doc = new jsPDF('p', 'mm');
+      doc.addImage(canvas, 'PNG', 0, position, imgWidth, imgHeight, '', 'SLOW');
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        doc.addPage();
+        doc.addImage(canvas, 'PNG', 0, position, imgWidth, imgHeight, '', 'SLOW');
+        heightLeft -= pageHeight;
+      }
+      // this.pdfDoc.save('Filename.pdf');  
+      console.log(doc.output('datauristring'))
+      this.pdfDoc = doc.output('datauristring');
+    });
+  }
 }

@@ -1,110 +1,135 @@
-<div class="container position-relative p-3 text-right">
-    <div class="row text-right">
-        <div class="col-2 offset-10 text-right">
-            <button class="btn btn-primary mt-2 position-absolute " (click)="downloadAsPDF()">Export To PDF</button>
+<div *ngIf="quote">
+    <div class="container position-relative p-3 text-right">
+        <div class="row text-right">
+            <div class="col-4 offset-8 text-right">
+                <button class="btn btn-success mt-2 me-2" routerLink="/quote/{{quote.id}}">edit</button>
+                <button class="btn btn-warning mt-2 me-2" (click)="realTimePdfViewer()">View Real PDF</button>
+                <button class="btn btn-primary mt-2" (click)="downloadAsPDF()">Export PDF</button>
+            </div>
         </div>
     </div>
-</div>
-<div class="pdf-container mx-auto" id="pdfContainer" #pdfContainer *ngIf="quote">
-    <div class="container main-container">
-        <div class="row">
-            <div class="col-9 offset-3 px-0">
-                <div class="dark-hr"></div>
-            </div>
+    <div class="real-time-pdf position-fixed shadow border rounded-3 overflow-hidden position-relative" *ngIf="livePdf" [style.width]="enlarge ? '900px' : '320px'" [style.height]="enlarge ? '500px' : '250px'">
+        <iframe [src]="pdfDoc | safe" frameborder="0"  type="application/pdf"  *ngIf="pdfDoc"></iframe>
+        <div class="w-100 h-100 bg-white display-1 d-flex align-items-center justify-content-around"  *ngIf="!pdfDoc">
+            <i class="fa-light fa-spinner-third fa-spin"></i>
         </div>
-        <div class="row mb-4 pb-2">
-            <div class="col-3 px-0">
-                <img width="90px" src="./assets/logo.png" alt="3erp logo" style="width: 180px;">
-            </div>
-            <div class="col-4 mt-5 ps-0">
-                <h1 class="blue fs-16">QUOTATION</h1>
-                <div class="light-hr my-2"></div>
-                <div class="fs-8 mb-0">Quotation no: <span class="green">#{{quote.id}}</span></div>
-                <div class="light-hr my-2"></div>
-                <div class="fs-8 mb-0">Date: <span class="black-70">{{quote.quote_date | date: 'dd-MM-yyyy'}}</span></div>
-                <div class="light-hr my-2"></div>
-                <div class="fs-8 mb-0">Validity: <span class="black-70">{{quote.validity}} Days</span></div>
-                <div class="light-hr my-2"></div>
-            </div>
-            <div class="col-5 mt-5 fs-8">
-                <div class="">SUPLIER</div>
-                <div class="blue  mb-0 mt-12">Ronan Ye</div>
-                <div class="mt-0 black-50 ">Ronan@3erp.com</div>
-                <div class=" mt-12">Address: <span class="black-70"> GangKou, ZhongShan City, GuangDong Province, China</span></div>
-                <div class="blue mt-12 ">+1 586-449-4689</div>
-            </div>
+        <div class="position-absolute bottom-0 end-0 p-2">
+            <span class="px-2" *ngIf="!enlarge" type="button" (click)="enlarge=true"><i class="fa-light fa-expand"></i></span>
+            <span class="px-2" *ngIf="enlarge" type="button" (click)="enlarge=false"><i class="fa-light fa-compress"></i></span>
+            <span class="ps-2" type="button" (click)="livePdf=false; enlarge=false;"><i class="fa-light fa-rectangle-xmark"></i></span>
         </div>
-        <div class="row">
-            <div class="hr-dash my-2 col-12 px-0"></div>
-        </div>
-        <div class="row fs-8 mt-5">
-            <div class="col-3 ps-0">
-                <div class="">Quote To</div>
-                <div class="blue  mb-0 mt-12">Michael Bolf</div>
-                <div class="mt-0 black-50 ">General Motors</div>
-                <div class=" mt-12"><span class="black-70">GM Global Technical Center - Cole Engineering Center</span></div>
-                <div class="blue mt-12 ">+1 586-449-4689</div>
+    </div>
+    <div class="pdf-container mx-auto" id="pdfContainer" #pdfContainer *ngIf="quote">
+        <div class="container main-container">
+            <div class="row">
+                <div class="col-9 offset-3 px-0">
+                    <div class="dark-hr"></div>
+                </div>
             </div>
-            <div class="col-4">
-                <div class="">Adress</div>
-                <div class=" mt-12"><span class="black-70">GangKou, ZhongShan City,GuangDong Province, China</span></div>
+            <div class="row mb-4 pb-2">
+                <div class="col-3 px-0">
+                    <img width="90px" src="./assets/logo.png" alt="3erp logo" style="width: 180px;">
+                </div>
+                <div class="col-4 mt-5 ps-0">
+                    <h1 class="blue fs-16">QUOTATION</h1>
+                    <div class="light-hr my-2"></div>
+                    <div class="fs-8 mb-0">Quotation no: <span class="green">#{{quote.id}}</span></div>
+                    <div class="light-hr my-2"></div>
+                    <div class="fs-8 mb-0">Date: <span class="black-70">{{quote.quote_date | date: 'dd-MM-yyyy'}}</span></div>
+                    <div class="light-hr my-2"></div>
+                    <div class="fs-8 mb-0">Validity: <span class="black-70">{{quote.validity}} Days</span></div>
+                    <div class="light-hr my-2"></div>
+                </div>
+                <div class="col-5 mt-5 fs-8">
+                    <div class="">SUPLIER</div>
+                    <div class="blue  mb-0 mt-12">Ronan Ye</div>
+                    <div class="mt-0 black-50 ">Ronan@3erp.com</div>
+                    <div class=" mt-12">Address: <span class="black-70"> GangKou, ZhongShan City, GuangDong Province, China</span></div>
+                    <div class="blue mt-12 ">+1 586-449-4689</div>
+                </div>
             </div>
-            <div class="col-5 pe-0">
-                <div class="">Payment Method <span style="padding-left: 20px;" class="black-70">Bank Transfer</span></div>
-                <div class=" mt-12 mb-0">Currency: <span class="black-70">U. S. Dollar</span></div>
-                <div class="light-hr my-2"></div>
-                <div class=" ">Terms: <span class="black-70">Pay in advance</span></div>
-                <div class="light-hr my-2"></div>
+            <div class="row">
+                <div class="hr-dash my-2 col-12 px-0"></div>
             </div>
-        </div>
-        <div class="row text-center fs-6 white bg-black align-center mt-5 ">
-            <div class="col-1 border-right">Item</div>
-            <div class="col-2 border-right">Part</div>
-            <div class="col-3 border-right">Article Description</div>
-            <div class="col-2 border-right">Unit Price(USD)</div>
-            <div class="col-1 border-right">Quantity</div>
-            <div class="col-2 border-right">Amount(USD)</div>
-            <div class="col-1 border-right">Lead Time(days)</div>
-        </div>
-        <div *ngFor="let quoteInfo of quote.quote_infos; let i = index">
-            <app-quote-info-pdf [quoteInfo]="quoteInfo" [index]="i"></app-quote-info-pdf>
-        </div>
-        
-        
-        
-        <div class="row mt-4 align-center">
+            <div class="row fs-8 mt-5">
+                <div class="col-3 ps-0">
+                    <div class="">Quote To</div>
+                    <div class="blue  mb-0 mt-12">Michael Bolf</div>
+                    <div class="mt-0 black-50 ">General Motors</div>
+                    <div class=" mt-12"><span class="black-70">GM Global Technical Center - Cole Engineering Center</span></div>
+                    <div class="blue mt-12 ">+1 586-449-4689</div>
+                </div>
+                <div class="col-4">
+                    <div class="">Adress</div>
+                    <div class=" mt-12"><span class="black-70">GangKou, ZhongShan City,GuangDong Province, China</span></div>
+                </div>
+                <div class="col-5 pe-0">
+                    <div class="">Payment Method <span style="padding-left: 20px;" class="black-70">Bank Transfer</span></div>
+                    <div class=" mt-12 mb-0">Currency: <span class="black-70">U. S. Dollar</span></div>
+                    <div class="light-hr my-2"></div>
+                    <div class=" ">Terms: <span class="black-70">Pay in advance</span></div>
+                    <div class="light-hr my-2"></div>
+                </div>
+            </div>
+            <div class="row text-center fs-6 white bg-black align-center mt-5 ">
+                <div class="col-1 border-right">Item</div>
+                <div class="col-2 border-right">Part</div>
+                <div class="col-3 border-right">Article Description</div>
+                <div class="col-2 border-right">Unit Price(USD)</div>
+                <div class="col-1 border-right">Quantity</div>
+                <div class="col-2 border-right">Amount(USD)</div>
+                <div class="col-1 border-right">Lead Time(days)</div>
+            </div>
+            <div class="include-drag-h-0" *ngFor="let quoteInfo of quote.quote_infos; let i = index">
+                <app-quote-info-pdf [quoteInfo]="quoteInfo" [index]="i"></app-quote-info-pdf>
+            </div>
             
-            <div class="col-2 offset-9 fs-6 text-center">Shipping Cost</div>
-            <div class="col-1 text-center fs-6">{{quote.shipping_cost}}</div>
-        </div>
-        
-        <div class="row mt-4 align-center">
-            <div class="col-7 fs-6 ps-0">
-                <div>Note:</div>
-                <div>1. Tolerances: As per drawing</div>
-                <div>2. Import Tax: this tax in destination country is not included</div>
+            
+            
+            <div class="row mt-4 align-center">
+                
+                <div class="col-2 offset-9 fs-6 text-center">Shipping Cost</div>
+                <div class="col-1 text-center fs-6">{{quote.shipping_cost}}</div>
             </div>
-            <div class="col-2 blue fs-8 ">Grand Total</div>
-            <div class="col-3 blue-div text-center fs-8">{{quote.grand_total}}</div>
-        </div>
-        <div class="row mt-5">
-            <div class="col-5 offset-7 pe-0">
-                <div class="fs-8">Please sign and date below</div>
-                <div class="fs-6 black-70">if you wish 3E to proceed with your job</div>
-                <div style="height:32px;background-color:#F5F5F5" class="mt-2"></div>
-                <div class="fs-6 black-70 mt-2">I confirm that I am an authorised signatory of the client company.</div>
+            
+            <div class="row mt-4 align-center">
+                <div class="col-7 fs-6 ps-0">
+                    <div>Note:</div>
+                    <div>1. Tolerances: As per drawing</div>
+                    <div>2. Import Tax: this tax in destination country is not included</div>
+                </div>
+                <div class="col-2 blue fs-8 ">Grand Total</div>
+                <div class="col-3 blue-div text-center fs-8">{{quote.grand_total}}</div>
             </div>
-        </div>
-        <div class="row mt-63">
-            <div class="col-12 px-0">
-                <div class="dark-hr"></div>
-                <div class="mt-3">
-                    <div class="fs-8 black-70">
-                        <img src="./assets/rights.svg" width="30px" alt="Rights">
-                        <span class="ps-2">ISO:9001-2015 Certified</span>
+            <div class="row mt-5">
+                <div class="col-5 offset-7 pe-0">
+                    <div class="fs-8">Please sign and date below</div>
+                    <div class="fs-6 black-70">if you wish 3E to proceed with your job</div>
+                    <div style="background-color:#F5F5F5" class="mt-2 py-4">
+                        <div class="py-3"></div>
+                    </div>
+                    <div class="fs-6 black-70 mt-2">I confirm that I am an authorised signatory of the client company.</div>
+                </div>
+            </div>
+            <div class="row include-spacer position-relative">
+                <div class="position-absolute end-0 top-0 text-end spacer-info">
+                    <input type="number" placeholder="Space Below" [(ngModel)]="spacebelow">
+                </div>
+                <div [style.height]="spacebelow + 'px'" class="bg-white"></div>
+                <div class="col-12 px-0">
+                    <div class="dark-hr"></div>
+                    <div class="mt-3">
+                        <div class="fs-8 black-70">
+                            <img src="./assets/rights.svg" width="30px" alt="Rights">
+                            <span class="ps-2">ISO:9001-2015 Certified</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+<div class="w-100 bg-white display-1 d-flex align-items-center justify-content-center flex-column" style="height: 50vh;" *ngIf="!quote">
+    <div><i class="fa-light fa-spinner-third fa-spin"></i></div>
+    <div class="display-6 mt-5">Loading...</div>
 </div>

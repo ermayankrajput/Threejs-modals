@@ -1,4 +1,4 @@
-<div class="row fs-6 align-center bg-gray align-items-stretch">
+<div class="row fs-6 align-center bg-gray align-items-stretch position-relative include-spacer">
     <div
         class="col-1 border-right-white border-bottom-white py-11 text-center px-2 d-flex align-items-center justify-content-around">
         {{index+1}}</div>
@@ -43,4 +43,8 @@
             <div class="hr-dash w-100"></div>
         </div>
     </div>
+    <div class="position-absolute end-0 bottom-0 text-end spacer-info">
+        <input type="number" placeholder="Space Below" [(ngModel)]="spacebelow">
+    </div>
+    <div [style.height]="spacebelow + 'px'" class="bg-white"></div>
 </div>

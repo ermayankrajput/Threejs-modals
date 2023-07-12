@@ -105,3 +105,9 @@
 .hr-dash {
     border-top: 1px dashed rgba(0, 0, 0, 0.2);
 }
+.include-spacer .spacer-info{
+    visibility: hidden;
+}
+.include-spacer:hover .spacer-info{
+    visibility: visible;
+}
