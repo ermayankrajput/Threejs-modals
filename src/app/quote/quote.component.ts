@@ -25,8 +25,8 @@ export class QuoteComponent implements OnInit  {
     const id = this.route.snapshot.paramMap.get('id');
     this.quoteService.getSingleQuote(id).subscribe((response) => {
       this.api_res = response;
-      console.log(response);
       this.quote = this.api_res;
+      this.quote.quote_infos = _.reverse(_.sortBy(this.quote.quote_infos, function(o){return o.id}))
       this.quote.grand_total = this.quote.grand_total?this.quote.grand_total:0;
     });
   }

@@ -18,6 +18,9 @@
             <span class="px-2" *ngIf="enlarge" type="button" (click)="enlarge=false"><i class="fa-light fa-compress"></i></span>
             <span class="ps-2" type="button" (click)="livePdf=false; enlarge=false;"><i class="fa-light fa-rectangle-xmark"></i></span>
         </div>
+        <div class="position-absolute top-0 start-0 p-2" *ngIf="pdfDoc">
+            <span class="ps-2" type="button" (click)="realTimePdfViewer();"><i class="fa-sharp fa-light fa-arrows-rotate"></i></span>
+        </div>
     </div>
     <div class="pdf-container mx-auto" id="pdfContainer" #pdfContainer *ngIf="quote">
         <div class="container main-container">
@@ -111,7 +114,7 @@
                     <div class="fs-6 black-70 mt-2">I confirm that I am an authorised signatory of the client company.</div>
                 </div>
             </div>
-            <div class="row include-spacer position-relative">
+            <!-- <div class="row include-spacer position-relative">
                 <div class="position-absolute end-0 top-0 text-end spacer-info">
                     <input type="number" placeholder="Space Below" [(ngModel)]="spacebelow">
                 </div>
@@ -125,7 +128,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

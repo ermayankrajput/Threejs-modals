@@ -7,6 +7,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Router } from '@angular/router';
+import * as _ from 'lodash'
 
 @Component({
   selector: 'app-quote-index',
@@ -27,6 +28,7 @@ export class QuoteIndexComponent {
   ngOnInit(): void {
     this.quoteService.geQuotes().subscribe((response) => {
       this.quotes = response;
+      this.quotes = _.reverse(_.sortBy(this.quotes, function(o){return o.id}))
       this.dataSource = new MatTableDataSource(this.quotes);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
