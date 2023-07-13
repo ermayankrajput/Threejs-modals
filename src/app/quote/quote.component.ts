@@ -26,7 +26,10 @@ export class QuoteComponent implements OnInit  {
     this.quoteService.getSingleQuote(id).subscribe((response) => {
       this.api_res = response;
       this.quote = this.api_res;
-      this.quote.quote_infos = _.reverse(_.sortBy(this.quote.quote_infos, function(o){return o.id}))
+      this.quote.quote_infos = _.sortBy(this.quote.quote_infos, function(o){
+        o.unit_quotes = _.sortBy(o.unit_quotes, function(o){return o.id});
+        return o.id;
+      })
       this.quote.grand_total = this.quote.grand_total?this.quote.grand_total:0;
     });
   }

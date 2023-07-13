@@ -5,6 +5,7 @@ import { Quote } from 'src/app/interface/quote';
 import { QuoteService } from 'src/app/services/quote.service';
 import { ActivatedRoute } from '@angular/router';
 import { RootService } from 'src/app/services/root.service';
+import * as _ from "lodash"
 
 @Component({
   selector: 'app-quote-pdf',
@@ -27,6 +28,10 @@ export class QuotePdfComponent implements OnInit {
     this.quoteService.getSingleQuote(id).subscribe((response) => {
       this.api_res = response;
       this.quote = this.api_res;
+      this.quote.quote_infos = _.sortBy(this.quote.quote_infos, function(o){
+        o.unit_quotes = _.sortBy(o.unit_quotes, function(o){return o.id});
+        return o.id;
+      })
       console.log(this.quote);
     });
   }

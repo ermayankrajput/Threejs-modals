@@ -19,7 +19,7 @@ export class QuoteInfoComponent implements OnInit {
   constructor(private quoteInfoFactory: QuoteInfoFactory, private quoteService:QuoteService, public rootService:RootService) { }
 
   ngOnInit(): void {
-    this.quoteInfo.unit_quotes = _.reverse(_.sortBy(this.quoteInfo.unit_quotes, function(o){return o.id}))
+    
   }
 
   addUnitQuote(){
