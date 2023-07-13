@@ -6,6 +6,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-quote-index',
@@ -15,12 +16,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 export class QuoteIndexComponent {
   quotes:any;
-  displayedColumns: string[] = [ 'id','quote_date','validity','shipping_cost','grand_total','action'];
+  displayedColumns: string[] = [ 'id','quote_date','shipping_cost','grand_total','action'];
   dataSource!: MatTableDataSource<Quote>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   
-  constructor(private quoteService:QuoteService) {}
+  constructor(private quoteService:QuoteService,private router:Router) {}
 
 
   ngOnInit(): void {
@@ -52,6 +53,13 @@ export class QuoteIndexComponent {
         this.dataSource.sort = this.sort;
       });
     }
+  }
+
+  viewPdf(quoteId:number){
+    this.router.navigate(["/quote/pdf/",quoteId])
+  }
+  editQuote(quoteId:number){
+    this.router.navigate(["/quote",quoteId])
   }
 
 }

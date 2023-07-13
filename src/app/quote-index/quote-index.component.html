@@ -17,13 +17,7 @@
         <!-- Date Column -->
         <ng-container matColumnDef="quote_date">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
-            <td mat-cell *matCellDef="let row"> {{row.quote_date}} </td>
-        </ng-container>
-
-        <!-- Validity Column -->
-        <ng-container matColumnDef="validity">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Validity </th>
-            <td mat-cell *matCellDef="let row"> {{row.validity}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.quote_date | date: 'EEEE, d MMM y'}}</td>
         </ng-container>
 
         <!-- Shipping Cost Column -->
@@ -40,8 +34,11 @@
 
         <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
-            <td mat-cell *matCellDef="let row; let i =index;" (click)="deleteQuote(row, i +
-            (paginator.pageIndex*paginator.pageSize) )"> Delete </td>
+            <td mat-cell *matCellDef="let row; let i =index;" > 
+                <span (click)="viewPdf(row.id)">View PDF</span> |
+                <span (click)="editQuote(row.id)">Edit</span> |
+                <span (click)="deleteQuote(row, i + (paginator.pageIndex*paginator.pageSize) )">Delete</span> 
+            </td>
         </ng-container>
 
         <!-- Row shown when there is no matching data. -->
