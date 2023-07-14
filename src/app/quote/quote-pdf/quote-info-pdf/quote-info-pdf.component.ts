@@ -21,15 +21,19 @@ export class QuoteInfoPdfComponent implements OnInit {
 
   drawCanvas(){
     console.log('loaded');
-    var imageUrl:any = this.rootService.getApiBase()+'/'+this.quoteInfo.image_file;
+    var imageUrl:string = this.rootService.getBucketUrl()+'/uploads/'+this.quoteInfo.image_file;
     getBase64ImageFromUrl(imageUrl)
-    .then(result => this.imageDataUri = result)
+    .then(result => {
+      this.imageDataUri = result
+      this.imageDataUri = this.imageDataUri.replace("data:binary/octet-stream;base64", "data:image/png;base64");
+      
+    })
     .catch(err => console.error(err));
   }
   
 }
-async function getBase64ImageFromUrl(imageUrl:any) {
-  var res = await fetch(imageUrl);
+async function getBase64ImageFromUrl(imageUrl:string) {
+  var res = await fetch(imageUrl, { method: 'GET', mode: "cors" });
   var blob = await res.blob();
 
   return new Promise((resolve, reject) => {

@@ -3,8 +3,8 @@
         class="col-1 border-right-white border-bottom-white py-11 text-center px-2 d-flex align-items-center justify-content-around">
         {{index+1}}</div>
     <div class="col-2 border-right-white border-bottom-white py-11 px-2 d-flex align-items-center">
-        <img class="w-100 d-none" (load)="drawCanvas()" src="{{rootService.getApiBase()}}/{{quoteInfo.image_file}}" alt="quote_image">
-        <img src="{{imageDataUri}}" alt="" class="w-100">
+        <img class="w-100 d-none" (load)="drawCanvas()" src="{{rootService.getBucketUrl()}}/uploads/{{quoteInfo.image_file}}" alt="quote_image">
+        <img src="{{imageDataUri}}" alt="Quote image missing" class="w-100">
     </div>
     <div
         class="col-3 border-right-white border-bottom-white py-11 d-flex flex-column align-items-start justify-content-center">

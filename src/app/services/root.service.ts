@@ -21,5 +21,8 @@ export class RootService {
         return environment.production? this.prodApiBase:this.devApiBase;
     }
 
+    getBucketUrl(){
+        return 'https://elasticbeanstalk-ap-northeast-1-364557162645.s3.ap-northeast-1.amazonaws.com'
+    }
   
 }
