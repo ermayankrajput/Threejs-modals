@@ -1,19 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { RootService } from './root.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ConverterService {
-  apiBase = 'http://54.172.19.133:5000';
+export class ConverterService extends RootService {
+  apiBase = this.getApiBase();
   
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { super() }
 
   upload(file:any): Observable<HttpEvent<any>> {
     const formData = new FormData();
     formData.append("file", file);
-    return this.http.post<any>(this.apiBase + "/file-upload", formData);
+    // return this.http.post<any>(this.apiBase + "/file-upload", formData);
+    return this.http.post<any>(this.apiBase + "/convert", formData);
   }
 
   // createUnitQuote(file:any): Observable<HttpEvent<any>> {
