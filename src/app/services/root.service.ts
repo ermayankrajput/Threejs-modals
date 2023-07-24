@@ -9,8 +9,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class RootService {
-    devApiBase = 'http://44.212.43.113:5000';
-    prodApiBase = "http://44.212.43.113:5000";
+    devApiBase = 'http://18.234.100.20:5000/';
+    prodApiBase = "http://18.234.100.20:5000/";
     getHeaders(){
         return new HttpHeaders({
             'Content-Type': 'application/json',
