@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpEvent } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { UnitQuote } from '../interface/unit-quote';
-import { Quote } from '../interface/quote';
+import { HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

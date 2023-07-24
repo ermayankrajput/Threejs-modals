@@ -20,11 +20,12 @@ export class QuoteInfoPdfComponent implements OnInit {
   }
 
   drawCanvas(){
-    console.log('loaded');
-    var imageUrl:string = this.rootService.getBucketUrl()+'/uploads/'+this.quoteInfo.image_file;
+    var imageUrl:string = this.rootService.getBucketUrl()+'/uploads/'+this.quoteInfo.image_file+"?tets";
     getBase64ImageFromUrl(imageUrl)
     .then(result => {
+      // console.log(result)
       this.imageDataUri = result
+      // console.log(result)
       this.imageDataUri = this.imageDataUri.replace("data:binary/octet-stream;base64", "data:image/png;base64");
       
     })
@@ -33,7 +34,7 @@ export class QuoteInfoPdfComponent implements OnInit {
   
 }
 async function getBase64ImageFromUrl(imageUrl:string) {
-  var res = await fetch(imageUrl, { method: 'GET', mode: "cors" });
+  var res = await fetch(imageUrl, { method: "GET", mode: "cors" });
   var blob = await res.blob();
 
   return new Promise((resolve, reject) => {
