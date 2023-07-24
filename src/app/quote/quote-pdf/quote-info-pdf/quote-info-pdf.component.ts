@@ -20,7 +20,7 @@ export class QuoteInfoPdfComponent implements OnInit {
   }
 
   drawCanvas(){
-    var imageUrl:string = this.rootService.getBucketUrl()+'/uploads/'+this.quoteInfo.image_file+"?tets";
+    var imageUrl:string = this.rootService.getBucketUrl()+this.quoteInfo.image_file+"?tets";
     getBase64ImageFromUrl(imageUrl)
     .then(result => {
       // console.log(result)

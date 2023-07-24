@@ -19,7 +19,7 @@ export class RootService {
     }
 
     getBucketUrl(){
-        return 'https://elasticbeanstalk-ap-northeast-1-364557162645.s3.ap-northeast-1.amazonaws.com'
+        return 'https://elasticbeanstalk-ap-northeast-1-364557162645.s3.ap-northeast-1.amazonaws.com/uploads/'
     }
   
 }
