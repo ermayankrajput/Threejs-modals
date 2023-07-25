@@ -15,6 +15,7 @@ export class QuoteInfoComponent implements OnInit {
   @Input() quoteInfo!: QuoteInfo; 
   @Input() index!:number;
   resUnitQuote:any;
+  addRowButtonText = "Add Row"
   
   constructor(private quoteInfoFactory: QuoteInfoFactory, private quoteService:QuoteService, public rootService:RootService) { }
 
@@ -23,7 +24,9 @@ export class QuoteInfoComponent implements OnInit {
   }
 
   addUnitQuote(){
+    this.addRowButtonText = '<i class="fa-light fa-spinner-third fa-spin"></i>'
     this.quoteService.createUniteQuote(this.quoteInfo.id).subscribe((response) => {
+      this.addRowButtonText = "Add Row"
       this.resUnitQuote = response;
       this.quoteInfo.unit_quotes.push(this.resUnitQuote)
     });

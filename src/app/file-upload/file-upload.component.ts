@@ -18,13 +18,17 @@ export class FileUploadComponent implements OnInit {
   constructor(private converterService:ConverterService, private quoteService:QuoteService, private router:Router) { }
   fileName = '';
   quoteResponse:any;
+  uploadingFile = false
+  uploadStatus = "Uploading & Converting File"
   ngOnInit(): void {
   }
 
   upload3dfile(event:any){
     const file:File = event.target.files[0];
     if (file) {
+      this.uploadingFile = true
       this.converterService.upload(file).subscribe((response) => {
+        this.uploadStatus = "Computing"
         this.quoteId === 0? this.createQuote(response): this.createQuoteInfo(response);
       });
     }

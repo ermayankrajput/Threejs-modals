@@ -1,6 +1,6 @@
 
 <div class="container my-5">
-    <div class="row">
+    <div class="row" [hidden]="uploadingFile">
         <!-- <div class="col-md-12 pb-2">
             <h3>Upload Your 3D File</h3>
         </div>
@@ -14,5 +14,11 @@
             <input type="file" (change)="upload3dfile($event)" id="formFileLg" >
         </label>
     </div>
+    <div class="row">
+        <div class="w-100 bg-white display-1 d-flex align-items-center justify-content-center flex-column" *ngIf="uploadingFile">
+            <div [hidden]="uploadStatus == 'Computing'"><i class="fa-light fa-cloud-arrow-up fa-flip"></i></div>
+            <div *ngIf="uploadStatus == 'Computing'"><i class="fa-light fa-laptop-binary fa-beat-fade"></i></div>
+            <div class="display-6 mt-5">{{uploadStatus}} ...</div>
+        </div>
+    </div>
 </div>
-
