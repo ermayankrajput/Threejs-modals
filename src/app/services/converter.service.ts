@@ -15,6 +15,13 @@ export class ConverterService extends RootService {
     const formData = new FormData();
     formData.append("file", file);
     // return this.http.post<any>(this.apiBase + "/file-upload", formData);
+    return this.http.post<any>(this.apiBase + "/file-upload", formData);
+  }
+
+  uploadCadExchanger(file:any): Observable<HttpEvent<any>> {
+    const formData = new FormData();
+    formData.append("file", file);
+    // return this.http.post<any>(this.apiBase + "/file-upload", formData);
     return this.http.post<any>(this.apiBase + "/convert", formData);
   }
 
