@@ -39,7 +39,10 @@ export class QuoteComponent implements OnInit  {
     if (this.quote) {
       if(this.calculateTotalCost() != this.quote.grand_total){
         this.quote.grand_total = this.calculateTotalCost();
-        this.updateQuote();
+        if(this.quote.grand_total)
+        {
+          this.updateQuote();
+        }
       };
     }
   }
