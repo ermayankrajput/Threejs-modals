@@ -43,9 +43,10 @@ export class QuoteIndexComponent {
     }
   }
   deleteQuote(row:Quote, i:number){
-    console.log(i);
+    console.log(row);
     // return false;
-    if (confirm("Want to delete?") == true) {
+    let deleteQuote = prompt("Please type DELETE to delete quote ID: "+ row.id, "");
+    if (deleteQuote === "DELETE") {
       this.quoteService.deleteQuote(row).subscribe((response) => {
 
         this.quotes.splice(i, 1)
