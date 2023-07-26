@@ -116,7 +116,7 @@ export class QuoteComponent implements OnInit  {
     let totalCost = _.sumBy(this.quote.quote_infos, ({unit_quotes})=>_.sumBy(unit_quotes,function(o){
       return (o.unit_price||0)*(o.quantity||0);
     }));
-    return Math.round((totalCost + parseFloat(this.quote.shipping_cost))*100)/100;
+    return Math.round((totalCost || 0 + parseFloat(this.quote.shipping_cost || '0'))*100)/100;
   }
 
 }

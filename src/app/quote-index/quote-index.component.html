@@ -1,4 +1,4 @@
-<div class="container my-5">
+<div class="container my-5" *ngIf="quotes">
     <div class="mb-5 pt-4">
         <h2>All Quotes</h2>
     </div>
@@ -54,4 +54,8 @@
     
         <mat-paginator [pageSizeOptions]="[25, 50, 75, 100]" aria-label="Select page of users"></mat-paginator>
     </div>
+</div>
+<div class="w-100 bg-white display-1 d-flex align-items-center justify-content-center flex-column" style="height: 50vh;"  *ngIf="!quotes">
+    <div><i class="fa-light fa-spinner-third fa-spin"></i></div>
+    <div class="display-6 mt-5">Loading Quotes...</div>
 </div>
