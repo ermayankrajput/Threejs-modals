@@ -23,6 +23,9 @@
             or
             <input #fileUpload type="file" (change)="upload3dfile($event)" id="fileUpload" accept='.stp,.stl,.STL,.step,.catpart,.igs,.prt,.sat,.sldprt,.x_t,.STP,.STEP,.CATPART,.IGS,.PRT,.SAT,.SLDPRT,.X_T'>
         </label>
+        <div class="py-4 text-center">
+            <strong>Allowed Files:- </strong>{{allowFiles}}
+        </div>
     </div>
     <div class="row">
         <div class="w-100 bg-white display-1 d-flex align-items-center justify-content-center flex-column" *ngIf="uploadingFile">

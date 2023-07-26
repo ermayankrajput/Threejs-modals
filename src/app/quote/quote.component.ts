@@ -57,27 +57,8 @@ export class QuoteComponent implements OnInit  {
   onRemoveQuote(event:number){
     this.quote.quote_infos.splice(event, 1)
   }
-  public downloadAsPDF(): void {
-      this.router.navigate(["/quote/pdf/",this.quote.id])
-      // let domElement = this.MyDIv.nativeElement as HTMLElement;
-    //   html2canvas(domElement).then(canvas => {
-    //     const contentDataURL = canvas.toDataURL('image/png')  // 'image/jpeg' for lower quality output.
-    //     const imgWidth = 208;
-    //     const pageHeight = 295;
-    //     const imgHeight = (canvas.height * imgWidth) / canvas.width;
-    //     let heightLeft = imgHeight;
-    //     let position = 0;
-    //     heightLeft -= pageHeight;
-    //     const doc = new jsPDF('p', 'mm');
-    //     doc.addImage(canvas, 'PNG', 0, position, imgWidth, imgHeight, '', 'FAST');
-    //     while (heightLeft >= 0) {
-    //       position = heightLeft - imgHeight;
-    //       doc.addPage();
-    //       doc.addImage(canvas, 'PNG', 0, position, imgWidth, imgHeight, '', 'FAST');
-    //       heightLeft -= pageHeight;
-    //     }
-    //     doc.save('Filename.pdf');   
-    // }); 
+  public view(): void {
+    this.router.navigate(["/quote/pdf/",this.quote.id])
   }
 
   addQuoteInfo(event:QuoteInfo){

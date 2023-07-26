@@ -1,10 +1,12 @@
 <div *ngIf="quote">
     <div class="container position-relative p-3 text-right">
         <div class="row text-right">
-            <div class="col-4 offset-8 text-right">
-                <button class="btn btn-success mt-2 me-2" routerLink="/quote/{{quote.id}}">edit</button>
-                <button class="btn btn-warning mt-2 me-2" (click)="realTimePdfViewer()">View Real PDF</button>
-                <button class="btn btn-primary mt-2" (click)="downloadAsPDF()">Export PDF</button>
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-success mt-2 me-2" routerLink="/quote/{{quote.id}}">Edit</button>
+                <button class="btn btn-warning mt-2 me-2" (click)="realTimePdfViewer()">View Multi Page PDF</button>
+                <button class="btn btn-primary mt-2 me-2" (click)="downloadAsPDF()">Export Multi Page PDF</button>
+                <button class="btn btn-info mt-2 me-2" (click)="realTimeSinglePagePdfViewer()">View Single Page PDF</button>
+                <button class="btn btn-dark mt-2" (click)="downloadSinglePageAsPDF()">Export Single Page PDF</button>
             </div>
         </div>
     </div>
@@ -92,7 +94,7 @@
             <div class="row mt-4 align-center">
                 
                 <div class="col-2 offset-9 fs-6 text-center">Shipping Cost</div>
-                <div class="col-1 text-center fs-6">{{quote.shipping_cost}}</div>
+                <div class="col-1 text-center fs-6">${{quote.shipping_cost}}</div>
             </div>
             
             <div class="row mt-4 align-center">
@@ -102,7 +104,7 @@
                     <div>2. Import Tax: this tax in destination country is not included</div>
                 </div>
                 <div class="col-2 blue fs-8 ">Grand Total</div>
-                <div class="col-3 blue-div text-center fs-8">{{quote.grand_total}}</div>
+                <div class="col-3 blue-div text-center fs-8">{{quote.grand_total}} (USD)</div>
             </div>
             <div class="row mt-5">
                 <div class="col-5 offset-7 pe-0">
@@ -114,7 +116,7 @@
                     <div class="fs-6 black-70 mt-2">I confirm that I am an authorised signatory of the client company.</div>
                 </div>
             </div>
-            <!-- <div class="row include-spacer position-relative">
+            <div class="row include-spacer position-relative">
                 <div class="position-absolute end-0 top-0 text-end spacer-info">
                     <input type="number" placeholder="Space Below" [(ngModel)]="spacebelow">
                 </div>
@@ -128,7 +130,7 @@
                         </div>
                     </div>
                 </div>
-            </div> -->
+            </div>
         </div>
     </div>
 </div>

@@ -83,4 +83,86 @@ export class QuotePdfComponent implements OnInit {
       this.pdfDoc = doc.output('datauristring');
     });
   }
+
+  public downloadSinglePageAsPDF(): void {
+    let domElement = this.pdfContainer.nativeElement as HTMLElement;
+    html2canvas(domElement).then(canvas => {
+      const contentDataURL = canvas.toDataURL('image/png')
+      let width = 208;
+      let height = 295;
+      switch(true) {
+        case canvas.width > 600 && canvas.width < 1000:
+          width = canvas.width/2
+          height = canvas.height/2
+          break;
+        case canvas.width >= 1000 && canvas.width < 1500:
+          width = canvas.width/3
+          height = canvas.height/3
+          break;
+        case canvas.width >= 1500 && canvas.width < 2000:
+          width = canvas.width/4
+          height = canvas.height/4
+          break;
+        case canvas.width >= 2000 && canvas.width < 2500:
+          width = canvas.width/5
+          height = canvas.height/5
+          break;
+        case canvas.width >= 2500:
+            width = canvas.width/6
+            height = canvas.height/6
+            break;
+        default:
+          width = canvas.width
+          height = canvas.height
+      }
+      const imgWidth = width;
+      const imgHeight = height;
+      let position = 0;
+      const doc = new jsPDF('p', 'mm', [height, width]);
+      doc.addImage(canvas, 'PNG', 0, position, imgWidth, imgHeight, '', 'SLOW');
+      doc.save('3ERP-quote-'+this.quote.id+'.pdf');   
+  }); 
+}
+
+  realTimeSinglePagePdfViewer(){
+    this.pdfDoc = '';
+    this.livePdf = true;
+    let domElement = this.pdfContainer.nativeElement as HTMLElement;
+    html2canvas(domElement).then(canvas => {
+      const contentDataURL = canvas.toDataURL('image/png')
+      let width = 208;
+      let height = 295;
+      switch(true) {
+        case canvas.width > 600 && canvas.width < 1000:
+          width = canvas.width/2
+          height = canvas.height/2
+          break;
+        case canvas.width >= 1000 && canvas.width < 1500:
+          width = canvas.width/3
+          height = canvas.height/3
+          break;
+        case canvas.width >= 1500 && canvas.width < 2000:
+          width = canvas.width/4
+          height = canvas.height/4
+          break;
+        case canvas.width >= 2000 && canvas.width < 2500:
+          width = canvas.width/5
+          height = canvas.height/5
+          break;
+        case canvas.width >= 2500:
+            width = canvas.width/6
+            height = canvas.height/6
+            break;
+        default:
+          width = canvas.width
+          height = canvas.height
+      }
+      const imgWidth = width;
+      const imgHeight = height;
+      let position = 0;
+      const doc = new jsPDF('p', 'mm', [height, width]);
+      doc.addImage(canvas, 'PNG', 0, position, imgWidth, imgHeight, '', 'SLOW');
+      this.pdfDoc = doc.output('datauristring');
+    });
+  }
 }

@@ -23,13 +23,11 @@ export class FileUploadComponent implements OnInit {
   uploadStatus = "Uploading & Converting File"
   selectedValue='cadex';
   apiPath!: string;
-  allowFiles!:string;
+  allowFiles = '.stp, .stl, .STL, .step, .catpart, .igs, .iges, .prt, .sat, .sldprt, .x_t, .STP, .STEP, .CATPART, .IGS, .IGES, .PRT, .SAT, .SLDPRT, .X_T';
   ngOnInit(): void {
   }
 
   upload3dfile(event:any){
-    console.log(this.selectedValue);
-    // return false;
     const file:File = event.target.files[0];
     if (file) {
       this.uploadingFile = true
@@ -84,9 +82,9 @@ export class FileUploadComponent implements OnInit {
   changeMethod(){
     
     if(this.selectedValue === 'cadex'){
-      this.allowFiles = '.stp,.stl,.STL,.step,.catpart,.igs,.prt,.sat,.sldprt,.x_t,.STP,.STEP,.CATPART,.IGS,.PRT,.SAT,.SLDPRT,.X_T';
+      this.allowFiles = '.stp, .stl, .STL, .step, .catpart, .igs, .iges, .prt, .sat, .sldprt, .x_t, .STP, .STEP, .CATPART, .IGS, .IGES, .PRT, .SAT, .SLDPRT, .X_T';
     }else{
-      this.allowFiles = '.stp,.STP,.step,.STEP,.igs,.IGS,.iges,.IGES,.stl,.STL';
+      this.allowFiles = '.stp, .STP, .step, .STEP, .igs, .IGS, .iges, .IGES, .stl, .STL';
     }
     console.log(this.allowFiles);
     this.fileUploadVar.nativeElement.accept= [this.allowFiles];
