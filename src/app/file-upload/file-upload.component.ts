@@ -35,13 +35,24 @@ export class FileUploadComponent implements OnInit {
       this.uploadingFile = true
       if(this.selectedValue === 'cadex'){
         this.converterService.uploadCadExchanger(file).subscribe((response) => {
-          this.uploadStatus = "Computing"
+          this.uploadStatus = "Computing";
           this.quoteId === 0? this.createQuote(response): this.createQuoteInfo(response);
+        },error => {
+          // console.log(error.status);
+          if(confirm("Error in handling file: "+error.status)){
+            this.router.navigate(['/quotes']);
+          }
         });
+
       }else{
         this.converterService.upload(file).subscribe((response) => {
           this.uploadStatus = "Computing"
           this.quoteId === 0? this.createQuote(response): this.createQuoteInfo(response);
+        },error => {
+          // console.log(error.status);
+          if(confirm("Error in handling file: "+error.status)){
+            this.router.navigate(['/quotes']);
+          }
         });
       }
     }
