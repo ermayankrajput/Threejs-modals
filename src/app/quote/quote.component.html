@@ -5,7 +5,7 @@
                 <div class="col-lg-2">Quote Date: <input (change)="updateQuote()" type="date" class="form-control" [ngModel]="quote.quote_date | date: 'yyyy-MM-dd'" (ngModelChange)="quote.quote_date=$event"></div>
                 <div class="col-lg-2 text-right">Validity (in days): <input (change)="updateQuote()" type="number" class="form-control" [(ngModel)] = 'quote.validity'></div>
                 <div class="col-lg-2">Shipping Cost (in USD): <input (change)="updateQuote()" type="number" class="form-control" [(ngModel)]='quote.shipping_cost'></div>
-                <div class="col-lg-2">Total Cost (in USD)<br>{{quote.grand_total}}</div>
+                <div class="col-lg-2">Total Cost (in USD)<br><span class="text-danger fw-bolder">{{quote.grand_total}}</span></div>
                 <div class="col-lg-4 mt-3 text-end">
                     <button class="btn btn-warning mt-2" *ngIf="quote.quote_infos.length > 0" (click)="downloadAsPDF()">View PDF</button>
                 </div>
