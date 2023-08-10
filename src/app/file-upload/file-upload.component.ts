@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input,ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input,ViewChild, ElementRef, HostListener} from '@angular/core';
 import { HttpClient, HttpHeaders, HttpEvent } from '@angular/common/http';
 import { ConverterService } from '../services/converter.service';
 // import { EventEmitter } from 'stream';
@@ -27,8 +27,30 @@ export class FileUploadComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  allowDrop(ev:any) {
+    ev.preventDefault();
+  }
+
+  drop(ev:any) {
+    // console.log(ev.dataTransfer);
+    ev.preventDefault();
+    [...ev.dataTransfer.items].forEach((item, i) => {
+      // If dropped items aren't files, reject them
+      if (item.kind === "file") {
+        const file = item.getAsFile();
+        console.log(`… file[${i}].name = ${file.name}`);
+        console.log(file);
+        this.upload3dfile(file)
+      }
+    });
+    // this.upload3dfile(ev)
+    // var data = ev.dataTransfer.getData("text");
+    // ev.target.appendChild(document.getElementById(data));
+  }
+
   upload3dfile(event:any){
-    const file:File = event.target.files[0];
+    // console.log();
+    const file:File = event?.target?.files[0]||event;
     if (file) {
       this.uploadingFile = true
       if(this.selectedValue === 'cadex'){
