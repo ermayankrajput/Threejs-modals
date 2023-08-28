@@ -27,7 +27,9 @@
         <div class="col-lg-2">
             <img class="w-100"
                 src="{{rootService.getBucketUrl()}}{{quoteInfo.image_file}}"
+                onerror="this.onerror=null; this.src='https://elasticbeanstalk-ap-northeast-1-364557162645.s3.ap-northeast-1.amazonaws.com/uploads/169037952524511230726_5176_p_bottom_case.stp.png'"
                 alt="quote_image">
+                <div class="text-center">{{quoteInfo.file_name}}</div>
                 <div class="text-center pt-2">X:{{quoteInfo.x_size}}mm, Y: {{quoteInfo.y_size}}mm, <br>Z: {{quoteInfo.z_size}}mm</div>
         </div>
         <div class="col-lg-2 ">

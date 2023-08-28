@@ -22,6 +22,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { QuoteInfoPdfComponent } from './quote/quote-pdf/quote-info-pdf/quote-info-pdf.component';
 import { SafePipe } from './pipes/safe.pipe';
+import { QuoteAttachmentComponent } from './quote/quote-attachment/quote-attachment.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { SafePipe } from './pipes/safe.pipe';
     QuoteIndexComponent,
     QuoteInfoPdfComponent,
     SafePipe,
+    QuoteAttachmentComponent,
   ],
   imports: [
     AppRoutingModule,

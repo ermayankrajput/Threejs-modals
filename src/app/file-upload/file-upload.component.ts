@@ -49,13 +49,16 @@ export class FileUploadComponent implements OnInit {
   }
 
   upload3dfile(event:any){
-    // console.log();
-    const file:File = event?.target?.files[0]||event;
+    // console.log('event',event);
+    const file:File = event?.target?.files||event;
+    console.log('file',file);
+    // return false;
     if (file) {
       this.uploadingFile = true
       if(this.selectedValue === 'cadex'){
         this.converterService.uploadCadExchanger(file).subscribe((response) => {
           this.uploadStatus = "Computing";
+          console.log(response,'thihth');
           this.quoteId === 0? this.createQuote(response): this.createQuoteInfo(response);
         },error => {
           // console.log(error.status);
@@ -63,7 +66,6 @@ export class FileUploadComponent implements OnInit {
             this.router.navigate(['/quotes']);
           }
         });
-
       }else{
         this.converterService.upload(file).subscribe((response) => {
           this.uploadStatus = "Computing"

@@ -1,5 +1,5 @@
 import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
-import { Quote } from './../interface/quote';
+import { Quote, QuoteAttachment } from './../interface/quote';
 import { QuoteInfo } from './../interface/quote-info';
 import { QuoteInfoFactory } from './quote-info/quote-info.factory';
 import * as _ from 'lodash';
@@ -7,6 +7,9 @@ import { ConverterService } from '../services/converter.service';
 import { QuoteService } from '../services/quote.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { RootService } from 'src/app/services/root.service';
+
+
 
 @Component({
   selector: 'app-quote',
@@ -18,19 +21,25 @@ export class QuoteComponent implements OnInit  {
   api_res:any;
   fileObject:any;
   quote!:Quote;
+  attachments!:QuoteAttachment[];
   
-  constructor(private quoteInfoFactory:QuoteInfoFactory,private converterService:ConverterService,private quoteService:QuoteService,private route: ActivatedRoute, private router:Router) { }
+  constructor(private quoteInfoFactory:QuoteInfoFactory,private converterService:ConverterService,private quoteService:QuoteService,private route: ActivatedRoute, private router:Router, public rootService:RootService) { }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.quoteService.getSingleQuote(id).subscribe((response) => {
+      console.log(response)
       this.api_res = response;
+
       this.quote = this.api_res;
       this.quote.quote_infos = _.sortBy(this.quote.quote_infos, function(o){
         o.unit_quotes = _.sortBy(o.unit_quotes, function(o){return o.id});
         return o.id;
       })
       this.quote.grand_total = this.quote.grand_total?this.quote.grand_total:0;
+      this.attachments = JSON.parse(this.quote.attachments)
+      console.log(this.attachments)
+      console.log(typeof this.attachments)
     });
   }
 
@@ -49,7 +58,7 @@ export class QuoteComponent implements OnInit  {
   
 
   renderFile(event:any){
-      this.quote.quote_infos.push(this.quoteInfoFactory.buildQuoteInfo(event.file))
+      // this.quote.quote_infos.push(this.quoteInfoFactory.buildQuoteInfo(event.file))
   }
   onClonedQuote(event:{quoteInfo: QuoteInfo, index: number}){
     this.quote.quote_infos.splice(event.index, 0, event.quoteInfo);

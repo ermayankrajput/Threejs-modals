@@ -20,6 +20,7 @@ export class QuotePdfComponent implements OnInit {
   livePdf = false;
   enlarge = false;
   spacebelow = 64;
+  attachments!:any;
   constructor(private quoteService:QuoteService,private route: ActivatedRoute,public rootService:RootService) { }
 
   ngOnInit(): void {
@@ -32,6 +33,7 @@ export class QuotePdfComponent implements OnInit {
         o.unit_quotes = _.sortBy(o.unit_quotes, function(o){return o.id});
         return o.id;
       })
+      this.attachments = JSON.parse(this.quote.attachments)
       console.log(this.quote);
     });
   }

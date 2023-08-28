@@ -1,6 +1,7 @@
 import { UnitQuote } from "./unit-quote";
 export interface QuoteInfo {
     id: number;
+    file_name: string|null;
     finishing: string|null;
     image_file: string|null;
     technique: string|null;

@@ -1,0 +1,46 @@
+
+
+<div class="badge rounded bg-light text-dark px-0 py-0 fs-6 d-flex align-items-center justify-content-between w-100">
+    <div class="d-flex align-items-center w-75">
+        <div class="file-icon rounded">
+            {{getExtention()}}
+        </div>
+        <div class="w-100-75 px-2 text-truncate capitalized text-start">
+            {{attachment.filename}}
+        </div>
+    </div>
+    <div class="dropdown px-3 btn-group">
+        <button type="button" class="dropdown btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <i class="fa-solid fa-ellipsis-vertical" ></i>
+        </button>
+        <ul class="dropdown-menu shadow border-0 dropdown-content">
+
+            <li *ngIf="getExtention() == 'IMAGE'"><button class="dropdown-item py-2" (click)="openPopup()">View</button></li>
+            <li><a class="dropdown-item py-2" href="{{rootService.getBucketUrl()}}{{attachment.file}}">Download</a></li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item text-danger py-2" href="#">Remove</a></li>
+        </ul>
+    </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{attachment.filename}}</h4>
+            </div>
+            <div class="modal-body">
+                <img class="w-100" src="{{rootService.getBucketUrl()}}{{attachment.file}}"
+                    onerror="this.onerror=null; this.src='https://elasticbeanstalk-ap-northeast-1-364557162645.s3.ap-northeast-1.amazonaws.com/uploads/169037952524511230726_5176_p_bottom_case.stp.png'"
+                    alt="quote_image">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="closePopup()">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
