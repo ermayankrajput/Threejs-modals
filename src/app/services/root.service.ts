@@ -11,6 +11,7 @@ export class RootService {
     getHeaders(){
         return new HttpHeaders({
             'Content-Type': 'application/json',
+            'x-access-token': localStorage.getItem('token') || "",
         });
     }
   

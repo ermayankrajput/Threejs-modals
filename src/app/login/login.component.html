@@ -1,0 +1,20 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 offset-lg-4">
+            <h2>Login</h2>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" required minlength="4" name="username" class="form-control" [(ngModel)]="user.email" [appInputValidator]="validateEmail()"/>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" class="form-control" [(ngModel)]="user.password" />
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" (click)="loginSubmit()">Login</button>
+                <a routerLink="/register" class="btn btn-link">Register</a>
+            </div>
+        </div>
+    </div>
+</div>

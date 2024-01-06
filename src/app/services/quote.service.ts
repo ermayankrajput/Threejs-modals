@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpEvent } from '@angular/common/http';
+import { HttpClient, HttpEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { UnitQuote } from '../interface/unit-quote';
-import { Quote } from '../interface/quote';
 import { RootService } from './root.service';
 
 @Injectable({
@@ -13,7 +11,7 @@ export class QuoteService extends RootService {
   constructor(private http: HttpClient) { super() }
 
   geQuotes(): Observable<HttpEvent<any>> {
-    return this.http.get<any>(this.apiBase + "/quotes");
+    return this.http.get<any>(this.apiBase + "quotes/",{headers : this.getHeaders()});
   }
   createQuote(returnData:any): Observable<HttpEvent<any>> {
     return this.http.post<any>(this.apiBase + "/quote",returnData,{headers : this.getHeaders()});
@@ -22,7 +20,7 @@ export class QuoteService extends RootService {
     return this.http.patch<any>(this.apiBase + "/quote/", quote,{headers : this.getHeaders()});
   }
   getSingleQuote(quoteId:any): Observable<HttpEvent<any>> {
-    return this.http.get<any>(this.apiBase + "/quote/" + quoteId);
+    return this.http.get<any>(this.apiBase + "/quote/" + quoteId,{headers : this.getHeaders()});
   }
   deleteQuote(quote:any):Observable<HttpEvent<any>> {
     return this.http.delete<any>(this.apiBase + "/quote/",{ headers: this.getHeaders(), body: quote });

@@ -1,0 +1,25 @@
+
+<h2>Register</h2>
+<div>
+    <div class="form-group my-2">
+        <label for="name">Name</label>
+        <input type="text" name="name" [(ngModel)]="user.name" class="form-control" required (keyup)="validateName()"/>
+        <span class="text-danger" *ngIf="!validateNameMessage.validation">{{validateNameMessage.message}}</span>
+    </div>
+    <div class="form-group my-2">
+        <label for="email">Email</label>
+        <input type="email" name="email" [(ngModel)]="user.email" class="form-control" required (keyup)="validateEmail()"/>
+        <span class="text-danger" *ngIf="!validateEmailMessage.validation">{{validateEmailMessage.message}}</span>
+    </div>
+    <div class="form-group my-2">
+        <label for="password">Password</label>
+        <input type="password" name="password" [(ngModel)]="user.password" class="form-control" required (keyup)="validatePassword()"/>
+        <span class="text-danger" *ngIf="!validatePasswordMessage.validation">{{validatePasswordMessage.message}}</span>
+    </div>
+    <div class="form-group my-4">
+        <button class="btn btn-primary" (click)="submitForm()">
+            Register
+        </button>
+        <a routerLink="/login" class="btn btn-link">Cancel</a>
+    </div>
+</div>

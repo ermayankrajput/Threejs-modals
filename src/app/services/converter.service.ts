@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpEvent } from '@angular/common/http';
+import { HttpClient, HttpEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { RootService } from './root.service';
 
@@ -15,7 +15,9 @@ export class ConverterService extends RootService {
     const formData = new FormData();
     formData.append("files[]", file);
     // return this.http.post<any>(this.apiBase + "/file-upload", formData);
-    return this.http.post<any>(this.apiBase + "quote-upload", formData);
+    console.log(this.getHeaders());
+    //return false;
+    return this.http.post<any>(this.apiBase + "quote-upload", formData,{headers : this.getHeaders()});
   }
 
   uploadCadExchanger(files:any): Observable<HttpEvent<any>> {
@@ -34,7 +36,7 @@ export class ConverterService extends RootService {
     console.log(formData.getAll('files'), 'converter service form')
     // return false;
     // return this.http.post<any>(this.apiBase + "/file-upload", formData);
-    return this.http.post<any>(this.apiBase + "quote-upload", formData);
+    return this.http.post<any>(this.apiBase + "quote-upload", formData,{headers : this.getHeaders()});
   }
   
 

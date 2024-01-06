@@ -23,6 +23,11 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { QuoteInfoPdfComponent } from './quote/quote-pdf/quote-info-pdf/quote-info-pdf.component';
 import { SafePipe } from './pipes/safe.pipe';
 import { QuoteAttachmentComponent } from './quote/quote-attachment/quote-attachment.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { InputValidatorDirective } from './directives/input-validator.directive';
+import {  ReactiveFormsModule } from '@angular/forms';
+import { ProfileComponent } from './user/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +45,10 @@ import { QuoteAttachmentComponent } from './quote/quote-attachment/quote-attachm
     QuoteInfoPdfComponent,
     SafePipe,
     QuoteAttachmentComponent,
+    LoginComponent,
+    RegisterComponent,
+    InputValidatorDirective,
+    ProfileComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -50,7 +59,8 @@ import { QuoteAttachmentComponent } from './quote/quote-attachment/quote-attachm
     MatTableModule, 
     MatSortModule, 
     MatPaginatorModule,
-    BrowserModule
+    BrowserModule,
+    ReactiveFormsModule
   ],
   providers: [provideAnimations()],
   bootstrap: [AppComponent]
