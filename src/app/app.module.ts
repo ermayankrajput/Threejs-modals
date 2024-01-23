@@ -24,10 +24,15 @@ import { QuoteInfoPdfComponent } from './quote/quote-pdf/quote-info-pdf/quote-in
 import { SafePipe } from './pipes/safe.pipe';
 import { QuoteAttachmentComponent } from './quote/quote-attachment/quote-attachment.component';
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './admin/register/register.component';
 import { InputValidatorDirective } from './directives/input-validator.directive';
 import {  ReactiveFormsModule } from '@angular/forms';
 import { ProfileComponent } from './user/profile/profile.component';
+import { UserIconComponent } from './user/user-icon/user-icon.component';
+import { ChangePasswordComponent } from './user/change-password/change-password.component';
+import { UserListComponent } from './admin/user-list/user-list.component';
+import { ChangeUserPasswordComponent } from './admin/change-user-password/change-user-password.component';
+import { EditUserProfileComponent } from './admin/edit-user-profile/edit-user-profile.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +54,11 @@ import { ProfileComponent } from './user/profile/profile.component';
     RegisterComponent,
     InputValidatorDirective,
     ProfileComponent,
+    UserIconComponent,
+    ChangePasswordComponent,
+    UserListComponent,
+    ChangeUserPasswordComponent,
+    EditUserProfileComponent,
   ],
   imports: [
     AppRoutingModule,

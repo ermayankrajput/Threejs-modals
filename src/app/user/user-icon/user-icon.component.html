@@ -1,0 +1,16 @@
+<li class="nav-item">
+    <div style="cursor: pointer;" class="nav-link d-block position-relative">
+        <i style="cursor: pointer;" class="fa-solid fa-user text-white"></i>
+        <i style="cursor: pointer;" class="fa-solid fa-caret-down ps-2 text-white"></i>
+        <div class="position-absolute w-100 h-100 start-0 top-0" #toggleButton (click)="toggleOption()">
+
+        </div>
+    </div>
+    <ul class="dropdown-menu" #menu *ngIf="this.showOption" [ngClass]="{'show': showOption === true}">
+        <li><a class="dropdown-item" routerLink="/profile">My Profile</a></li>
+        <!-- <li><a *ngIf="userHelper.isAdmin(currentUser)" class="dropdown-item" routerLink="/register">Create User</a></li> -->
+        <li><a *ngIf="authService.isAdmin() || authService.isSuperAdmin()" class="dropdown-item" routerLink="/user-list">View Users</a></li>
+        <li><a class="dropdown-item" routerLink="/change-password">Change Password</a></li>
+        <li><a class="dropdown-item" (click)="logout()" href="#">Logout</a></li>
+    </ul>
+</li>

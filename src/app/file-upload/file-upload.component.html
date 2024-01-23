@@ -13,7 +13,7 @@
     </div>
     
     <div class="row" [hidden]="uploadingFile" (drop)="drop($event)" (dragover)="allowDrop($event)">
-        <label for="images" class="drop-container" id="dropcontainer">
+        <label for="fileUpload" class="drop-container" id="dropcontainer">
             <span class="drop-title">Drop file here</span>
             or
             <input multiple="multiple" #fileUpload type="file" (change)="upload3dfile($event)" id="fileUpload" accept='.stp,.stl,.STL,.step,.catpart,.igs,.prt,.sat,.sldprt,.x_t,.STP,.STEP,.CATPART,.IGS,.PRT,.SAT,.SLDPRT,.X_T'>

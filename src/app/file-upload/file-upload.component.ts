@@ -25,7 +25,9 @@ export class FileUploadComponent implements OnInit {
   apiPath!: string;
   allowFiles = '.stp, .stl, .STL, .step, .catpart, .igs, .iges, .prt, .sat, .sldprt, .x_t, .STP, .STEP, .CATPART, .IGS, .IGES, .PRT, .SAT, .SLDPRT, .X_T';
   ngOnInit(): void {
+    // console.log(localStorage.getItem('user'));
   }
+
 
   allowDrop(ev:any) {
     ev.preventDefault();

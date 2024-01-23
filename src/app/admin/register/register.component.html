@@ -1,0 +1,68 @@
+<div class="row mt-3">
+    <div class="col-md-6 text-start">
+        <h5>Create User</h5>
+    </div>
+    <div class="col-md-6 text-end">
+        <a routerLink="/user-list" class="btn btn-sm btn-success">Back</a>
+    </div>
+</div>
+<div class="row d-flex justify-content-center align-items-center h-100 mt-5">
+    <div class="col col-xl-6">
+        <div class="card" style="border-radius: 1rem;">
+            <div class="card-body p-4 p-lg-5 text-black">
+                <div class="form-outline mb-4">
+                    <label class="form-label">First Name</label>
+                    <span class="text-danger"
+                        *ngIf="!validateFirstNameMessage.validation">{{validateFirstNameMessage.message}}</span>
+                    <input type="text" [(ngModel)]="user.first_name" class="form-control form-control" />
+                </div>
+                <div class="form-outline mb-4">
+                    <label class="form-label">Last Name</label>
+                    <span class="text-danger"
+                        *ngIf="!validateLastNameMessage.validation">{{validateLastNameMessage.message}}</span>
+                    <input type="text" [(ngModel)]="user.last_name" class="form-control form-control" />
+                </div>
+                <div class="form-outline mb-4">
+                    <label class="form-label">Email</label>
+                    <span class="text-danger"
+                        *ngIf="!validateEmailMessage.validation">{{validateEmailMessage.message}}</span>
+                    <input type="text" [(ngModel)]="user.email" class="form-control form-control" />
+                </div>
+                <div class="form-outline mb-4">
+                    <label class="form-label">Role</label>
+                    <select class="form-select" name="role" [(ngModel)]="user.role_id" required>
+                        <ng-container *ngFor="let role of roles | keyvalue">
+                            <option *ngIf="isNumber(role.key)" [value]="role.key">{{[role.value]}}</option>
+                        </ng-container>
+                    </select>
+                </div>
+                <div class="form-outline mb-4">
+                    <label class="form-label">Age</label>
+                    <select class="form-select" name="age" [(ngModel)]="user.age">
+                        <option *ngFor="let age of ageList" [value]="age">{{age}}</option>
+                    </select>
+                </div>
+                <div class="form-outline mb-4">
+                    <label class="form-label">Password (Password must contain an alphabet, special character, number and length must be greater than 5)</label>
+                    <span class="text-danger" *ngIf="!validatePasswordMessage.validation">{{validatePasswordMessage.message}}</span>
+                    <input type="password" [(ngModel)]="user.password" class="form-control form-control" />
+                </div>
+                <div class="form-outline mb-4">
+                    <label class="form-label">Confirm Password</label>
+                    <span class="text-danger" *ngIf="!validateCPasswordMessage.validation">{{validateCPasswordMessage.message}}</span>
+                    <input type="text" [(ngModel)]="cPassword" class="form-control form-control" />
+                </div>
+                <div class="d-flex align-items-center mb-3 pb-1">
+                    <div class="pt-1 mb-4">
+                        <button class="btn btn-dark btn-lg btn-block" type="button" (click)="submitForm()">Create User</button>
+                    </div>
+                    <p *ngIf="registerStatus == true" class="text-success ps-3">User created successfully</p>
+                    <p *ngIf="registerStatus == false" class="text-danger ps-3">Something went wrong</p>
+                </div>
+
+                
+
+            </div>
+        </div>
+    </div>
+</div>
