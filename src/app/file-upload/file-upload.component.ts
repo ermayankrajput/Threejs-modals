@@ -54,7 +54,8 @@ export class FileUploadComponent implements OnInit {
     // console.log('event',event);
     const file:File = event?.target?.files||event;
     console.log('file',file);
-    // return false;
+    
+    return false;
     if (file) {
       this.uploadingFile = true
       if(this.selectedValue === 'cadex'){
