@@ -7,7 +7,8 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Router } from '@angular/router';
-import * as _ from 'lodash'
+import * as _ from 'lodash';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-quote-index',
@@ -16,23 +17,31 @@ import * as _ from 'lodash'
 })
 
 export class QuoteIndexComponent {
+  constructor(private quoteService:QuoteService,private router:Router, private datePipe: DatePipe) {}
   quotes:any;
-  displayedColumns: string[] = [ 'id','quote_date','shipping_cost','grand_total','action'];
+  displayedColumns: string[] = [ 'id','date_new','shipping_cost','grand_total','action'];
   dataSource!: MatTableDataSource<Quote>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  
-  constructor(private quoteService:QuoteService,private router:Router) {}
-
+  pipe!: DatePipe;
 
   ngOnInit(): void {
     this.quoteService.geQuotes().subscribe((response) => {
       this.quotes = response;
+      this.ngAfterViewInit();
+    });
+  }
+
+  pageSizes = [20, 50, 100];
+
+  ngAfterViewInit() {
       this.quotes = _.reverse(_.sortBy(this.quotes, function(o){return o.id}))
+      this.quotes.map((quote:any) => {
+        quote.date_new = this.datePipe.transform(quote.quote_date, 'EEEE, d MMM y')
+      })
       this.dataSource = new MatTableDataSource(this.quotes);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-    });
   }
 
   applyFilter(event: Event) {
@@ -42,9 +51,8 @@ export class QuoteIndexComponent {
       this.dataSource.paginator.firstPage();
     }
   }
+  
   deleteQuote(row:Quote, i:number){
-    console.log(row);
-    // return false;
     let deleteQuote = prompt("Please type DELETE to delete quote ID: "+ row.id, "");
     if (deleteQuote === "DELETE") {
       this.quoteService.deleteQuote(row).subscribe((response) => {

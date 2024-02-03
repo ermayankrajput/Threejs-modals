@@ -33,6 +33,7 @@ import { ChangePasswordComponent } from './user/change-password/change-password.
 import { UserListComponent } from './admin/user-list/user-list.component';
 import { ChangeUserPasswordComponent } from './admin/change-user-password/change-user-password.component';
 import { EditUserProfileComponent } from './admin/edit-user-profile/edit-user-profile.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,7 @@ import { EditUserProfileComponent } from './admin/edit-user-profile/edit-user-pr
     BrowserModule,
     ReactiveFormsModule
   ],
-  providers: [provideAnimations()],
+  providers: [provideAnimations(), DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

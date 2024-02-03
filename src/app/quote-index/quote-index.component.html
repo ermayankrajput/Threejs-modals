@@ -1,4 +1,4 @@
-<div class="container my-5" *ngIf="quotes">
+<div class="container my-5 mb-5" *ngIf="quotes">
     <div class="mb-5 pt-4">
         <h2>All Quotes</h2>
     </div>
@@ -7,7 +7,7 @@
         <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
     </mat-form-field>
     
-    <div class="mat-elevation-z8">
+    <div class="mat-elevation-z8 mb-5">
         <table mat-table [dataSource]="dataSource" matSort>
             
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -19,9 +19,9 @@
             </ng-container>
     
             <!-- Date Column -->
-            <ng-container matColumnDef="quote_date">
+            <ng-container matColumnDef="date_new">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
-                <td mat-cell *matCellDef="let row"> {{row.quote_date | date: 'EEEE, d MMM y'}}</td>
+                <td mat-cell *matCellDef="let row"> {{row.date_new}}</td>
             </ng-container>
     
             <!-- Shipping Cost Column -->
@@ -52,7 +52,7 @@
             
         </table>
     
-        <mat-paginator [pageSizeOptions]="[25, 50, 75, 100]" aria-label="Select page of users"></mat-paginator>
+        <mat-paginator #paginatorPageSize  [pageSizeOptions]="pageSizes" showFirstLastButtons aria-label="Select page of users"></mat-paginator>
     </div>
 </div>
 <div class="w-100 bg-white display-1 d-flex align-items-center justify-content-center flex-column" style="height: 50vh;"  *ngIf="!quotes">

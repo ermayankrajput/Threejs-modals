@@ -22,7 +22,8 @@ export class HeaderComponent implements OnInit {
     this.router.events.subscribe(
       (event: any) => {
         if (event instanceof NavigationEnd) {
-          this.isNewQuoteVisible = !this.router.url.includes('/quote/');
+          console.log(this.router.url);
+          this.isNewQuoteVisible = !this.router.url.includes('new-quote');
         }
       }
     );
@@ -32,7 +33,7 @@ export class HeaderComponent implements OnInit {
       this.quoteService.createUniqueQuote().subscribe((response) => {
         this.apiResponse = response;
         console.log(response);
-        this.router.navigate(['/quote/'+this.apiResponse.quote.id]);
+        this.router.navigate(['/quote/'+this.apiResponse.quote.id+'?new-quote']);
       });
     }
    
