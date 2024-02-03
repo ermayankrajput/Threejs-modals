@@ -13,6 +13,7 @@ import { ChangePasswordComponent } from './user/change-password/change-password.
 import { UserListComponent } from './admin/user-list/user-list.component';
 import { ChangeUserPasswordComponent } from './admin/change-user-password/change-user-password.component';
 import { EditUserProfileComponent } from './admin/edit-user-profile/edit-user-profile.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {
@@ -64,7 +65,7 @@ const routes: Routes = [
   {
     path:'',
     canActivate:[AuthGuard],
-    component:QuoteIndexComponent
+    component:DashboardComponent
   },
   
 ];

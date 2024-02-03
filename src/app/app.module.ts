@@ -34,6 +34,7 @@ import { UserListComponent } from './admin/user-list/user-list.component';
 import { ChangeUserPasswordComponent } from './admin/change-user-password/change-user-password.component';
 import { EditUserProfileComponent } from './admin/edit-user-profile/edit-user-profile.component';
 import { DatePipe } from '@angular/common';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { DatePipe } from '@angular/common';
     UserListComponent,
     ChangeUserPasswordComponent,
     EditUserProfileComponent,
+    DashboardComponent,
   ],
   imports: [
     AppRoutingModule,

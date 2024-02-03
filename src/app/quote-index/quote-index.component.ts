@@ -17,13 +17,13 @@ import { DatePipe } from '@angular/common';
 })
 
 export class QuoteIndexComponent {
-  constructor(private quoteService:QuoteService,private router:Router, private datePipe: DatePipe) {}
+  constructor(private quoteService:QuoteService,private router:Router, private datePipe: DatePipe ) {}
   quotes:any;
   displayedColumns: string[] = [ 'id','date_new','shipping_cost','grand_total','action'];
   dataSource!: MatTableDataSource<Quote>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  pipe!: DatePipe;
+  // pipe!: DatePipe;
 
   ngOnInit(): void {
     this.quoteService.geQuotes().subscribe((response) => {
