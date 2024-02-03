@@ -25,6 +25,7 @@ export class LoginComponent {
         this.router.navigate(['/']);
       }
     },error=>{
+      console.log(error)
       this.invalidUser = true;
       // console.log('invalid username or password')
     });

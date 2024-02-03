@@ -7,6 +7,7 @@ export interface Quote {
     attachments: any|null;
     shipping_cost: string|'0';
     validity:number|null;
+    parent_id: number|0;
 }
 export interface QuoteAttachment {
     id: number;

@@ -14,6 +14,7 @@ import { Quote } from '../interface/quote';
 export class FileUploadComponent implements OnInit {
   @Output() onFileUpload = new EventEmitter() 
   @Output() onCreateQuoteInfo = new EventEmitter() 
+  @Output() onUpdateQuote = new EventEmitter() 
   @Input() quoteId:number = 0;
   @ViewChild('fileUpload') fileUploadVar!:ElementRef;
   constructor(private converterService:ConverterService, private quoteService:QuoteService, private router:Router) { }
@@ -52,34 +53,39 @@ export class FileUploadComponent implements OnInit {
 
   upload3dfile(event:any){
     // console.log('event',event);
-    const file:File = event?.target?.files||event;
-    console.log('file',file);
-    
-    return false;
-    if (file) {
-      this.uploadingFile = true
-      if(this.selectedValue === 'cadex'){
-        this.converterService.uploadCadExchanger(file).subscribe((response) => {
-          this.uploadStatus = "Computing";
-          console.log(response,'thihth');
-          this.quoteId === 0? this.createQuote(response): this.createQuoteInfo(response);
-        },error => {
-          // console.log(error.status);
-          if(confirm("Error in handling file: "+error.status)){
-            this.router.navigate(['/quotes']);
-          }
-        });
-      }else{
-        this.converterService.upload(file).subscribe((response) => {
-          this.uploadStatus = "Computing"
-          this.quoteId === 0? this.createQuote(response): this.createQuoteInfo(response);
-        },error => {
-          // console.log(error.status);
-          if(confirm("Error in handling file: "+error.status)){
-            this.router.navigate(['/quotes']);
-          }
-        });
+    const files:File[] = event?.target?.files||event;
+    // console.log(files, files[0])
+    // this.upload(files[0]);
+    if (files) {
+      for (const file of files) {
+        this.upload(file);
       }
+    }
+  }
+
+  upload(file:File){
+    this.uploadingFile = true
+    if(this.selectedValue === 'cadex'){
+      this.converterService.uploadCadExchanger(file, this.quoteId).subscribe((response) => {
+        this.uploadStatus = "Computing";
+        this.quoteId === 0 ? this.createQuote(response): this.onUpdateQuote.emit(response);
+        this.resetUploadingStats();
+      },error => {
+        // console.log(error.status);
+        if(confirm("Error in handling file: "+error.status)){
+          this.router.navigate(['/quotes']);
+        }
+      });
+    }else{
+      this.converterService.upload(file).subscribe((response) => {
+        this.uploadStatus = "Computing"
+        this.quoteId === 0 ? this.createQuote(response): this.onUpdateQuote.emit(response);
+      },error => {
+        // console.log(error.status);
+        if(confirm("Error in handling file: "+error.status)){
+          this.router.navigate(['/quotes']);
+        }
+      });
     }
   }
 

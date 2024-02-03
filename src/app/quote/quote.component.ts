@@ -28,18 +28,15 @@ export class QuoteComponent implements OnInit  {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.quoteService.getSingleQuote(id).subscribe((response) => {
-      console.log(response)
       this.api_res = response;
-
-      this.quote = this.api_res;
+      this.quote = this.api_res.quote;
+      console.log(this.quote)
       this.quote.quote_infos = _.sortBy(this.quote.quote_infos, function(o){
         o.unit_quotes = _.sortBy(o.unit_quotes, function(o){return o.id});
         return o.id;
       })
       this.quote.grand_total = this.quote.grand_total?this.quote.grand_total:0;
-      this.attachments = JSON.parse(this.quote.attachments)
-      console.log(this.attachments)
-      console.log(typeof this.attachments)
+      this.attachments = JSON.parse(this.quote.attachments || null)
     });
   }
 
@@ -96,10 +93,16 @@ export class QuoteComponent implements OnInit  {
 
   updateQuote(){
     const cloneobj = _.clone(this.quote);
-    const newObj = _.omit(cloneobj, ['quote_infos']);
+    const newObj = _.omit(cloneobj, ['quote_infos', 'parent_id', 'versions']);
+    console.log(newObj)
     this.quoteService.updateQuote(newObj).subscribe((response) => {
     });
     
+  }
+
+  updateQuoteObject(event:any){
+    console.log(event)
+    this.quote = event;
   }
 
   calculateTotalCost(){

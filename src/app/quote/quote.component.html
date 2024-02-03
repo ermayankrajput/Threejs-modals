@@ -26,16 +26,18 @@
             </div>
         </div>
 
-        <h4  *ngIf="attachments.length > 0">Attachments</h4>
-        <div class="row" *ngIf="attachments.length > 0">
-            <div class="col-lg-4" *ngFor="let attachment of attachments; let i = index" >
-                <app-quote-attachment [attachment]='attachment' [quoteId] = 'quote.id'></app-quote-attachment>
+        <div *ngIf="attachments">
+            <h4 *ngIf="attachments.length > 0">Attachments</h4>
+            <div class="row" *ngIf="attachments.length > 0">
+                <div class="col-lg-4" *ngFor="let attachment of attachments; let i = index" >
+                    <app-quote-attachment [attachment]='attachment' [quoteId] = 'quote.id'></app-quote-attachment>
+                </div>
             </div>
         </div>
 
     </div>
     
-    <app-file-upload *ngIf="quote" [quoteId]="quote.id" (onCreateQuoteInfo)="addQuoteInfo($event)"></app-file-upload>
+    <app-file-upload *ngIf="quote" [quoteId]="quote.id" (onCreateQuoteInfo)="addQuoteInfo($event)" (onUpdateQuote)="updateQuoteObject($event)"></app-file-upload>
 </div>
 <div class="w-100 bg-white display-1 d-flex align-items-center justify-content-center flex-column" style="height: 50vh;" *ngIf="!quote">
     <div><i class="fa-light fa-spinner-third fa-spin"></i></div>

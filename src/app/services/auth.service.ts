@@ -20,7 +20,7 @@ export class AuthService extends RootService {
   user !: User;
 
   login(user:any): Observable<HttpEvent<any>> {
-    return this.http.post<any>(this.apiBase + "login/",user,{headers : this.getHeaders()});
+    return this.http.post<any>(this.apiBase + "/login/",user,{headers : this.getHeaders()});
   }
 
   isUserLogin(){

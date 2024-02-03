@@ -17,7 +17,7 @@ export class QuoteService extends RootService {
     return this.http.post<any>(this.apiBase + "/quote",returnData,{headers : this.getHeaders()});
   }
   updateQuote(quote:any): Observable<HttpEvent<any>> {
-    return this.http.patch<any>(this.apiBase + "/quote/", quote,{headers : this.getHeaders()});
+    return this.http.patch<any>(this.apiBase + "quote/", quote, {headers : this.getHeaders()});
   }
   getSingleQuote(quoteId:any): Observable<HttpEvent<any>> {
     return this.http.get<any>(this.apiBase + "/quote/" + quoteId,{headers : this.getHeaders()});
@@ -44,6 +44,10 @@ export class QuoteService extends RootService {
   }
   deleteUniteQuote(unitQuoteObject:any): Observable<HttpEvent<any>> {
     return this.http.delete<any>(this.apiBase + "/unit-quote/",{ headers: this.getHeaders(), body: unitQuoteObject });
+  }
+
+  createUniqueQuote(): Observable<HttpEvent<any>> {
+    return this.http.get<any>(this.apiBase + "/create-quote",{headers : this.getHeaders()});
   }
   
 }

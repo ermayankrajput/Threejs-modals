@@ -64,7 +64,7 @@ const routes: Routes = [
   {
     path:'',
     canActivate:[AuthGuard],
-    component:FileUploadComponent
+    component:QuoteIndexComponent
   },
   
 ];

@@ -17,26 +17,14 @@ export class ConverterService extends RootService {
     // return this.http.post<any>(this.apiBase + "/file-upload", formData);
     console.log(this.getHeaders());
     //return false;
-    return this.http.post<any>(this.apiBase + "quote-upload", formData,{headers : this.getHeaders()});
+    return this.http.post<any>(this.apiBase + "quote-upload", formData, {headers : this.getHeaders()});
   }
 
-  uploadCadExchanger(files:any): Observable<HttpEvent<any>> {
-    console.log(files, files.length, 'converter service')
-    const formData = new FormData();
-    let fileToSend: any = []
-    for (let x = 0; x < files.length; x++) {
-        fileToSend.push(files[x]) 
-    }
-    formData.append('files', fileToSend)
-    // console.log(formData)
-
-    
-    // formData.append("files", files[0]);
-    // files.forEach((file:any) => { formData.append('files', file); });
-    console.log(formData.getAll('files'), 'converter service form')
-    // return false;
-    // return this.http.post<any>(this.apiBase + "/file-upload", formData);
-    return this.http.post<any>(this.apiBase + "quote-upload", formData,{headers : this.getHeaders()});
+  uploadCadExchanger(file:any, quoteId = 0): Observable<HttpEvent<any>> {
+    const formData: FormData = new FormData();
+    formData.append('file', file, file.name)
+    formData.append('quote-id', quoteId.toString())
+    return this.http.post<any>(this.apiBase + "quote-upload", formData, {headers : this.getHeadersFileUpload()});
   }
   
 
