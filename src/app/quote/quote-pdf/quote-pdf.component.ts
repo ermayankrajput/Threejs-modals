@@ -80,7 +80,7 @@ export class QuotePdfComponent implements OnInit {
         heightLeft -= pageHeight;
       }
       // this.pdfDoc.save('Filename.pdf');  
-      console.log(doc.output('datauristring'))
+      // console.log(doc.output('datauristring'))
       this.pdfDoc = doc.output('datauristring');
     });
   }

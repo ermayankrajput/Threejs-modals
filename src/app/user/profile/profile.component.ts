@@ -35,7 +35,7 @@ export class ProfileComponent {
   currentUser= this.authService.currentUser();
 
   ngOnInit(): void{
-    console.log(this.currentUser.id);
+    // console.log(this.currentUser.id);
     this.userService.getUserById(this.currentUser.id).subscribe((response) => {
       this.getUser = response;
       this.user.first_name = this.getUser.first_name;
@@ -65,7 +65,7 @@ export class ProfileComponent {
   submitForm(){
     this.resultStatus= {success: false, message: ''};
     if(this.runValidation()){
-      console.log(this.user);
+      // console.log(this.user);
       this.userService.updateUserProfile(this.user).subscribe((response) => {
         this.registerResponse = response;
         // console.log(this.registerResponse);

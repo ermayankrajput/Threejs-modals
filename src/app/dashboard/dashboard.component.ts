@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { QuoteService } from '../services/quote.service';
 import { UserService } from '../services/user.service';
 import { DatePipe } from '@angular/common';
+import { EnquiryService } from '../services/enquiry.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,25 +10,26 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-  constructor(private quoteService:QuoteService,private userService:UserService,private datePipe: DatePipe){}
+  constructor(private quoteService:QuoteService,private userService:UserService,private datePipe: DatePipe, private enquiryService: EnquiryService){}
   quotes:any[] = [];
   users:any[] = [];
+  enquiries: any[] = [];
   todayQuotes:any[] = [];
 
   ngOnInit(): void {
     this.quoteService.geQuotes().subscribe((response:any) => {
       this.quotes = response;
-      console.log(this.quotes)
       this.findTodayQuote()
     });
+
     this.userService.getAllUsers().subscribe((response:any)=>{
       this.users = response;
-      console.log(this.users)
-      });
-      this.userService.getAllUsers().subscribe((response:any)=>{
-        this.users = response;
-        console.log(this.users)
-        })
+    });
+
+    this.enquiryService.getAllEnquiries().subscribe((response:any)=>{
+      this.enquiries = response
+    })
+
   }
 
   findTodayQuote(){

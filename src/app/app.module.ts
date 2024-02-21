@@ -35,6 +35,8 @@ import { ChangeUserPasswordComponent } from './admin/change-user-password/change
 import { EditUserProfileComponent } from './admin/edit-user-profile/edit-user-profile.component';
 import { DatePipe } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { EnquiriesComponent } from './admin/enquiries/enquiries.component';
+import { EnquiryDetailComponent } from './admin/enquiry-detail/enquiry-detail.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +64,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ChangeUserPasswordComponent,
     EditUserProfileComponent,
     DashboardComponent,
+    EnquiriesComponent,
+    EnquiryDetailComponent,
   ],
   imports: [
     AppRoutingModule,

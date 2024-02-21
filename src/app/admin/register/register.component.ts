@@ -65,7 +65,7 @@ export class RegisterComponent {
     if(this.runValidation()){
       this.registerService.register(this.user).subscribe((response) => {
         this.registerResponse = response;
-        console.log(this.registerResponse);
+        // console.log(this.registerResponse);
         if(this.registerResponse.status == 1){
           this.registerStatus = true;
         }

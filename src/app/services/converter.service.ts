@@ -15,7 +15,7 @@ export class ConverterService extends RootService {
     const formData = new FormData();
     formData.append("files[]", file);
     // return this.http.post<any>(this.apiBase + "/file-upload", formData);
-    console.log(this.getHeaders());
+    // console.log(this.getHeaders());
     //return false;
     return this.http.post<any>(this.apiBase + "quote-upload", formData, {headers : this.getHeaders()});
   }
@@ -24,7 +24,7 @@ export class ConverterService extends RootService {
     const formData: FormData = new FormData();
     formData.append('file', file, file.name)
     formData.append('quote-id', quoteId.toString())
-    return this.http.post<any>(this.apiBase + "quote-upload", formData, {headers : this.getHeadersFileUpload()});
+    return this.http.post<any>(this.apiBase + "quote-upload", formData, {headers : this.getHeaders()});
   }
   
 

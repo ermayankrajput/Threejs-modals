@@ -12,7 +12,7 @@ export class RegisterService extends RootService {
   @Output() userLogin: EventEmitter<any> = new EventEmitter();
 
   register(user:any): Observable<HttpEvent<any>> {
-    console.log(user);
+    // console.log(user);
     return this.http.post<any>(this.apiBase + "signup/",user,{headers : this.getHeaders()});
   }
 }

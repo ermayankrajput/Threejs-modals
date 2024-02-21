@@ -41,8 +41,8 @@ export class FileUploadComponent implements OnInit {
       // If dropped items aren't files, reject them
       if (item.kind === "file") {
         const file = item.getAsFile();
-        console.log(`… file[${i}].name = ${file.name}`);
-        console.log(file);
+        // console.log(`… file[${i}].name = ${file.name}`);
+        // console.log(file);
         this.upload3dfile(file)
       }
     });
@@ -92,7 +92,7 @@ export class FileUploadComponent implements OnInit {
   createQuote(fileResponse:any){
     this.quoteService.createQuote(fileResponse).subscribe((response) => {
       this.quoteResponse = response;
-      console.log(response);
+      // console.log(response);
       this.resetUploadingStats();
       // this.selectedValue === 'method1'? this.apiPath = '/': this
       this.router.navigate(["/quote",this.quoteResponse.id])
@@ -119,7 +119,7 @@ export class FileUploadComponent implements OnInit {
     }else{
       this.allowFiles = '.stp, .STP, .step, .STEP, .igs, .IGS, .iges, .IGES, .stl, .STL';
     }
-    console.log(this.allowFiles);
+    // console.log(this.allowFiles);
     this.fileUploadVar.nativeElement.accept= [this.allowFiles];
   }
 

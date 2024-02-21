@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild,ChangeDetectorRef,AfterContentChecked } from '@angular/core';
 import { Quote } from './../interface/quote';
 import { QuoteService } from '../services/quote.service';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -16,10 +16,10 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./quote-index.component.css'],
 })
 
-export class QuoteIndexComponent {
-  constructor(private quoteService:QuoteService,private router:Router, private datePipe: DatePipe ) {}
+export class QuoteIndexComponent  {
+  constructor(private quoteService:QuoteService,private router:Router, private datePipe: DatePipe,private changeDetector: ChangeDetectorRef, ) {}
   quotes:any;
-  displayedColumns: string[] = [ 'id','date_new','shipping_cost','grand_total','action'];
+  displayedColumns: string[] = ['sn', 'id','date_new','shipping_cost','grand_total','action'];
   dataSource!: MatTableDataSource<Quote>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -28,15 +28,16 @@ export class QuoteIndexComponent {
   ngOnInit(): void {
     this.quoteService.geQuotes().subscribe((response) => {
       this.quotes = response;
-      this.ngAfterViewInit();
+      this.restructurePagination();
     });
   }
 
   pageSizes = [20, 50, 100];
 
-  ngAfterViewInit() {
+  restructurePagination() {
       this.quotes = _.reverse(_.sortBy(this.quotes, function(o){return o.id}))
-      this.quotes.map((quote:any) => {
+      this.quotes.map((quote:any, index:number) => {
+        quote.sn = index+1;
         quote.date_new = this.datePipe.transform(quote.quote_date, 'EEEE, d MMM y')
       })
       this.dataSource = new MatTableDataSource(this.quotes);
@@ -71,6 +72,9 @@ export class QuoteIndexComponent {
   }
   editQuote(quoteId:number){
     this.router.navigate(["/quote",quoteId])
+  }
+  ngAfterContentChecked(): void {
+    this.changeDetector.detectChanges();
   }
 
 }

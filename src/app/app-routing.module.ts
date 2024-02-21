@@ -14,12 +14,25 @@ import { UserListComponent } from './admin/user-list/user-list.component';
 import { ChangeUserPasswordComponent } from './admin/change-user-password/change-user-password.component';
 import { EditUserProfileComponent } from './admin/edit-user-profile/edit-user-profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { EnquiriesComponent } from './admin/enquiries/enquiries.component';
+import { EnquiryDetailComponent } from './admin/enquiry-detail/enquiry-detail.component';
+
 
 const routes: Routes = [
   {
     path:'edit-user-profile/:id',
     canActivate:[AdminGuard],
     component:EditUserProfileComponent
+  },
+  {
+    path:'enquiry/:id',
+    canActivate:[AdminGuard],
+    component:EnquiryDetailComponent
+  },
+  {
+    path:'enquiries',
+    canActivate:[AdminGuard],
+    component:EnquiriesComponent
   },
   {
     path:'change-user-password/:id/:email/:first_name/:last_name',
