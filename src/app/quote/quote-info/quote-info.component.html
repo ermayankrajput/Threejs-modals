@@ -8,43 +8,53 @@
         </div>
         <div class="col-lg-8">
             <div class="row">
-                <div class="col-lg-3">
-                    <h4 class="text-center">Unit Price <span class="fs-6">(in USD)</span></h4>
+                <div class="col-lg-3 text-center">
+                    <h4 class="">Unit Price <span class="fs-6">(in RMB)</span></h4>
+                    <p>单价（人民币）</p>
                 </div>
-                <div class="col-lg-3">
-                    <h4 class="text-center">Quantity</h4>
+                <div class="col-lg-3 text-center">
+                    <h4 class="">Quantity</h4>
+                    <p>数量</p>
                 </div>
-                <div class="col-lg-3">
-                    <h4 class="text-center">Amount <span class="fs-6">(in USD)</span></h4>
+                <div class="col-lg-3 text-center">
+                    <h4 class="text-center">Amount <span class="fs-6">(in RMB)</span></h4>
+                    <p>金额（人民币）</p>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-3 text-center">
                     <h4 class="text-center">Lead Time <span class="fs-6">(in days)</span></h4>
+                    <p>交货时间（以天为单位）</p>
                 </div>
             </div>
         </div>
     </div>
     <div class="row mt-3">
-        <div class="col-lg-2">
+        <div class="col-lg-2 text-center">
             <img class="w-100"
-                src="{{rootService.getBucketUrl()}}{{quoteInfo.image_file}}"
-                onerror="this.onerror=null; this.src='https://elasticbeanstalk-ap-northeast-1-364557162645.s3.ap-northeast-1.amazonaws.com/uploads/169037952524511230726_5176_p_bottom_case.stp.png'"
-                alt="quote_image">
-                <div class="text-center">{{quoteInfo.file_name}}</div>
-                <div class="text-center pt-2">X:{{quoteInfo.x_size}}mm, Y: {{quoteInfo.y_size}}mm, <br>Z: {{quoteInfo.z_size}}mm</div>
+                src="{{this.rootService.getBucketUrl()+this.quoteInfo.image_file}}"
+                (error) ="changeSource($event)"
+                alt="quote_image" style="width:150px!important">
+                <div class="text-center">{{quoteInfo.file_name}} <a href="{{this.rootService.getBucketUrl()+this.quoteInfo.uploded_file}}" style="font-size:11px;">Download STL file (下载)</a></div>
+                <div class=" pt-2" style="font-size: 12px;">X:{{quoteInfo.x_size | number : '1.2-2'}}mm, Y: {{quoteInfo.y_size | number : '1.2-2'}}mm, <br>Z: {{quoteInfo.z_size | number : '1.2-2'}}mm</div>
         </div>
-        <div class="col-lg-2 ">
+        <div class="col-lg-2 " *ngIf="!authService.isVendor()">
             <input type="text" (change)="updateQuoteInfo(quoteInfo)" class="form-control" placeholder="Material" [(ngModel)] = 'quoteInfo.material_search'>
             <input type="text" (change)="updateQuoteInfo(quoteInfo)" class="form-control mt-2" placeholder="Technique" [(ngModel)] = 'quoteInfo.technique'>
             <input type="text" (change)="updateQuoteInfo(quoteInfo)" class="form-control mt-2" placeholder="Finishing" [(ngModel)] = 'quoteInfo.finishing'>
         </div>
+        <div class="col-lg-2 " *ngIf="authService.isVendor()">
+            
+            Material (材料): <span class="form-control vendor-form-control">{{quoteInfo.material_search}}</span>
+            Technique (技术): <span class="form-control vendor-form-control">{{quoteInfo.technique}}</span>
+            Finishing (精加工): <span class="form-control vendor-form-control">{{quoteInfo.finishing}}</span>
+        </div>
         <div class="col-lg-8">
             <div class="position-relative" *ngFor="let unitQuote of quoteInfo.unit_quotes; let i = index" >
-                <app-unit-quote [unitQuote]='unitQuote' ></app-unit-quote>
-                <div class="position-absolute end-0 top-0" role="button" *ngIf="quoteInfo.unit_quotes.length > 1" (click) = 'removeUnitQuote(unitQuote, i)'>
+                <app-unit-quote [unitQuote]='unitQuote'></app-unit-quote>
+                <div class="position-absolute end-0 top-0" role="button" *ngIf="quoteInfo.unit_quotes.length > 1 && !authService.isVendor()" (click) = 'removeUnitQuote(unitQuote, i)'>
                     <span class="badge rounded-pill bg-danger"> - </span>
                 </div>
             </div>
-            <div class="row mt-2">
+            <div class="row mt-2" *ngIf="!authService.isVendor()">
                 <div class="col-lg-3 offset-lg-9">
                     <app-button [text]="addRowButtonText" (click) = 'addUnitQuote()'></app-button>
                 </div>

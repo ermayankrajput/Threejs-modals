@@ -13,6 +13,6 @@ export class RegisterService extends RootService {
 
   register(user:any): Observable<HttpEvent<any>> {
     // console.log(user);
-    return this.http.post<any>(this.apiBase + "signup/",user,{headers : this.getHeaders()});
+    return this.http.post<any>(this.apiBase + "signup",user,{headers : this.getHeaders()});
   }
 }

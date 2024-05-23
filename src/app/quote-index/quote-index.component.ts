@@ -28,6 +28,7 @@ export class QuoteIndexComponent  {
   ngOnInit(): void {
     this.quoteService.geQuotes().subscribe((response) => {
       this.quotes = response;
+      console.log(this.quotes)
       this.restructurePagination();
     });
   }

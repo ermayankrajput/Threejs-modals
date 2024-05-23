@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
 import { UnitQuote } from '../../../interface/unit-quote';
 import { QuoteService } from 'src/app/services/quote.service';
+import { AuthService } from 'src/app/services/auth.service';
+
 
 @Component({
   selector: 'app-unit-quote',
@@ -9,7 +11,7 @@ import { QuoteService } from 'src/app/services/quote.service';
 })
 export class UnitQuoteComponent implements OnInit {
   @Input() unitQuote!: UnitQuote;
-  constructor(private quoteService:QuoteService) { }
+  constructor(private quoteService:QuoteService,public authService:AuthService) { }
 
   ngOnInit(): void {
   }

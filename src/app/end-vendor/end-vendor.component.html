@@ -1,0 +1,45 @@
+<div *ngIf="quote">
+    <div id="MyDIv" #MyDIv>
+        <div class="container mb-5 mt-5">
+            <div class="row text-right">
+                <div class="col-lg-2">
+                    Quote Date <br>报价日期 <br><span class="pt-2">{{quote.quote_date | date: 'yyyy-MM-dd'}}</span>
+                </div>
+
+                <div class="col-lg-2 text-right">
+                    Validity (in days)<br>有效期（以天为单位） <br> <span class="pt-2">{{quote.validity}}</span>
+                </div>
+                <div class="col-lg-2">
+                    Shipping Cost (in RMB)<br>运费（人民币）<span class="pt-2">{{quote.shipping_cost}}</span>
+                </div>
+                <div class="col-lg-2">
+                    Total Cost (in RMB)<br>总成本（人民币）<br><span class="text-danger fw-bolder">{{quote.grand_total}}</span>
+                </div>
+            </div>
+        </div>
+        <div *ngFor="let quoteInfo of quote.quote_infos; let i = index" class="position-relative">
+            <!-- <div style="z-index: 2;" (click)='removeQuoteInfo(quoteInfo,i)' class="text-right position-absolute end-0 top-0" role="button">
+                <span class="badge rounded-pill bg-danger">Remove</span>
+            </div> -->
+            <app-quote-info [quoteInfo]='quoteInfo' [index]='i'></app-quote-info>
+            <!-- <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-end pe-0">
+                        <span class="badge rounded-pill badge-radius text-dark px-3 py-2 bg-gray-200 pointer"
+                            (click)="createQuoteInfo(quoteInfo,i)">Copy With No Data</span>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+
+        <div *ngIf="attachments">
+            <h4 *ngIf="attachments.length > 0">Attachments</h4>
+            <div class="row" *ngIf="attachments.length > 0">
+                <div class="col-lg-4" *ngFor="let attachment of attachments; let i = index">
+                    <app-quote-attachment [attachment]='attachment' [quoteId]='quote.id'></app-quote-attachment>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

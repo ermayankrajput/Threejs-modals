@@ -11,6 +11,6 @@
         <!-- <li><a *ngIf="userHelper.isAdmin(currentUser)" class="dropdown-item" routerLink="/register">Create User</a></li> -->
         <li><a *ngIf="authService.isAdmin() || authService.isSuperAdmin()" class="dropdown-item" routerLink="/user-list">View Users</a></li>
         <li><a class="dropdown-item" routerLink="/change-password">Change Password</a></li>
-        <li><a class="dropdown-item" (click)="logout()" href="#">Logout</a></li>
+        <li><a class="dropdown-item" (click)="logout()" style="cursor: pointer;">Logout</a></li>
     </ul>
 </li>

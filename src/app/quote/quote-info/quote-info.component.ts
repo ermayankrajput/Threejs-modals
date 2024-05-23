@@ -5,6 +5,8 @@ import * as _ from 'lodash';
 import { QuoteService } from 'src/app/services/quote.service';
 import { UnitQuote } from 'src/app/interface/unit-quote';
 import { RootService } from 'src/app/services/root.service';
+import { AuthService } from 'src/app/services/auth.service';
+
 
 @Component({
   selector: 'app-quote-info',
@@ -16,8 +18,9 @@ export class QuoteInfoComponent implements OnInit {
   @Input() index!:number;
   resUnitQuote:any;
   addRowButtonText = "Add Row"
+  imageUrl='';
   
-  constructor(private quoteInfoFactory: QuoteInfoFactory, private quoteService:QuoteService, public rootService:RootService) { }
+  constructor(public authService:AuthService, private quoteInfoFactory: QuoteInfoFactory, private quoteService:QuoteService, public rootService:RootService) { }
 
   ngOnInit(): void {
     
@@ -44,6 +47,25 @@ export class QuoteInfoComponent implements OnInit {
     this.quoteService.updateQuoteInfo(newObj).subscribe((response) => {
   
     });
+  }
+
+  // loadImageUrl(){
+  //   console.log('before 3 sec'); 
+  //   setTimeout(()=>{           
+  //       console.log(this.rootService.getBucketUrl()+this.quoteInfo.image_file);
+  //       return this.rootService.getBucketUrl()+this.quoteInfo.image_file;
+  //   }, 3000);
+    
+  // }
+  changeSource(event:any){
+    // let MyEvent = event;
+    event.target.src = this.rootService.getBucketUrl()+'load.gif';
+    setTimeout(()=>{       
+      event.target.src = this.rootService.getBucketUrl()+this.quoteInfo.image_file;    
+      // console.log(this.rootService.getBucketUrl()+this.quoteInfo.image_file);
+      // return this.rootService.getBucketUrl()+this.quoteInfo.image_file;
+      return true;
+    }, 3000);
   }
 
 }

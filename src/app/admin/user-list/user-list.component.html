@@ -32,7 +32,7 @@
 
             <!-- Shipping Cost Column -->
             <ng-container matColumnDef="role">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>
                 <td mat-cell *matCellDef="let row"> {{row.role.name}} </td>
             </ng-container>
 
@@ -45,8 +45,8 @@
             <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
                 <td mat-cell *matCellDef="let row; let i =index;">
-                    <a routerLink="{{currentUser.id == row.id? '/profile' : '/edit-user-profile/' + row.id}}" class="badge rounded-pill bg-success text-white me-1">Edit</a> 
-                    <a routerLink="/change-user-password/{{row.id}}/{{row.email}}/{{row.first_name}}/{{row.last_name}}" class="badge rounded-pill bg-warning text-white me-1">Change Password</a>
+                    <a *ngIf="showEditProfileOptions(row.role.id)" routerLink="{{currentUser.id == row.id? '/profile' : '/edit-user-profile/' + row.id}}" class="badge rounded-pill bg-success text-white me-1">Edit</a> 
+                    <a *ngIf="showChangePasswordOptions(row.role.id)" routerLink="/change-user-password/{{row.id}}/{{row.email}}/{{row.first_name}}/{{row.last_name}}" class="badge rounded-pill bg-warning text-white me-1">Change Password</a>
                     <a style="cursor: pointer;" *ngIf="showOptions(row.role.id)" (click)="deleteUser(row, i + (paginator.pageIndex*paginator.pageSize) )" class="badge rounded-pill bg-danger">Delete</a>
                 </td>
             </ng-container>

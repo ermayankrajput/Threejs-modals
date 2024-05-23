@@ -20,16 +20,19 @@ export class UserService extends RootService {
   user !: User;
 
   getCurrentUser(): Observable<HttpEvent<any>> {
-    return this.http.get<any>(this.apiBase + "get/user/",{headers : this.getHeaders()});
+    return this.http.get<any>(this.apiBase + "get/user",{headers : this.getHeaders()});
   }
   getAllUsers(): Observable<HttpEvent<any>> {
-    return this.http.get<any>(this.apiBase + "get/users/",{headers : this.getHeaders()});
+    return this.http.get<any>(this.apiBase + "get/users",{headers : this.getHeaders()});
   }
   deleteUser(id:any): Observable<HttpEvent<any>> {
-    return this.http.delete<any>(this.apiBase + "user/"+id+"/",{headers : this.getHeaders()});
+    return this.http.delete<any>(this.apiBase + "user/"+id,{headers : this.getHeaders()});
   }
   getUserById(userId:any): Observable<HttpEvent<any>> {
-    return this.http.get<any>(this.apiBase + "user/" + userId + "/",{headers : this.getHeaders()});
+    return this.http.get<any>(this.apiBase + "user/" + userId ,{headers : this.getHeaders()});
+  }
+  getUserByEmail(email:any): Observable<HttpEvent<any>> {
+    return this.http.get<any>(this.apiBase + "user/email/" + email ,{headers : this.getHeaders()});
   }
   updateUserProfile(user:any): Observable<HttpEvent<any>> {
     return this.http.patch<any>(this.apiBase + "user/",user,{headers : this.getHeaders()});

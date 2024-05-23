@@ -11,7 +11,7 @@ import { Router,ActivatedRoute, NavigationEnd } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private authService:AuthService,private quoteService:QuoteService,private router:Router,private route:ActivatedRoute) { 
+  constructor(public authService:AuthService,private quoteService:QuoteService,private router:Router,private route:ActivatedRoute) { 
     authService.userLogin.subscribe(data => this.checkUser(data))
   }
   isNewQuoteVisible=true;

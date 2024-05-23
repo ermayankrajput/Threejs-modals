@@ -20,7 +20,7 @@ export class AuthService extends RootService {
   user !: User;
 
   login(user:any): Observable<HttpEvent<any>> {
-    return this.http.post<any>(this.apiBase + "/login/",user,{headers : this.getHeaders()});
+    return this.http.post<any>(this.apiBase + "login",user,{headers : this.getHeaders()});
   }
 
   isUserLogin(){
@@ -29,6 +29,10 @@ export class AuthService extends RootService {
 
   isAdmin(){
     return this.currentUser().role.id == RolesEnum.ADMIN
+  }
+
+  isVendor(){
+    return this.currentUser().role.id == RolesEnum.VENDOR
   }
 
   isSuperAdmin(){
@@ -40,7 +44,7 @@ export class AuthService extends RootService {
   }
 
   cahngePassword(user:any): Observable<HttpEvent<any>> {
-    return this.http.post<any>(this.apiBase + "change-password/",user,{headers : this.getHeaders()});
+    return this.http.post<any>(this.apiBase + "change-password",user,{headers : this.getHeaders()});
   }
 
   setToken(data:any){

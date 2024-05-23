@@ -1,4 +1,5 @@
 export enum RolesEnum {
+    VENDOR = 4,
     USER = 2,
     ADMIN = 1
 }

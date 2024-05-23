@@ -2,12 +2,14 @@
     <div class="col-lg-3">
         <input type="number" min="1" (change)="update()" class="form-control" [(ngModel)] = 'unitQuote.unit_price'>
     </div>
-    <div class="col-lg-3">
+    <div class="col-lg-3"  *ngIf="!authService.isVendor()">
         <input type="number" (change)="update()" class="form-control" id="exampleFormControlInput1" [(ngModel)] = 'unitQuote.quantity'>
     </div>
+    <div class="col-lg-3" *ngIf="authService.isVendor()">
+            <span class="form-control vendor-form-control">{{unitQuote.quantity}}</span>
+    </div>
     <div class="col-lg-3 text-center">
-        <!-- <input type="number" class="form-control" id="exampleFormControlInput1" [(ngModel)] = 'unitQuote.amount'> -->
-        {{ unitQuote.unit_price && unitQuote.quantity ? unitQuote.unit_price * unitQuote.quantity : null}}
+        <span class="form-control vendor-form-control">{{ unitQuote.unit_price && unitQuote.quantity ? unitQuote.unit_price * unitQuote.quantity : null}}</span>
     </div>
     <div class="col-lg-3">
         <input type="number" (change)="update()" class="form-control" id="exampleFormControlInput1" [(ngModel)] = 'unitQuote.lead_time'>

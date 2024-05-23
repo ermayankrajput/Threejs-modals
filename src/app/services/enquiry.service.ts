@@ -16,6 +16,6 @@ export class EnquiryService extends RootService {
     return this.http.get<any>(this.apiBase + "enquiries",{headers : this.getHeaders()});
   }
   getEnquiryById(id:any): Observable<HttpEvent<any>> {
-    return this.http.get<any>(this.apiBase + "enquiry/" + id ,{headers : this.getHeaders()});
+    return this.http.get<any>(this.apiBase + "enquiry" + id ,{headers : this.getHeaders()});
   }
 }

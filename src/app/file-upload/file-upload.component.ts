@@ -52,8 +52,11 @@ export class FileUploadComponent implements OnInit {
   }
 
   upload3dfile(event:any){
-    // console.log('event',event);
+    // console.log(event.target.files[0]);
+    // this.upload(event.target.files[0]);
+    console.log('event',event);
     const files:File[] = event?.target?.files||event;
+
     // console.log(files, files[0])
     // this.upload(files[0]);
     if (files) {
@@ -65,7 +68,7 @@ export class FileUploadComponent implements OnInit {
 
   upload(file:File){
     this.uploadingFile = true
-    if(this.selectedValue === 'cadex'){
+    // if(this.selectedValue === 'cadex'){
       this.converterService.uploadCadExchanger(file, this.quoteId).subscribe((response) => {
         this.uploadStatus = "Computing";
         this.quoteId === 0 ? this.createQuote(response): this.onUpdateQuote.emit(response);
@@ -76,17 +79,18 @@ export class FileUploadComponent implements OnInit {
           this.router.navigate(['/quotes']);
         }
       });
-    }else{
-      this.converterService.upload(file).subscribe((response) => {
-        this.uploadStatus = "Computing"
-        this.quoteId === 0 ? this.createQuote(response): this.onUpdateQuote.emit(response);
-      },error => {
-        // console.log(error.status);
-        if(confirm("Error in handling file: "+error.status)){
-          this.router.navigate(['/quotes']);
-        }
-      });
-    }
+    // }
+    // else{
+    //   this.converterService.upload(file).subscribe((response) => {
+    //     this.uploadStatus = "Computing"
+    //     this.quoteId === 0 ? this.createQuote(response): this.onUpdateQuote.emit(response);
+    //   },error => {
+    //     // console.log(error.status);
+    //     if(confirm("Error in handling file: "+error.status)){
+    //       this.router.navigate(['/quotes']);
+    //     }
+    //   });
+    // }
   }
 
   createQuote(fileResponse:any){

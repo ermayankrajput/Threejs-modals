@@ -37,6 +37,8 @@ import { DatePipe } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EnquiriesComponent } from './admin/enquiries/enquiries.component';
 import { EnquiryDetailComponent } from './admin/enquiry-detail/enquiry-detail.component';
+import { AssignQuoteComponent } from './assign-quote/assign-quote.component';
+import { EndVendorComponent } from './end-vendor/end-vendor.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +68,8 @@ import { EnquiryDetailComponent } from './admin/enquiry-detail/enquiry-detail.co
     DashboardComponent,
     EnquiriesComponent,
     EnquiryDetailComponent,
+    AssignQuoteComponent,
+    EndVendorComponent,
   ],
   imports: [
     AppRoutingModule,

@@ -49,13 +49,41 @@ export class UserListComponent {
     }
   }
 
+  showChangePasswordOptions(roleId:number){
+    if(roleId == 3 && this.authService.isSuperAdmin()){
+      return true;
+    }
+    if(roleId == 3){
+      return false;
+    }
+    
+    return true;
+  }
+
+  showEditProfileOptions(roleId:number){
+    if(roleId == 3 && this.authService.isSuperAdmin()){
+      return true;
+    }
+    if(roleId == 3){
+      return false;
+    }
+    
+    return true;
+  }
+
   showOptions(roleId:number){
+    // console.log(this.authService.isSuperAdmin())
+    if(roleId == 3){
+      return false;
+    }
     if(this.authService.isSuperAdmin()){
-      return true
+      return true;
     }
     if(roleId == RolesEnum.ADMIN && this.authService.isAdmin()){
       return false;
     }
+    // }
+    
     return true
   }
 
