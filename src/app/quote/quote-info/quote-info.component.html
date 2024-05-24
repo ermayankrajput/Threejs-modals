@@ -33,19 +33,27 @@
                 src="{{this.rootService.getBucketUrl()+this.quoteInfo.image_file}}"
                 (error) ="changeSource($event)"
                 alt="quote_image" style="width:150px!important">
-                <div class="text-center">{{quoteInfo.file_name}} <a href="{{this.rootService.getBucketUrl()+this.quoteInfo.uploded_file}}" style="font-size:11px;">Download STL file (下载)</a></div>
+                
                 <div class=" pt-2" style="font-size: 12px;">X:{{quoteInfo.x_size | number : '1.2-2'}}mm, Y: {{quoteInfo.y_size | number : '1.2-2'}}mm, <br>Z: {{quoteInfo.z_size | number : '1.2-2'}}mm</div>
+                <div class="text-center mt-2">
+                    File Name:
+                    <input type="text" (change)="updateQuoteInfo(quoteInfo)" class="form-control" placeholder="File Name" [(ngModel)] = 'quoteInfo.file_name' *ngIf="!authService.isVendor()">
+                    <span *ngIf="authService.isVendor()"><strong></strong>{{quoteInfo.file_name}}</span>
+                </div>
+                <div class="text-center mt-2"><a href="{{this.rootService.getBucketUrl()+this.quoteInfo.uploded_file}}" style="font-size:11px;">Download STL file (下载)</a></div>
         </div>
         <div class="col-lg-2 " *ngIf="!authService.isVendor()">
             <input type="text" (change)="updateQuoteInfo(quoteInfo)" class="form-control" placeholder="Material" [(ngModel)] = 'quoteInfo.material_search'>
             <input type="text" (change)="updateQuoteInfo(quoteInfo)" class="form-control mt-2" placeholder="Technique" [(ngModel)] = 'quoteInfo.technique'>
             <input type="text" (change)="updateQuoteInfo(quoteInfo)" class="form-control mt-2" placeholder="Finishing" [(ngModel)] = 'quoteInfo.finishing'>
+            <input type="text" (change)="updateQuoteInfo(quoteInfo)" class="form-control mt-2" placeholder="Color" [(ngModel)] = 'quoteInfo.color'>
         </div>
         <div class="col-lg-2 " *ngIf="authService.isVendor()">
             
             Material (材料): <span class="form-control vendor-form-control">{{quoteInfo.material_search}}</span>
             Technique (技术): <span class="form-control vendor-form-control">{{quoteInfo.technique}}</span>
             Finishing (精加工): <span class="form-control vendor-form-control">{{quoteInfo.finishing}}</span>
+            Color (颜色): <span class="form-control vendor-form-control">{{quoteInfo.color}}</span>
         </div>
         <div class="col-lg-8">
             <div class="position-relative" *ngFor="let unitQuote of quoteInfo.unit_quotes; let i = index" >

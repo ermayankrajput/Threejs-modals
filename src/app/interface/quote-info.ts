@@ -10,6 +10,7 @@ export interface QuoteInfo {
     uploded_file:string|null;
     material_search: string|null;
     x_size: number|null;
-    y_size:number|null;
-    z_size:number|null;
+    y_size: number|null;
+    z_size: number|null;
+    color: string|null;
 }

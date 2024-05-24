@@ -31,7 +31,6 @@ export class AssignQuoteComponent {
     if(this.authService.isUserLogin() && this.authService.isVendor()){
       this.shareService.shareQuote(this.uuid,this.authService.currentUser().email).subscribe((response) => {
         this.resp = response;
-        console.log(this.resp);
         this.router.navigate(['/vendor-quote',this.resp.quote.id]);
       });
     }
@@ -54,19 +53,15 @@ export class AssignQuoteComponent {
   submitForm(){
     this.resultStatus= {success: false, message: ''};
     if(this.runValidation()){
-
-      console.log(this.first_name);
-      console.log(this.last_name);
-      console.log(this.email);
       this.userService.getUserByEmail(this.email).subscribe((response) => {
         this.findUser = response;
-        console.log(this.findUser);
+        // console.log(this.findUser);
         if(this.findUser.success == false || (this.findUser.success == true && this.findUser.user.role.name == 'vendor')){
           // console.log('this is vendor please redirect');
           this.shareService.shareQuote(this.uuid,this.email).subscribe((response) => {
             this.resp = response;
             console.log(this.resp);
-            console.log(this.resp.token);
+            // console.log(this.resp.token);
             localStorage.setItem('user', JSON.stringify(this.resp.user));
             localStorage.setItem('token', this.resp.token);
             this.router.navigate(['/vendor-quote',this.resp.quote.id]);

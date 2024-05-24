@@ -68,6 +68,10 @@ const routes: Routes = [
     component:QuoteIndexComponent
   },
   {
+    path:'quotes/:id',
+    component:QuoteIndexComponent
+  },
+  {
     path:'login',
     component:LoginComponent
   },

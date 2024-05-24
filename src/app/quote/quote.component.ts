@@ -94,7 +94,6 @@ export class QuoteComponent implements OnInit  {
   updateQuote(){
     const cloneobj = _.clone(this.quote);
     const newObj = _.omit(cloneobj, ['quote_infos', 'parent_id', 'versions']);
-    console.log(newObj)
     this.quoteService.updateQuote(newObj).subscribe((response) => {
     });
     

@@ -9,6 +9,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
 import { DatePipe } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import {Clipboard} from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-quote-index',
@@ -17,20 +19,34 @@ import { DatePipe } from '@angular/common';
 })
 
 export class QuoteIndexComponent  {
-  constructor(private quoteService:QuoteService,private router:Router, private datePipe: DatePipe,private changeDetector: ChangeDetectorRef, ) {}
+  constructor(private quoteService:QuoteService,private router:Router, private route: ActivatedRoute, private datePipe: DatePipe,private changeDetector: ChangeDetectorRef,private clipboard: Clipboard) {}
   quotes:any;
-  displayedColumns: string[] = ['sn', 'id','date_new','shipping_cost','grand_total','action'];
+  api_res:any;
+  isRevisionIndex = false;
+  quote!:Quote
+  displayedColumns: string[] = ['sn', 'id','date_new','shipping_cost','grand_total','versions','action'];
   dataSource!: MatTableDataSource<Quote>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   // pipe!: DatePipe;
 
   ngOnInit(): void {
-    this.quoteService.geQuotes().subscribe((response) => {
-      this.quotes = response;
-      console.log(this.quotes)
-      this.restructurePagination();
-    });
+    const id = this.route.snapshot.paramMap.get('id');
+    if(id){
+      this.quoteService.geQuoteRevision(parseInt(id)).subscribe((response) => {
+        this.api_res = response;
+        this.quotes = this.api_res.quote.versions;
+        this.quote =  this.api_res.quote
+        console.log(this.api_res)
+        this.isRevisionIndex = true
+        this.restructurePagination();
+      });
+    }else{
+      this.quoteService.geQuotes().subscribe((response) => {
+        this.quotes = response;
+        this.restructurePagination();
+      });
+    }
   }
 
   pageSizes = [20, 50, 100];
@@ -74,6 +90,13 @@ export class QuoteIndexComponent  {
   editQuote(quoteId:number){
     this.router.navigate(["/quote",quoteId])
   }
+  copyShareLink(uuid:string){
+    this.clipboard.copy(window.location.origin+'/assign-quote/'+uuid)
+  }
+  viewRevision(id:number){
+    this.router.navigate(["/quotes",id])
+  }
+
   ngAfterContentChecked(): void {
     this.changeDetector.detectChanges();
   }

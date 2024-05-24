@@ -13,6 +13,9 @@ export class QuoteService extends RootService {
   geQuotes(): Observable<HttpEvent<any>> {
     return this.http.get<any>(this.apiBase + "quotes",{headers : this.getHeaders()});
   }
+  geQuoteRevision(quoteId: number): Observable<HttpEvent<any>> {
+    return this.http.get<any>(this.apiBase + "quote-versions/" + quoteId,{headers : this.getHeaders()});
+  }
   createQuote(returnData:any): Observable<HttpEvent<any>> {
     return this.http.post<any>(this.apiBase + "quote",returnData,{headers : this.getHeaders()});
   }
@@ -30,6 +33,7 @@ export class QuoteService extends RootService {
     return this.http.post<any>(this.apiBase + "quote/"+quoteId+"/create-quote-info", quoteInfoObject,{headers : this.getHeaders()});
   }
   updateQuoteInfo(quoteInfoObject:any): Observable<HttpEvent<any>> {
+    console.log(quoteInfoObject)
     return this.http.patch<any>(this.apiBase + "quote-info", quoteInfoObject,{headers : this.getHeaders()});
   }
   deleteQuoteInfo(quoteInfo:any): Observable<HttpEvent<any>> {

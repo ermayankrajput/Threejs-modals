@@ -13,3 +13,6 @@ table {
 td span{
     cursor: pointer;
 }
+.clipboard-button:active{
+    background-color: green!important;
+}
