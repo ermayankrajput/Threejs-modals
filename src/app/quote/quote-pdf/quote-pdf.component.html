@@ -47,10 +47,10 @@
                 </div>
                 <div class="col-5 mt-5 fs-8">
                     <div class="">SUPLIER</div>
-                    <div class="blue  mb-0 mt-12">Ronan Ye</div>
-                    <div class="mt-0 black-50 ">Ronan@3erp.com</div>
-                    <div class=" mt-12">Address: <span class="black-70"> GangKou, ZhongShan City, GuangDong Province, China</span></div>
-                    <div class="blue mt-12 ">+1 586-449-4689</div>
+                    <div class="blue  mb-0 mt-12">3ERP Limited</div>
+                    <div class="mt-0 black-50 ">sales@3erp.com</div>
+                    <div class="black-50 mt-2">+1 586-449-4689</div>
+                    <div class=" mt-2">Address: <br><span class="black-70"> GangKou, ZhongShan City, GuangDong Province, China</span></div>
                 </div>
             </div>
             <div class="row">
@@ -59,14 +59,15 @@
             <div class="row fs-8 mt-5">
                 <div class="col-3 ps-0">
                     <div class="">Quote To</div>
-                    <div class="blue  mb-0 mt-12">Michael Bolf</div>
-                    <div class="mt-0 black-50 ">General Motors</div>
-                    <div class=" mt-12"><span class="black-70">GM Global Technical Center - Cole Engineering Center</span></div>
-                    <div class="blue mt-12 ">+1 586-449-4689</div>
+                    <div class="blue  mb-0 mt-12">{{quote.customer_name}}</div>
+                    <div class="mt-0 black-50 ">{{quote.customer_designation}}</div>
+                    <div class=" mt-2"><span class="black-70">{{quote.customer_company}}</span></div>
+                    <div class="blue mt-2">{{quote.customer_email}}</div>
+                    <div class="blue mt-2 ">{{quote.customer_phone}}</div>
                 </div>
                 <div class="col-4">
-                    <div class="">Adress</div>
-                    <div class=" mt-12"><span class="black-70">GangKou, ZhongShan City,GuangDong Province, China</span></div>
+                    <div class="">Address</div>
+                    <div class=" mt-12"><span class="black-70">{{quote.customer_address}}</span></div>
                 </div>
                 <div class="col-5 pe-0">
                     <div class="">Payment Method <span style="padding-left: 20px;" class="black-70">Bank Transfer</span></div>

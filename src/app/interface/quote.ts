@@ -9,6 +9,12 @@ export interface Quote {
     validity:number|null;
     parent_id: number|0; 
     versions: number|0;
+    customer_name: string|'';
+    customer_company: string|'';
+    customer_address: string|'';
+    customer_email: string|'';
+    customer_designation: string|'';
+    customer_phone: string|'';
 }
 export interface QuoteAttachment {
     id: number;
