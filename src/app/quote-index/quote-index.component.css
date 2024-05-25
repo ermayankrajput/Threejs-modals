@@ -6,7 +6,9 @@ table {
     font-size: 14px;
     width: 100%;
 }
-
+.fs-16{
+    font-size: 16px;
+}
 /* td,th {
     width: 25%;
 } */

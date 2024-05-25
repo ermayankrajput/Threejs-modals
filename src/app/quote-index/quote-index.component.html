@@ -1,10 +1,15 @@
 <div class="container my-5 mb-5" *ngIf="quotes">
     <div class="mb-5 pt-4">
         <h2 *ngIf="!isRevisionIndex">All Quotes</h2>
-        <h2 *ngIf="isRevisionIndex">Vendor Quotes of Quote #{{quote.id}}</h2>
-    </div>
-    <div *ngIf="isRevisionIndex">
-
+        <div *ngIf="isRevisionIndex">
+            <h2><span class="fs-16">Vendor Quotes of Quote </span> #{{quote.id}} <span class="ms-3 fs-16">{{quote.quote_date}}</span></h2>
+            <div class="mt-2">
+                For Company: <strong>{{quote.customer_company}}</strong>
+            </div>
+            <div class="mt-2">
+                Client Name: <strong>{{quote.customer_name}}</strong>
+            </div>
+        </div>
     </div>
     <mat-form-field>
         <mat-label>Filter</mat-label>
@@ -47,7 +52,10 @@
 
             <ng-container matColumnDef="versions">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Vendors Quoted**</th>
-                <td mat-cell *matCellDef="let row"> {{row.versions}} <span *ngIf="row.versions > 0" (click)="viewRevision(row.id)" class="badge rounded-pill bg-primary">Check</span></td>
+                <td mat-cell *matCellDef="let row"> {{row.versions}} 
+                    <span *ngIf="row.versions > 0" (click)="viewRevision(row.id)" class="badge rounded-pill bg-primary">Check</span>
+                    <span *ngIf="row.parent_id">{{row.user.email}}</span>
+                </td>
             </ng-container>
     
             <ng-container matColumnDef="action">

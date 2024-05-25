@@ -1,33 +1,33 @@
 <div class="row mt-3">
-    <div class="col-md-12 text-start">
-        <h5>Please enter below details</h5>
+    <div class="col-lg-6 offset-lg-3 mt-5 text-start">
+        <h5>Please enter below details (请输入以下详细信息)</h5>
     </div>
 </div>
-<div class="row d-flex justify-content-center align-items-center h-100 mt-5">
-    <div class="col col-xl-6">
+<div class="row d-flex justify-content-center align-items-center h-100 mt-4">
+    <div class="col col-lg-6">
         <div class="card" style="border-radius: 1rem;">
             <div class="card-body p-4 p-lg-5 text-black">
-                <div class="form-outline mb-4">
+                <!-- <div class="form-outline mb-4">
                     <label class="form-label">First Name</label>
                     <span class="text-danger ps-3"
                         *ngIf="!validateFirstNameMessage.validation">{{validateFirstNameMessage.message}}</span>
                     <input type="text" name="first_name" [(ngModel)]="first_name" class="form-control form-control" />
-                </div>
-                <div class="form-outline mb-4">
+                </div> -->
+                <!-- <div class="form-outline mb-4">
                     <label class="form-label">Last Name</label>
                     <span class="text-danger ps-3"
                         *ngIf="!validateLastNameMessage.validation">{{validateLastNameMessage.message}}</span>
                     <input type="text" name="last_name" [(ngModel)]="last_name" class="form-control form-control" />
-                </div>
+                </div> -->
                 <div class="form-outline mb-4">
-                    <label class="form-label">Email</label>
+                    <label class="form-label fw-bold">Email (电子邮件)</label>
                     <span class="text-danger ps-3"
                         *ngIf="!validateEmailMessage.validation">{{validateEmailMessage.message}}</span>
-                    <input type="text" name="email" [(ngModel)]="email" class="form-control form-control" />
+                    <input type="text" name="email" [(ngModel)]="email" class="form-control form-control" placeholder="在此输入您的电子邮件"/>
                 </div>
                 <div class="d-flex align-items-center">
                     <div class="pt-1 mb-4">
-                        <button class="btn btn-dark btn-lg btn-block" type="button" (click)="submitForm()">Submit</button>
+                        <button class="btn btn-dark btn-md btn-block" type="button" (click)="submitForm()">Submit (提交)</button>
                     </div>
                     <p [ngClass]="resultStatus.success == false ? 'text-danger' : 'text-success'" class=" ps-3">
                         {{resultStatus.message}}</p>
