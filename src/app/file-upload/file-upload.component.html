@@ -16,10 +16,11 @@
         <label for="fileUpload" class="drop-container" id="dropcontainer">
             <span class="drop-title">Drop file here</span>
             or
-            <input multiple="multiple" name="file" #fileUpload type="file" (change)="upload3dfile($event)" id="fileUpload" accept='.stl, .STL'>
+            <input multiple="multiple" name="file" #fileUpload type="file" (change)="upload3dfile($event)" id="fileUpload" accept='*'>
         </label>
         <div class="py-4 text-center">
-            <strong>Allowed Files:- </strong>{{allowFiles}}
+            <strong>3D Supported Files:- </strong>{{allowFiles}}
+            <div>All other files will move to attachments</div>
         </div>
     </div>
 

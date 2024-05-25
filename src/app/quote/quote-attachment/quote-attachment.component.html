@@ -1,5 +1,3 @@
-
-
 <div class="badge rounded bg-light text-dark px-0 py-0 fs-6 d-flex align-items-center justify-content-between w-100">
     <div class="d-flex align-items-center w-75">
         <div class="file-icon rounded">
@@ -17,11 +15,11 @@
         <ul class="dropdown-menu shadow border-0 dropdown-content">
 
             <li *ngIf="getExtention() == 'IMAGE'"><button class="dropdown-item py-2" (click)="openPopup()">View</button></li>
-            <li><a class="dropdown-item py-2" href="{{rootService.getBucketUrl()}}{{attachment.file}}">Download</a></li>
+            <li><a class="dropdown-item py-2" href="{{rootService.getBucketUrl()}}{{attachment.file}}" download = "download">Download</a></li>
             <li>
                 <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item text-danger py-2" href="#">Remove</a></li>
+            <li><a class="dropdown-item text-danger py-2" href="#" *ngIf="!disableRemove">Remove</a></li>
         </ul>
     </div>
 </div>

@@ -32,14 +32,14 @@
             </div> -->
         </div>
 
-        <div *ngIf="attachments">
+        <div *ngIf="attachments" class="mb-5 pb-5 mt-5">
             <h4 *ngIf="attachments.length > 0">Attachments</h4>
             <div class="row" *ngIf="attachments.length > 0">
                 <div class="col-lg-4" *ngFor="let attachment of attachments; let i = index">
-                    <app-quote-attachment [attachment]='attachment' [quoteId]='quote.id'></app-quote-attachment>
+                    <app-quote-attachment [attachment]='attachment' [quoteId]='quote.id' [disableRemove]="true"></app-quote-attachment>
                 </div>
             </div>
         </div>
-
+        <div class="py-5 mb-5"></div>
     </div>
 </div>

@@ -24,7 +24,8 @@ export class FileUploadComponent implements OnInit {
   uploadStatus = "Uploading & Converting File"
   selectedValue='cadex';
   apiPath!: string;
-  allowFiles = '.stp, .stl, .STL, .step, .catpart, .igs, .iges, .prt, .sat, .sldprt, .x_t, .STP, .STEP, .CATPART, .IGS, .IGES, .PRT, .SAT, .SLDPRT, .X_T';
+  allowFiles = '.stl, .STL';
+  // allowFiles = '.stp, .stl, .STL, .step, .catpart, .igs, .iges, .prt, .sat, .sldprt, .x_t, .STP, .STEP, .CATPART, .IGS, .IGES, .PRT, .SAT, .SLDPRT, .X_T';
   ngOnInit(): void {
     // console.log(localStorage.getItem('user'));
   }

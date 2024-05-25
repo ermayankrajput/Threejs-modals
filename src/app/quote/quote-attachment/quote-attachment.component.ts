@@ -9,6 +9,7 @@ import { RootService } from 'src/app/services/root.service';
 export class QuoteAttachmentComponent {
   @Input() attachment!: QuoteAttachment; 
   @Input() quoteId!:number;
+  @Input() disableRemove = false;
   isMenuOpen = false;
   imgSrc!:string;
   displayStyle = "none";
