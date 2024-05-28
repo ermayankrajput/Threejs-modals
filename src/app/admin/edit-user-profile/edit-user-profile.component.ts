@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { RolesEnum } from 'src/app/enums/roles.enum';
 import { editProfile } from 'src/app/interface/user';
 import { UserService } from 'src/app/services/user.service';
+import { countries } from 'src/app/utils/countries';
 
 @Component({
   selector: 'app-edit-user-profile',
@@ -37,6 +38,7 @@ export class EditUserProfileComponent {
   userId:any; 
 
   ngOnInit(): void{
+    console.log(countries)
     this.userId = this.route.snapshot.paramMap.get('id');
     this.userService.getUserById(this.userId).subscribe((response) => {
       this.getUser = response;

@@ -19,20 +19,18 @@
             <li>
                 <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item text-danger py-2" href="#" *ngIf="!disableRemove">Remove</a></li>
+            <li><a class="dropdown-item text-danger py-2" role="button" (click)="remove()" *ngIf="!disableRemove">Remove</a></li>
         </ul>
     </div>
 </div>
-<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+<div class="modal" tabindex="-1" role="dialog" style="background: rgb(0 0 0 / 80%);" [ngStyle]="{'display':displayStyle}">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">{{attachment.filename}}</h4>
             </div>
             <div class="modal-body">
-                <img class="w-100" src="{{rootService.getBucketUrl()}}{{attachment.file}}"
-                    onerror="this.onerror=null; this.src='https://elasticbeanstalk-ap-northeast-1-364557162645.s3.ap-northeast-1.amazonaws.com/uploads/169037952524511230726_5176_p_bottom_case.stp.png'"
-                    alt="quote_image">
+                <img class="w-100" src="{{rootService.getBucketUrl()}}{{attachment.file}}" alt="quote_image">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" (click)="closePopup()">

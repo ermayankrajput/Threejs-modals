@@ -15,6 +15,8 @@ export interface Quote {
     customer_email: string|'';
     customer_designation: string|'';
     customer_phone: string|'';
+    usd_to_rmb: number|10;
+    commission: number|1;
 }
 export interface QuoteAttachment {
     id: number;

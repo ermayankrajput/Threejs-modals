@@ -9,8 +9,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { RootService } from 'src/app/services/root.service';
 
-
-
 @Component({
   selector: 'app-quote',
   templateUrl: './quote.component.html',
@@ -36,7 +34,7 @@ export class QuoteComponent implements OnInit  {
         return o.id;
       })
       this.quote.grand_total = this.quote.grand_total?this.quote.grand_total:0;
-      this.attachments = JSON.parse(this.quote.attachments || null)
+      this.getAttchments();
     });
   }
 
@@ -53,16 +51,22 @@ export class QuoteComponent implements OnInit  {
     }
   }
   
+  getAttchments(){
+    this.attachments = JSON.parse(this.quote.attachments || null)
+  }
 
   renderFile(event:any){
       // this.quote.quote_infos.push(this.quoteInfoFactory.buildQuoteInfo(event.file))
   }
+
   onClonedQuote(event:{quoteInfo: QuoteInfo, index: number}){
     this.quote.quote_infos.splice(event.index, 0, event.quoteInfo);
   }
+
   onRemoveQuote(event:number){
     this.quote.quote_infos.splice(event, 1)
   }
+
   public view(): void {
     this.router.navigate(["/quote/pdf/",this.quote.id])
   }
@@ -77,6 +81,12 @@ export class QuoteComponent implements OnInit  {
         this.quote.quote_infos.splice(i, 1)
       });
     }
+  }
+
+  removeAttachment(event:number){
+    this.attachments.splice(event, 1);
+    this.quote.attachments = JSON.stringify(this.attachments);
+    this.updateQuote()
   }
 
   createQuoteInfo(quoteInfo:QuoteInfo, index: number){
@@ -96,12 +106,11 @@ export class QuoteComponent implements OnInit  {
     const newObj = _.omit(cloneobj, ['quote_infos', 'parent_id', 'versions']);
     this.quoteService.updateQuote(newObj).subscribe((response) => {
     });
-    
   }
 
   updateQuoteObject(event:any){
-    console.log(event)
     this.quote = event;
+    this.getAttchments();
   }
 
   calculateTotalCost(){

@@ -8,7 +8,7 @@
     </div>
     <div
         class="col-3 border-right-white border-bottom-white py-11 d-flex flex-column align-items-start justify-content-center">
-        <div class="my-1">SIZE: x:{{quoteInfo.x_size}}mm, y: {{quoteInfo.y_size}}mm, z: {{quoteInfo.z_size}}mm</div>
+        <div class="my-1">SIZE: x:{{quoteInfo.x_size | number : '1.2-2'}}mm, y: {{quoteInfo.y_size | number : '1.2-2'}}mm, z: {{quoteInfo.z_size | number : '1.2-2'}}mm</div>
         <div class="my-1">Filename: <span class="black-70">{{quoteInfo.file_name}}</span></div>
         <div class="my-1">Process: <span class="black-70">{{quoteInfo.technique}}</span></div>
         <div class="my-1">Material: <span class="black-70">{{quoteInfo.material_search}}</span></div>
@@ -17,7 +17,7 @@
     <div
         class="col-2 border-right-white border-bottom-white text-center px-0 d-flex flex-column align-items-start justify-content-center">
         <div class="px-2 py-2 w-100" *ngFor="let unitQuote of quoteInfo.unit_quotes; let j = index">
-            <div class="px-2 py-2 w-100">{{unitQuote.unit_price}}
+            <div class="px-2 py-2 w-100">{{convertUSD(addCommission(unitQuote.unit_price || 0))}}
             </div>
             <div class="hr-dash w-100"></div>
         </div>
@@ -33,7 +33,7 @@
         class="col-2 border-right-white border-bottom-white py-11 text-center px-0 d-flex flex-column align-items-start justify-content-center">
         <div class="px-2 py-2 w-100" *ngFor="let unitQuote of quoteInfo.unit_quotes; let l = index">
             <div class="px-2 py-2 w-100">
-                {{(unitQuote.unit_price||0)*(unitQuote.quantity||0)}}</div>
+                {{convertUSD(addCommission((unitQuote.unit_price||0)*(unitQuote.quantity||0)))}}</div>
             <div class="hr-dash w-100"></div>
         </div>
     </div>
@@ -48,5 +48,5 @@
     <div class="position-absolute end-0 bottom-0 text-end spacer-info">
         <input type="number" placeholder="Space Below" [(ngModel)]="spacebelow">
     </div>
-    <div [style.height]="spacebelow + 'px'" class="bg-white"></div>
 </div>
+<div [style.height]="spacebelow + 'px'" class="bg-white"></div>

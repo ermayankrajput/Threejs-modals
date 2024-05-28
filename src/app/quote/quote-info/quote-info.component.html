@@ -58,7 +58,7 @@
             <div class="position-relative" *ngFor="let unitQuote of quoteInfo.unit_quotes; let i = index" >
                 <app-unit-quote [unitQuote]='unitQuote'></app-unit-quote>
                 <div class="position-absolute end-0 top-0" role="button" *ngIf="quoteInfo.unit_quotes.length > 1 && !authService.isVendor()" (click) = 'removeUnitQuote(unitQuote, i)'>
-                    <span class="badge rounded-pill bg-danger"> - </span>
+                    <span class="badge rounded-pill bg-danger"> x </span>
                 </div>
             </div>
             <div class="row mt-2" *ngIf="!authService.isVendor()">

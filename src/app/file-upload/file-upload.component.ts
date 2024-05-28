@@ -55,7 +55,7 @@ export class FileUploadComponent implements OnInit {
   upload3dfile(event:any){
     // console.log(event.target.files[0]);
     // this.upload(event.target.files[0]);
-    console.log('event',event);
+    // console.log('event',event);
     const files:File[] = event?.target?.files||event;
 
     // console.log(files, files[0])

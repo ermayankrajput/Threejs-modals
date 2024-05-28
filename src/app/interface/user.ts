@@ -31,6 +31,14 @@ export interface User {
     age: number;
     role:Role;
     status: number;
+    phone: string|null;
+    secondary_phone: string|null;
+    secondary_email: string|null;
+    company: string|null;
+    address: string|null;
+    designation: string|null;
+    country: string|null;
+    zip: string|null;
 }
 export interface Role{
     id: number;

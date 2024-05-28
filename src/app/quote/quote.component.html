@@ -33,8 +33,10 @@
                 <div class="col-lg-2">Quote Date: <input (change)="updateQuote()" type="date" class="form-control" [ngModel]="quote.quote_date | date: 'yyyy-MM-dd'" (ngModelChange)="quote.quote_date=$event"></div>
                 <div class="col-lg-2">Validity (in days): <input (change)="updateQuote()" type="number" class="form-control" [(ngModel)] = 'quote.validity'></div>
                 <div class="col-lg-2">Shipping Cost (in USD): <input (change)="updateQuote()" type="number" class="form-control" [(ngModel)]='quote.shipping_cost'></div>
-                <div class="col-lg-2">Total Cost (in USD)<br><span class="text-danger fw-bolder">{{quote.grand_total}}</span></div>
-                <div class="col-lg-4 mt-3 text-end">
+                <!-- <div class="col-lg-2">Total Cost (in USD)<br><span class="text-danger fw-bolder">{{quote.grand_total}}</span></div> -->
+                <div class="col-lg-2">USD to RMB Rates: <input (change)="updateQuote()" type="number" class="form-control" [(ngModel)]='quote.usd_to_rmb'></div>
+                <div class="col-lg-2">Commission(in %): <input (change)="updateQuote()" type="number" class="form-control" [(ngModel)]='quote.commission'></div>
+                <div class="col-lg-2 mt-3 text-end">
                     <button class="btn btn-warning mt-2" *ngIf="quote.quote_infos.length > 0" (click)="view()">View</button>
                 </div>
             </div>
@@ -58,7 +60,7 @@
             <h4 *ngIf="attachments.length > 0">Attachments</h4>
             <div class="row" *ngIf="attachments.length > 0">
                 <div class="col-lg-4" *ngFor="let attachment of attachments; let i = index" >
-                    <app-quote-attachment [attachment]='attachment' [quoteId] = 'quote.id'></app-quote-attachment>
+                    <app-quote-attachment [attachment]='attachment' [index]='i' [quoteId]='quote.id' (removeAttachment)="removeAttachment($event)"></app-quote-attachment>
                 </div>
             </div>
         </div>

@@ -87,7 +87,7 @@
                 <div class="col-1 border-right">Lead Time(days)</div>
             </div>
             <div class="include-drag-h-0" *ngFor="let quoteInfo of quote.quote_infos; let i = index">
-                <app-quote-info-pdf [quoteInfo]="quoteInfo" [index]="i"></app-quote-info-pdf>
+                <app-quote-info-pdf [quoteInfo]="quoteInfo" [commission]="quote.commission" [usdRmb]="quote.usd_to_rmb" [index]="i"></app-quote-info-pdf>
             </div>
             <div *ngIf="attachments">
                 <h4 *ngIf="attachments.length > 0" class="mt-3">Attachments</h4>

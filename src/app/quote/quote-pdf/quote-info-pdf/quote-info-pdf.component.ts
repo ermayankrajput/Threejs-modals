@@ -12,11 +12,21 @@ export class QuoteInfoPdfComponent implements OnInit {
   constructor(public rootService:RootService){}
   @Input() quoteInfo!:QuoteInfo;
   @Input() index!:number;
+  @Input() commission:number = 0;
+  @Input() usdRmb!:number;
   imageDataUri:any = "";
   spacebelow = ''
 
   ngOnInit(): void {
     
+  }
+
+  addCommission(price:any = 0){
+    return parseFloat(price) + (price*this.commission)/100;
+  }
+  
+  convertUSD(price:any = 0){
+    return (parseFloat(price)/this.usdRmb).toFixed(2)
   }
 
   drawCanvas(){
