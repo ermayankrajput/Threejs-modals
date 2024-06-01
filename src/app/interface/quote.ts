@@ -20,6 +20,7 @@ export interface Quote {
     usd_to_rmb: number|10;
     commission: number|1;
     client:User;
+    is_final:number|0;
 }
 export interface QuoteAttachment {
     id: number;

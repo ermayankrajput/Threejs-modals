@@ -115,7 +115,9 @@ export class QuoteComponent implements OnInit  {
 
   updateQuote(){
     const cloneobj = _.clone(this.quote);
-    const newObj = _.omit(cloneobj, ['quote_infos', 'parent_id', 'versions']);
+    const newObj = _.omit(cloneobj, ['quote_infos', 'parent_id', 'versions','client']);
+    console.log("🚀 ~ QuoteComponent ~ updateQuote ~ this.quote:", this.quote)
+    
     this.quoteService.updateQuote(newObj).subscribe((response) => {
     });
   }
@@ -170,5 +172,9 @@ export class QuoteComponent implements OnInit  {
     this.displayStyleNewUser = "none"; 
   } 
 
+  updateIsFinal(){
+    this.quote.is_final = this.quote.is_final?0:1;
+    this.updateQuote()
+  }
 
 }

@@ -24,7 +24,7 @@ export class QuoteIndexComponent  {
   api_res:any;
   isRevisionIndex = false;
   quote!:Quote
-  displayedColumns: string[] = ['sn', 'id','date_new','shipping_cost','grand_total','versions','action'];
+  displayedColumns: string[] = ['sn', 'id','date_new','is_final','versions','action'];
   dataSource!: MatTableDataSource<Quote>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
