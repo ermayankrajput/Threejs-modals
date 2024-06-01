@@ -27,7 +27,7 @@ export class ProfileComponent {
     first_name: '',
     last_name: '',
     email:'',
-    age:null,
+    age:0,
   }
   
   validateFirstNameMessage = {validation: false, message: ''}

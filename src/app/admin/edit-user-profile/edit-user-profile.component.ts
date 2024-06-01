@@ -1,18 +1,20 @@
-import { Component } from '@angular/core';
+import { Component,Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RolesEnum } from 'src/app/enums/roles.enum';
-import { editProfile } from 'src/app/interface/user';
+import { User, editProfile } from 'src/app/interface/user';
 import { UserService } from 'src/app/services/user.service';
 import { countries } from 'src/app/utils/countries';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-edit-user-profile',
   templateUrl: './edit-user-profile.component.html',
   styleUrls: ['./edit-user-profile.component.css']
 })
-export class EditUserProfileComponent {
-  constructor(private route: ActivatedRoute,private userService:UserService) {}
+export class EditUserProfileComponent implements OnChanges {
+  constructor(private route: ActivatedRoute,private userService:UserService, public authService:AuthService) {}
   // public Roles2LabelMapping = Roles2LabelMapping;
+  @Input() editUser!:User;
   roles = RolesEnum;
   keys = Object.keys;
   isNaN: Function = Number.isNaN;
@@ -23,34 +25,39 @@ export class EditUserProfileComponent {
   getUser:any;
   resultStatus= {success: false, message: ''};
 
-  user: editProfile = {
-    id: null,
-    first_name: '',
-    last_name: '',
-    email: '',
-    age:null,
-    role_id:null,
-  }
+  user!: User
   
   validateFirstNameMessage = {validation: false, message: ''}
   validateLastNameMessage = {validation: false, message: ''}
   validateEmailMessage = {validation: false, message: ''}
   userId:any; 
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.user = {...this.editUser}
+    // console.log("🚀 ~ EditUserProfileComponent ~ ngOnChanges ~ this.editUser:", this.editUser)
+    
+  }
+
   ngOnInit(): void{
-    console.log(countries)
-    this.userId = this.route.snapshot.paramMap.get('id');
-    this.userService.getUserById(this.userId).subscribe((response) => {
-      this.getUser = response;
-      this.user.id = this.getUser.id;
-      this.user.first_name = this.getUser.first_name;
-      this.user.last_name = this.getUser.last_name;
-      this.user.email = this.getUser.email;
-      this.user.age = this.getUser.age;
-      this.user.role_id = this.getUser.role.id;
-    },error=>{
-      console.log(error)
-    });
+    if(!this.editUser){
+      // console.log(countries)
+      this.userId = this.route.snapshot.paramMap.get('id');
+      this.userService.getUserById(this.userId).subscribe((response) => {
+        this.getUser = response;
+        this.user = this.getUser;
+        // this.user.id = this.getUser.id;
+        // this.user.first_name = this.getUser.first_name;
+        // this.user.last_name = this.getUser.last_name;
+        // this.user.email = this.getUser.email;
+        // this.user.age = this.getUser.age;
+        // this.user.role_id = this.getUser.role.id;
+      },error=>{
+        console.log(error)
+      });
+    }else{
+      this.user = this.editUser;
+    }
+    
   }
   
   validateFirstName(){
@@ -78,6 +85,9 @@ export class EditUserProfileComponent {
       this.userService.updateUserProfile(this.user).subscribe((response) => {
         this.registerResponse = response;
         // console.log(this.registerResponse);
+        this.editUser = this.registerResponse;
+        this.user = this.registerResponse;
+
         if(this.registerResponse.status == 1){
           this.resultStatus = {success:true, message:'Profile updated successfully'};
         }else{

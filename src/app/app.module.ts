@@ -39,6 +39,10 @@ import { EnquiriesComponent } from './admin/enquiries/enquiries.component';
 import { EnquiryDetailComponent } from './admin/enquiry-detail/enquiry-detail.component';
 import { AssignQuoteComponent } from './assign-quote/assign-quote.component';
 import { EndVendorComponent } from './end-vendor/end-vendor.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { Ng2SearchPipe } from 'ng2-search-filter';
+import { QuoteClientComponent } from './quote-client/quote-client.component';
+
 
 @NgModule({
   declarations: [
@@ -70,6 +74,7 @@ import { EndVendorComponent } from './end-vendor/end-vendor.component';
     EnquiryDetailComponent,
     AssignQuoteComponent,
     EndVendorComponent,
+    QuoteClientComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -81,9 +86,9 @@ import { EndVendorComponent } from './end-vendor/end-vendor.component';
     MatSortModule, 
     MatPaginatorModule,
     BrowserModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  providers: [provideAnimations(), DatePipe],
+  providers: [provideAnimations(), DatePipe,Ng2SearchPipeModule,Ng2SearchPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

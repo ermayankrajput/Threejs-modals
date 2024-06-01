@@ -34,6 +34,10 @@ export class AuthService extends RootService {
   isVendor(){
     return this.currentUser().role.id == RolesEnum.VENDOR
   }
+  
+  isSales(){
+    return this.currentUser().role.id == RolesEnum.SALES
+  }
 
   isSuperAdmin(){
     return this.currentUser().role.id == SuperAdminEnum.SUPERADMIN

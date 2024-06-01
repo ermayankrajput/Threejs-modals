@@ -1,6 +1,8 @@
 import { QuoteInfo } from "./quote-info";
+import { User } from "./user";
 export interface Quote {
     id: number;
+    name:string|null;
     grand_total: number|null;
     quote_date: string|null;
     quote_infos: QuoteInfo[];
@@ -17,6 +19,7 @@ export interface Quote {
     customer_phone: string|'';
     usd_to_rmb: number|10;
     commission: number|1;
+    client:User;
 }
 export interface QuoteAttachment {
     id: number;

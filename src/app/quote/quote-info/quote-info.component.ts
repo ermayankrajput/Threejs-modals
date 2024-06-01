@@ -16,6 +16,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class QuoteInfoComponent implements OnInit {
   @Input() quoteInfo!: QuoteInfo; 
   @Input() index!:number;
+  @Input() commission:number = 0;
   resUnitQuote:any;
   addRowButtonText = "Add Row"
   imageUrl='';

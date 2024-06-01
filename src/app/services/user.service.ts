@@ -22,8 +22,8 @@ export class UserService extends RootService {
   getCurrentUser(): Observable<HttpEvent<any>> {
     return this.http.get<any>(this.apiBase + "get/user",{headers : this.getHeaders()});
   }
-  getAllUsers(): Observable<HttpEvent<any>> {
-    return this.http.get<any>(this.apiBase + "get/users",{headers : this.getHeaders()});
+  getAllUsers(role_id=0): Observable<HttpEvent<any>> {
+    return this.http.get<any>(this.apiBase + "get/users/"+ role_id,{headers : this.getHeaders()});
   }
   deleteUser(id:any): Observable<HttpEvent<any>> {
     return this.http.delete<any>(this.apiBase + "user/"+id,{headers : this.getHeaders()});
@@ -35,6 +35,10 @@ export class UserService extends RootService {
     return this.http.get<any>(this.apiBase + "user/email/" + email ,{headers : this.getHeaders()});
   }
   updateUserProfile(user:any): Observable<HttpEvent<any>> {
+    delete user.role;
     return this.http.patch<any>(this.apiBase + "user/",user,{headers : this.getHeaders()});
+  }
+  addClientToQuote(userId:number, quoteId:number): Observable<HttpEvent<any>> {
+    return this.http.patch<any>(this.apiBase + "add-client-to-quote",{'user_id':userId,'quote_id':quoteId},{headers : this.getHeaders()});
   }
 }

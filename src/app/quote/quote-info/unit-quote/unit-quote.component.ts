@@ -11,9 +11,13 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class UnitQuoteComponent implements OnInit {
   @Input() unitQuote!: UnitQuote;
+  @Input() commission:number = 0;
   constructor(private quoteService:QuoteService,public authService:AuthService) { }
 
   ngOnInit(): void {
+  }
+  addCommission(price:any = 0){
+    return parseFloat(price) + (price*this.commission)/100;
   }
 
   update(){

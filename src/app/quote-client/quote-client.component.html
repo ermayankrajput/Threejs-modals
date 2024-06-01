@@ -1,0 +1,70 @@
+<div class="row mt-5">
+    <div class="col-12">
+        <h3>Client Data</h3>
+    </div>
+    <div class="col-4 mt-2">
+        Client Name: {{client.first_name}} {{client.last_name}}
+    </div>
+    <div class="col-4 mt-2">
+        Email: {{client.email}}
+    </div>
+    <div class="col-4 mt-2">
+        Age: {{client.age}}
+    </div>
+    <div class="col-4 mt-2">
+        address: {{client.address}}
+    </div>
+    <div class="col-4 mt-2">
+        company: {{client.company}}
+    </div>
+    <div class="col-4 mt-2">
+        country: {{client.country}}
+    </div>
+    <div class="col-4 mt-2">
+        designation: {{client.designation}}
+    </div>
+    <div class="col-4 mt-2">
+        phone: {{client.phone}}
+    </div>
+    <div class="col-4 mt-2">
+        secondary_email: {{client.secondary_email}}
+    </div>
+    <div class="col-4 mt-2">
+        secondary_phone: {{client.secondary_phone}}
+    </div>
+    <div class="col-4 mt-2">
+        zip: {{client.zip}}
+    </div>
+    <div class="col-4 mt-2">
+        <a (click)="openPopup()" class="btn btn-info btn-sm">Edit User Detail</a>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" style="background: rgb(0 0 0 / 80%);"
+    [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Edit client details</h4>
+
+                <button type="button" class="btn-close" (click)="closePopup()"></button>
+
+            </div>
+            
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <app-edit-user-profile [editUser]="client"></app-edit-user-profile>
+                
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="closePopup()">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>

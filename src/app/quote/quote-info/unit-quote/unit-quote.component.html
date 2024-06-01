@@ -1,15 +1,22 @@
 <div class="row">
-    <div class="col-lg-3">
+    <div class="col-lg-3" *ngIf="!authService.isSales()">
         <input type="number" min="1" (change)="update()" class="form-control" [(ngModel)] = 'unitQuote.unit_price'>
+    </div>
+    <div class="col-lg-3" *ngIf="authService.isSales()">
+        <span class="form-control vendor-form-control">{{addCommission(unitQuote.unit_price)}}</span>
     </div>
     <div class="col-lg-3"  *ngIf="!authService.isVendor()">
         <input type="number" (change)="update()" class="form-control" value="1" [(ngModel)] = 'unitQuote.quantity'>
     </div>
     <div class="col-lg-3" *ngIf="authService.isVendor()">
-            <span class="form-control vendor-form-control">{{unitQuote.quantity}}</span>
+        <span class="form-control vendor-form-control">{{unitQuote.quantity}}</span>
     </div>
-    <div class="col-lg-2 text-center">
+    <div class="col-lg-2 text-center" *ngIf="!authService.isSales()">
         <span class="form-control vendor-form-control">{{ unitQuote.unit_price && unitQuote.quantity ? unitQuote.unit_price * unitQuote.quantity : null}}</span>
+    </div>
+    <div class="col-lg-2 text-center" *ngIf="authService.isSales()">
+        <span class="form-control vendor-form-control">{{ addCommission(unitQuote.unit_price && unitQuote.quantity ? unitQuote.unit_price
+            * unitQuote.quantity : null)}}</span>
     </div>
     <div class="col-lg-2">
         <input type="number" (change)="update()" class="form-control" id="exampleFormControlInput1" [(ngModel)] = 'unitQuote.lead_time'>

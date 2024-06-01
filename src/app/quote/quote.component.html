@@ -1,41 +1,105 @@
 <div *ngIf="quote">
     <div id="MyDIv" #MyDIv>
-        <div class="container mb-5 mt-5">
-            <div class="row">
-                <div class="col-12 mb-3">
-                    <h2>Customer Details</h2>
-                </div>
-                <div class="col-lg-2">
-                    Customer Name: <input (change)="updateQuote()" type="text" class="form-control w-100" [(ngModel)] = 'quote.customer_name'>
-                </div>
-                <div class="col-lg-2">
-                    Company: <input (change)="updateQuote()" type="text" class="form-control w-100" [(ngModel)] = 'quote.customer_company'>
-                </div>
-                <div class="col-lg-2">
-                    Designation: <input (change)="updateQuote()" type="text" class="form-control w-100" [(ngModel)] = 'quote.customer_designation'>
-                </div>
-                <div class="col-lg-2">
-                    Customer Address: <textarea (change)="updateQuote()" type="text" class="form-control w-100" [(ngModel)] = 'quote.customer_address'></textarea>
-                </div>
-                <div class="col-lg-2">
-                    Email: <input (change)="updateQuote()" type="text" class="form-control w-100" [(ngModel)] = 'quote.customer_email'>
-                </div>
-                <div class="col-lg-2">
-                    Phone: <input (change)="updateQuote()" type="text" class="form-control w-100" [(ngModel)] = 'quote.customer_phone'>
+        <app-quote-client [client]="quote.client"></app-quote-client>
+
+
+        <!-- The Modal -->
+        <div class="modal" tabindex="-1" role="dialog" style="background: rgb(0 0 0 / 80%);" [ngStyle]="{'display':displayStyle}">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Search User</h4>
+                        <button type="button" class="btn-close" (click)="closePopup()"></button>
+                    </div>
+                    <div class="search-hero" *ngIf="!isAddingClient">
+                        <input (keyup)="applyFilter($event)" class="form-control" type="text" name="search" autocomplete="off" placeholder="Start searching for user by entering name">
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <table class="table table-striped" *ngIf="!isAddingClient">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="scrollable">
+                                <tr *ngFor="let user of filterUsers">
+                                    <td>{{user.id}}</td>
+                                    <td>{{user.first_name}}</td>
+                                    <td>{{user.email}}</td>
+                                    <td><button type="button" class="btn btn-sm btn-info" (click)="addClient(user.id)">Add Client</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div *ngIf="isClientAdded" class="text-success">
+                            <div class="my-5">Client added successfully</div>
+                        </div>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" (click)="addNewClient()">Add New Client</button>
+                        <button type="button" class="btn btn-danger" (click)="closePopup()">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
+        <!-- The Modal END -->
+
+        <!-- The Modal -->
+        <div class="modal" tabindex="-1" role="dialog" style="background: rgb(0 0 0 / 80%);"
+            [ngStyle]="{'display':displayStyleNewUser}">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add New User</h4>
+                        <button type="button" class="btn-close" (click)="closePopupNewUser()"></button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div>
+                            <app-register [quote]="quote"></app-register>
+                        </div>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" (click)="closePopupNewUser()">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- The Modal END -->
+
+
+
+
+
+
         <div class="container mb-5 mt-5">
             <div class="row text-right">
-                <div class="col-12 mb-3">
-                    <h2>Quote Details</h2>
+                <div class="col-2 mb-3">
+                    <h2>Quote Name</h2>
                 </div>
+                <div class="col-4 mb-3">
+                    <input (change)="updateQuote()" type="text" class="form-control" [(ngModel)]='quote.name'>
+                </div>
+                <div class="col-3 mb-3"></div>
+
+                <div class="col-3 mb-3 text-end">
+                    <button *ngIf="!quote.client" type="button" class="btn btn-success mt-2" (click)="openPopup()">Add Client</button>
+                    <button *ngIf="quote.client" type="button" class="btn btn-success mt-2" (click)="openPopup()">Change Client</button>
+                </div>
+                
                 <div class="col-lg-2">Quote Date: <input (change)="updateQuote()" type="date" class="form-control" [ngModel]="quote.quote_date | date: 'yyyy-MM-dd'" (ngModelChange)="quote.quote_date=$event"></div>
                 <div class="col-lg-2">Validity (in days): <input (change)="updateQuote()" type="number" class="form-control" [(ngModel)] = 'quote.validity'></div>
                 <div class="col-lg-2">Shipping Cost (in USD): <input (change)="updateQuote()" type="number" class="form-control" [(ngModel)]='quote.shipping_cost'></div>
                 <!-- <div class="col-lg-2">Total Cost (in USD)<br><span class="text-danger fw-bolder">{{quote.grand_total}}</span></div> -->
                 <div class="col-lg-2">USD to RMB Rates: <input (change)="updateQuote()" type="number" class="form-control" [(ngModel)]='quote.usd_to_rmb'></div>
-                <div class="col-lg-2">Commission(in %): <input (change)="updateQuote()" type="number" class="form-control" [(ngModel)]='quote.commission'></div>
+                <div *ngIf="!authService.isSales()" class="col-lg-2">Commission(in %): <input (change)="updateQuote()" type="number" class="form-control" [(ngModel)]='quote.commission'></div>
                 <div class="col-lg-2 mt-3 text-end">
                     <button class="btn btn-warning mt-2" *ngIf="quote.quote_infos.length > 0" (click)="view()">View</button>
                 </div>
@@ -44,7 +108,7 @@
         <div *ngFor="let quoteInfo of quote.quote_infos; let i = index" class="position-relative">
             <div style="z-index: 2;" (click)='removeQuoteInfo(quoteInfo,i)' class="text-right position-absolute end-0 top-0" role="button"><span
                     class="badge rounded-pill bg-danger">Remove</span></div>
-            <app-quote-info [quoteInfo]='quoteInfo' [index] = 'i'></app-quote-info>
+            <app-quote-info [commission]="quote.commission" [quoteInfo]='quoteInfo' [index] = 'i'></app-quote-info>
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-end pe-0">

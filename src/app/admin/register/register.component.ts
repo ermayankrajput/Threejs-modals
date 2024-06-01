@@ -1,7 +1,11 @@
-import { Component,OnInit } from '@angular/core';
-import { UserRegister } from '../../interface/user';
+import { Component,OnInit,Input } from '@angular/core';
+import { User, UserRegister } from '../../interface/user';
 import {RolesEnum} from "../../enums/roles.enum";
 import { RegisterService } from 'src/app/services/register.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { countries } from 'src/app/utils/countries';
+import { UserService } from 'src/app/services/user.service';
+import { Quote } from 'src/app/interface/quote';
 
 @Component({
   selector: 'app-register',
@@ -9,8 +13,9 @@ import { RegisterService } from 'src/app/services/register.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  constructor(private registerService:RegisterService) {}
+  constructor(private registerService:RegisterService, public authService:AuthService, private userService:UserService) {}
   // public Roles2LabelMapping = Roles2LabelMapping;
+  @Input() quote!:Quote;
   roles = RolesEnum;
   keys = Object.keys;
   isNaN: Function = Number.isNaN;
@@ -18,15 +23,24 @@ export class RegisterComponent {
   ageList = Array.from({length:73},(v,k)=>k+18); 
   registerStatus:any;
   registerResponse:any;
+  country = countries;
+  clientData:any;
+  isAddingClient=false;
+  isClientAdded = false;
 
-  user: UserRegister = {
-    first_name: '',
-    last_name: '',
-    email: '',
-    age:18,
-    role_id:2,
-    password: '',
-  }
+  user: User = <User>{
+    role_id: this.roles.USER, 
+    last_name: "", 
+    secondary_email: "",
+    phone: "",
+    secondary_phone: "",
+    designation: "",
+    company: "",
+    address: "",
+    country: "",
+    zip: "",
+    age: 0,
+  };
   
   validateFirstNameMessage = {validation: false, message: ''}
   validateLastNameMessage = {validation: false, message: ''}
@@ -47,10 +61,10 @@ export class RegisterComponent {
   //   return this.validateRoleMessage = this.user.role?.match(/^[a-zA-Z ]{2,30}$/) ? {validation: true, message: ''} : {validation: false, message: "Enter valid role"};
   // }
   validatePassword(){
-    return this.validatePasswordMessage =  this.user.password?.match(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/) ? {validation: true, message: ''} : {validation: false, message: "Enter valid password"};
+    return !this.authService.isSuperAdmin()? {validation: true, message: ''} : this.validatePasswordMessage =  this.user.password?.match(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/) || !this.user.password ? {validation: true, message: ''} : {validation: false, message: "Enter valid password"};
   }
   validateCPassword(){
-    return this.validateCPasswordMessage =  this.cPassword == this.user.password ? {validation: true, message: ''} : {validation: false, message: "Confirm password did not match"};
+    return !this.authService.isSuperAdmin()? {validation: true, message: ''} : this.validateCPasswordMessage =  this.cPassword == this.user.password || !this.cPassword ? {validation: true, message: ''} : {validation: false, message: "Confirm password did not match"};
   }
 
   runValidation(){
@@ -65,15 +79,35 @@ export class RegisterComponent {
     if(this.runValidation()){
       this.registerService.register(this.user).subscribe((response) => {
         this.registerResponse = response;
-        // console.log(this.registerResponse);
+
+        console.log(this.registerResponse);
         if(this.registerResponse.status == 1){
           this.registerStatus = true;
+          
+          if(this.quote){
+            this.isAddingClient = true;
+            this.userService.addClientToQuote(this.registerResponse.id, this.quote.id).subscribe((response) => {
+              console.log(response);
+              this.clientData = response;
+              this.quote.client = {...this.clientData.client};
+              this.isClientAdded = true;
+              // this.isAddingClient = false;
+            });
+          }
+          
         }
       },error=>{
         this.registerStatus = false;
       });
     }else{
+      console.log("🚀 ~ RegisterComponent ~ submitForm ~ this.user.email:", this.user.email)
+      console.log("🚀 ~ RegisterComponent ~ submitForm ~ this.validateCPassword().validation:", this.validateCPassword().validation)
+      console.log("🚀 ~ RegisterComponent ~ submitForm ~ this.validatePassword().validation:", this.validatePassword().validation)
+      console.log("🚀 ~ RegisterComponent ~ submitForm ~ this.validateEmail().validation:", this.validateEmail().validation)
+      console.log("🚀 ~ RegisterComponent ~ submitForm ~ this.validateLastName().validation:", this.validateLastName().validation)
+      console.log("🚀 ~ RegisterComponent ~ submitForm ~ this.validateFirstName().validation:", this.validateFirstName().validation)
       console.log('Invalid form');
     }
+      
   }
 }

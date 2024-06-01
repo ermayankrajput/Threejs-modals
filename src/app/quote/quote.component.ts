@@ -8,6 +8,10 @@ import { QuoteService } from '../services/quote.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { RootService } from 'src/app/services/root.service';
+import { UserService } from '../services/user.service';
+import { User } from '../interface/user';
+import { AuthService } from '../services/auth.service';
+
 
 @Component({
   selector: 'app-quote',
@@ -20,15 +24,23 @@ export class QuoteComponent implements OnInit  {
   fileObject:any;
   quote!:Quote;
   attachments!:QuoteAttachment[];
+  displayStyle = "none";
+  displayStyleNewUser = "none";
+  filterUsers:any;
+  allUsers:any;
+  clientData:any;
+  isAddingClient = false;
+  isClientAdded = false;
   
-  constructor(private quoteInfoFactory:QuoteInfoFactory,private converterService:ConverterService,private quoteService:QuoteService,private route: ActivatedRoute, private router:Router, public rootService:RootService) { }
+  
+  constructor(private quoteInfoFactory:QuoteInfoFactory,private converterService:ConverterService,private quoteService:QuoteService,private route: ActivatedRoute, private router:Router, public rootService:RootService, private userService: UserService, public authService:AuthService) { }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.quoteService.getSingleQuote(id).subscribe((response) => {
       this.api_res = response;
       this.quote = this.api_res.quote;
-      // console.log(this.quote)
+      console.log(this.quote)
       this.quote.quote_infos = _.sortBy(this.quote.quote_infos, function(o){
         o.unit_quotes = _.sortBy(o.unit_quotes, function(o){return o.id});
         return o.id;
@@ -119,5 +131,44 @@ export class QuoteComponent implements OnInit  {
     }));
     return Math.round((totalCost || 0 + parseFloat(this.quote.shipping_cost || '0'))*100)/100;
   }
+  openPopup() { 
+    this.isAddingClient = false;
+    this.displayStyle = "block"; 
+    this.userService.getAllUsers(2).subscribe((response) => {
+      this.allUsers = response;
+      this.filterUsers = [...this.allUsers];
+    });
+
+  } 
+  closePopup() { 
+    this.displayStyle = "none"; 
+  } 
+  applyFilter(event:any){
+    this.filterUsers = this.allUsers.filter((user:any)=>{
+      // return user.email.toLowerCase().includes(event.target.value.toLowerCase()) || user.first_name?user.first_name.toLowerCase().includes(event.target.value.toLowerCase()) : false || user.last_name?user.last_name.toLowerCase().includes(event.target.value.toLowerCase()) : false || user.id == event.target.value || user.country?user.country.toLowerCase().includes(event.target.value.toLowerCase()) : false;
+      // console.log(user.email.toLowerCase().includes(event.target.value.toLowerCase()));
+      // return user.email.toLowerCase().indexOf(event.target.value.toLowerCase()) !== -1 || user.first_name?user.first_name.toLowerCase().includes(event.target.value.toLowerCase()) : false || user.last_name?user.last_name.toLowerCase().includes(event.target.value.toLowerCase()) : false || parseInt(user.id) == parseInt(event.target.value);
+      return user.email.toLowerCase().includes(event.target.value.toLowerCase()) || parseInt(user.id) == parseInt(event.target.value);
+    })
+  }
+  addClient(userId:number){
+    this.isAddingClient = true;
+    this.userService.addClientToQuote(userId, this.quote.id).subscribe((response) => {
+      console.log(response);
+      this.clientData = response;
+      this.quote.client = {...this.clientData.client};
+      this.isClientAdded = true;
+      // this.isAddingClient = false;
+    });
+  }
+
+  addNewClient(){
+    this.displayStyle = "none"; 
+    this.displayStyleNewUser = "block"; 
+  }
+  closePopupNewUser() { 
+    this.displayStyleNewUser = "none"; 
+  } 
+
 
 }
