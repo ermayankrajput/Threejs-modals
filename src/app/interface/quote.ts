@@ -11,16 +11,11 @@ export interface Quote {
     validity:number|null;
     parent_id: number|0; 
     versions: number|0;
-    customer_name: string|'';
-    customer_company: string|'';
-    customer_address: string|'';
-    customer_email: string|'';
-    customer_designation: string|'';
-    customer_phone: string|'';
     usd_to_rmb: number|10;
     commission: number|1;
     client:User;
     is_final:number|0;
+    is_version_finalized:boolean|false;
 }
 export interface QuoteAttachment {
     id: number;

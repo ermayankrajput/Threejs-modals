@@ -1,5 +1,6 @@
 <div *ngIf="quote">
     <div id="MyDIv" #MyDIv>
+        <div class="py-5 text-danger" *ngIf="quote.is_final">Finalized by Engineer (由工程师最终确定)</div>
         <app-quote-client [client]="quote.client"></app-quote-client>
 
 

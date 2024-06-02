@@ -59,15 +59,15 @@
             <div class="row fs-8 mt-5">
                 <div class="col-3 ps-0">
                     <div class="">Quote To</div>
-                    <div class="blue  mb-0 mt-12">{{quote.customer_name}}</div>
-                    <div class="mt-0 black-50 ">{{quote.customer_designation}}</div>
-                    <div class=" mt-2"><span class="black-70">{{quote.customer_company}}</span></div>
-                    <div class="blue mt-2">{{quote.customer_email}}</div>
-                    <div class="blue mt-2 ">{{quote.customer_phone}}</div>
+                    <div class="blue  mb-0 mt-12">{{quote.client.first_name}} {{quote.client.last_name}}</div>
+                    <div class="mt-0 black-50 ">{{quote.client.designation}}</div>
+                    <div class=" mt-2"><span class="black-70">{{quote.client.company}}</span></div>
+                    <div class="blue mt-2">{{quote.client.email}}</div>
+                    <div class="blue mt-2 ">{{quote.client.phone}}</div>
                 </div>
                 <div class="col-4">
                     <div class="">Address</div>
-                    <div class=" mt-12"><span class="black-70">{{quote.customer_address}}</span></div>
+                    <div class=" mt-12"><span class="black-70">{{quote.client.address}}</span></div>
                 </div>
                 <div class="col-5 pe-0">
                     <div class="">Payment Method <span style="padding-left: 20px;" class="black-70">Bank Transfer</span></div>
@@ -112,8 +112,8 @@
                     <div>1. Tolerances: As per drawing</div>
                     <div>2. Import Tax: this tax in destination country is not included</div>
                 </div>
-                <div class="col-2 blue fs-8 ">Grand Total</div>
-                <div class="col-3 blue-div text-center fs-8">{{quote.grand_total}} (USD)</div>
+                <!-- <div class="col-2 blue fs-8 ">Grand Total</div>
+                <div class="col-3 blue-div text-center fs-8">{{quote.grand_total}} (USD)</div> -->
             </div>
             <div class="row mt-5">
                 <div class="col-5 offset-7 pe-0">
