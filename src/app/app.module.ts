@@ -39,8 +39,6 @@ import { EnquiriesComponent } from './admin/enquiries/enquiries.component';
 import { EnquiryDetailComponent } from './admin/enquiry-detail/enquiry-detail.component';
 import { AssignQuoteComponent } from './assign-quote/assign-quote.component';
 import { EndVendorComponent } from './end-vendor/end-vendor.component';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { Ng2SearchPipe } from 'ng2-search-filter';
 import { QuoteClientComponent } from './quote-client/quote-client.component';
 
 
@@ -88,7 +86,7 @@ import { QuoteClientComponent } from './quote-client/quote-client.component';
     BrowserModule,
     ReactiveFormsModule,
   ],
-  providers: [provideAnimations(), DatePipe,Ng2SearchPipeModule,Ng2SearchPipe],
+  providers: [provideAnimations(), DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
