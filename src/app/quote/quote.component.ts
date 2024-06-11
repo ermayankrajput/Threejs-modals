@@ -11,6 +11,7 @@ import { RootService } from 'src/app/services/root.service';
 import { UserService } from '../services/user.service';
 import { User } from '../interface/user';
 import { AuthService } from '../services/auth.service';
+import { DepartmentsEnum } from '../enums/departments.enum';
 
 
 @Component({
@@ -31,6 +32,7 @@ export class QuoteComponent implements OnInit  {
   clientData:any;
   isAddingClient = false;
   isClientAdded = false;
+  departments =DepartmentsEnum;
   
   
   constructor(private quoteInfoFactory:QuoteInfoFactory,private converterService:ConverterService,private quoteService:QuoteService,private route: ActivatedRoute, private router:Router, public rootService:RootService, private userService: UserService, public authService:AuthService) { }
@@ -113,12 +115,13 @@ export class QuoteComponent implements OnInit  {
     });
   }
 
-  updateQuote(){
+  updateQuote(navigateTo = ''){
     const cloneobj = _.clone(this.quote);
     const newObj = _.omit(cloneobj, ['quote_infos', 'parent_id', 'versions','client','is_version_finalized']);
     console.log("🚀 ~ QuoteComponent ~ updateQuote ~ this.quote:", this.quote)
     
     this.quoteService.updateQuote(newObj).subscribe((response) => {
+      navigateTo ? this.router.navigate([navigateTo]) : '';
     });
   }
 
@@ -175,6 +178,17 @@ export class QuoteComponent implements OnInit  {
   updateIsFinal(){
     this.quote.is_final = this.quote.is_final?0:1;
     this.updateQuote()
+  }
+
+  moveToDepartment(){
+    if(this.quote.department_id == DepartmentsEnum.SALES_DEPARTMENT){
+      this.quote.department_id = DepartmentsEnum.ENGINEERING_DEPARTMENT;
+    }else if(this.quote.department_id == DepartmentsEnum.ENGINEERING_DEPARTMENT){
+      this.quote.department_id = DepartmentsEnum.SALES_DEPARTMENT;
+    }
+    this.updateQuote('/quotes')
+    // this.router.navigate(['/quotes']);
+
   }
 
 }

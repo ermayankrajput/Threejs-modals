@@ -32,7 +32,7 @@
             </div> -->
         </div>
 
-        <div *ngIf="attachments" class="mb-5 pb-5 mt-5">
+        <div *ngIf="attachments" class="mb-2 mt-5">
             <h4 *ngIf="attachments.length > 0">Attachments</h4>
             <div class="row" *ngIf="attachments.length > 0">
                 <div class="col-lg-4" *ngFor="let attachment of attachments; let i = index">
@@ -40,6 +40,34 @@
                 </div>
             </div>
         </div>
+
+        <app-edit-user-profile [editUser]="currUser"></app-edit-user-profile>
+        
+
+        <!-- <div class="container">
+            <div class="row">
+                <div class="col-4 my-2">
+                    <label for="">First Name</label>
+                    <input type="text" [(ngModel)]="currUser.first_name" class="form-control">
+                </div>
+                <div class="col-4 my-2">
+                    <label for="">Last Name</label>
+                    <input type="text" [(ngModel)]="currUser.last_name" class="form-control">
+                </div>
+                <div class="col-4 my-2">
+                    <label for="">Email</label>
+                    <input type="email" [(ngModel)]="currUser.email" class="form-control">
+                </div>
+                <div class="col-4 my-2">
+                    <label for="">Company</label>
+                    <input type="text" [(ngModel)]="currUser.company" class="form-control">
+                </div>
+                <div class="col-4 my-2">
+                    <label for="">Designation</label>
+                    <input type="text" [(ngModel)]="currUser.designation" class="form-control">
+                </div>
+            </div>
+        </div> -->
         <div class="py-5 mb-5"></div>
     </div>
 </div>

@@ -135,6 +135,15 @@
         <input (change)="updateIsFinal()" [checked]="quote.is_final" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
         <label class="form-check-label" for="flexSwitchCheckChecked">Make It Final (完成后将其定为最终结果)</label>
     </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="text-end">
+                <button *ngIf="quote.department_id ==departments.SALES_DEPARTMENT" (click)="moveToDepartment()" class="btn btn-primary">Move to Engineering</button>
+                <button *ngIf="quote.department_id == departments.ENGINEERING_DEPARTMENT" (click)="moveToDepartment()" class="btn btn-primary">Move to Sales</button>
+            </div>
+        </div>
+    </div>
     
     <app-file-upload *ngIf="quote" [quoteId]="quote.id" (onCreateQuoteInfo)="addQuoteInfo($event)" (onUpdateQuote)="updateQuoteObject($event)"></app-file-upload>
 </div>

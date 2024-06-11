@@ -16,6 +16,7 @@ export interface Quote {
     client:User;
     is_final:number|0;
     is_version_finalized:boolean|false;
+    department_id:number;
 }
 export interface QuoteAttachment {
     id: number;

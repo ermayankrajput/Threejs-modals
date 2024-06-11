@@ -11,6 +11,8 @@ import * as _ from 'lodash';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import {Clipboard} from '@angular/cdk/clipboard';
+import { DepartmentsEnum } from '../enums/departments.enum';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-quote-index',
@@ -19,15 +21,17 @@ import {Clipboard} from '@angular/cdk/clipboard';
 })
 
 export class QuoteIndexComponent  {
-  constructor(private quoteService:QuoteService,private router:Router, private route: ActivatedRoute, private datePipe: DatePipe,private changeDetector: ChangeDetectorRef,private clipboard: Clipboard) {}
+  constructor(private quoteService:QuoteService,private router:Router, private route: ActivatedRoute, private datePipe: DatePipe,private changeDetector: ChangeDetectorRef,private clipboard: Clipboard, public authService:AuthService) {}
   quotes:any;
   api_res:any;
   isRevisionIndex = false;
   quote!:Quote
-  displayedColumns: string[] = ['sn', 'id','date_new','is_final','versions','action'];
+  displayedColumns: string[] = ['sn', 'id','date_new','is_final','versions','department_id','action'];
   dataSource!: MatTableDataSource<Quote>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  departments = DepartmentsEnum;
+  // d = QuoteComponent;
   // pipe!: DatePipe;
 
   ngOnInit(): void {
@@ -99,6 +103,20 @@ export class QuoteIndexComponent  {
 
   ngAfterContentChecked(): void {
     this.changeDetector.detectChanges();
+  }
+
+  moveToDepartment(){
+    // this.QuoteComponent.moveToDepartment();
+  }
+
+  filterDepartment(event:any){
+    console.log(event.target.value)
+    this.dataSource = this.quotes;
+    if(event.target.value != 0){
+      this.dataSource = this.quotes.filter((quote:Quote)=>{
+        return quote.department_id == event.target.value;
+      });
+    }
   }
 
 }

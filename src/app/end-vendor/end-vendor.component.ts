@@ -8,6 +8,8 @@ import { QuoteService } from '../services/quote.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { RootService } from 'src/app/services/root.service';
+import { UserService } from '../services/user.service';
+import { User } from '../interface/user';
 
 @Component({
   selector: 'app-end-vendor',
@@ -20,15 +22,24 @@ export class EndVendorComponent {
   fileObject:any;
   quote!:Quote;
   attachments!:QuoteAttachment[];
+  userResponse:any;
+  currUser!:User;
   
-  constructor(private quoteInfoFactory:QuoteInfoFactory,private converterService:ConverterService,private quoteService:QuoteService,private route: ActivatedRoute, private router:Router, public rootService:RootService) { }
+  constructor(private quoteInfoFactory:QuoteInfoFactory,private converterService:ConverterService,private quoteService:QuoteService,private route: ActivatedRoute, private router:Router, public rootService:RootService, private userService:UserService) { }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.quoteService.getSingleQuote(id).subscribe((response) => {
       this.api_res = response;
       this.quote = this.api_res.quote;
-      // console.log(this.quote)
+      console.log(this.quote)
+      this.userService.getCurrentUser().subscribe((response) => {
+        this.userResponse = response
+        console.log(this.userResponse.current_user);
+        this.currUser = this.userResponse.current_user;
+      },error=>{
+        console.log(error)
+      });
       this.quote.quote_infos = _.sortBy(this.quote.quote_infos, function(o){
         o.unit_quotes = _.sortBy(o.unit_quotes, function(o){return o.id});
         return o.id;
@@ -36,6 +47,10 @@ export class EndVendorComponent {
       this.quote.grand_total = this.quote.grand_total?this.quote.grand_total:0;
       this.attachments = JSON.parse(this.quote.attachments || null)
     });
+
+    
+      
+
   }
 
 

@@ -1,6 +1,21 @@
 <div class="container my-5 mb-5" *ngIf="quotes">
     <div class="mb-5 pt-4">
-        <h2 *ngIf="!isRevisionIndex">All Quotes</h2>
+        <h2 *ngIf="!isRevisionIndex">
+            <span *ngIf="authService.isSales()">Sales Department Quotes</span>
+            <span *ngIf="authService.isAdmin()">Engineering Department Quotes</span>
+            <span *ngIf="authService.isSuperAdmin()">All Quotes</span>
+            <!-- <span *ngIf="authService.isUserLogin()">User's Quotes</span> -->
+            <!-- <span *ngIf="authService.isVendor">User's Quotes</span> -->
+        </h2>
+        <div *ngIf="!isRevisionIndex && authService.isSuperAdmin()">
+            <select class="form-control" (change)="filterDepartment($event)" name="" id="">
+                <option value="0">All Quotes</option>
+                <option value="{{departments.SALES_DEPARTMENT}}">Sales Quotes</option>
+                <option value="{{departments.ENGINEERING_DEPARTMENT}}">Engineering Quotes</option>
+            </select>
+        </div>
+        
+        
         <div *ngIf="isRevisionIndex">
             <h2><span class="fs-16">Vendor Quotes of Quote </span> #{{quote.id}} <span class="ms-3 fs-16">{{quote.quote_date}}</span></h2>
             <div class="mt-2">
@@ -51,14 +66,28 @@
                     <span *ngIf="row.parent_id">{{row.user.email}}</span>
                 </td>
             </ng-container>
+            <ng-container matColumnDef="department_id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Department </th>
+                <td mat-cell *matCellDef="let row"> <span *ngIf="row.department_id == departments.SALES_DEPARTMENT">Sales</span> <span *ngIf="row.department_id == departments.ENGINEERING_DEPARTMENT">Engineering</span></td>
+            </ng-container>
     
             <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
                 <td mat-cell *matCellDef="let row; let i =index;" > 
-                    <span (click)="viewPdf(row.id)" class="badge rounded-pill bg-success">View PDF</span> |
-                    <span (click)="editQuote(row.id)" class="badge rounded-pill bg-primary">Edit</span> |
-                    <span (click)="copyShareLink(row.uuid)" *ngIf="!row.parent_id" class="badge rounded-pill bg-warning text-dark clipboard-button" role="button">Copy Share Link</span> |
-                    <span (click)="deleteQuote(row, i + (paginator.pageIndex*paginator.pageSize) )" class="badge rounded-pill bg-danger">Delete</span> 
+                    <div *ngIf="(authService.isSales() && row.department_id == departments.SALES_DEPARTMENT) || (authService.isAdmin()) || authService.isSuperAdmin()">
+                        <span (click)="viewPdf(row.id)" class="badge rounded-pill bg-success">View PDF</span> |
+                        <span (click)="editQuote(row.id)" class="badge rounded-pill bg-primary">Edit</span> |
+                        <!-- <span *ngIf="row.department_id == departments.SALES_DEPARTMENT">
+                            <span  (click)="moveToDepartment()" class="badge rounded-pill bg-info">Move to Engineering Department</span> |
+                        </span>
+                        <span *ngIf="row.department_id == departments.ENGINEERING_DEPARTMENT">
+                            <span  (click)="moveToDepartment()" class="badge rounded-pill bg-info">Move to Engineering Department</span> |
+                        </span> -->
+                        <span *ngIf="!row.parent_id">
+                            <span (click)="copyShareLink(row.uuid)"  class="badge rounded-pill bg-warning text-dark clipboard-button" role="button">Copy Share Link</span> |
+                        </span>
+                        <span (click)="deleteQuote(row, i + (paginator.pageIndex*paginator.pageSize) )" class="badge rounded-pill bg-danger">Delete</span> 
+                    </div>
                 </td>
             </ng-container>
     
