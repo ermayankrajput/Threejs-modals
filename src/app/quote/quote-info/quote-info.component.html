@@ -49,10 +49,10 @@
             <input type="text" (change)="updateQuoteInfo(quoteInfo)" class="form-control mt-2" placeholder="Color" [(ngModel)] = 'quoteInfo.color'>
         </div>
         <div class="col-lg-2 " *ngIf="authService.isVendor()">
-            Material (材料): <span class="form-control vendor-form-control">{{quoteInfo.material_search}}</span>
-            Technique (技术): <span class="form-control vendor-form-control">{{quoteInfo.technique}}</span>
-            Finishing (精加工): <span class="form-control vendor-form-control">{{quoteInfo.finishing}}</span>
-            Color (颜色): <span class="form-control vendor-form-control">{{quoteInfo.color}}</span>
+            Material / 材料: <span class="form-control vendor-form-control">{{quoteInfo.material_search}}</span>
+            Technique / 技术: <span class="form-control vendor-form-control">{{quoteInfo.technique}}</span>
+            Finishing / 精加工: <span class="form-control vendor-form-control">{{quoteInfo.finishing}}</span>
+            Color / 颜色: <span class="form-control vendor-form-control">{{quoteInfo.color}}</span>
         </div>
         <div class="col-lg-8">
             <div class="position-relative" *ngFor="let unitQuote of quoteInfo.unit_quotes; let i = index" >

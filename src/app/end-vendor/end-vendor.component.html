@@ -15,6 +15,7 @@
                 <div class="col-lg-2">
                     Total Cost (in RMB)<br>总成本（人民币）<br><span class="text-danger fw-bolder">None</span>
                 </div>
+                <div class="col-lg-4"><button class="btn btn-primary" (click)="downloadAllFiles()">Download all files / 下载所有文件</button></div>
             </div>
         </div>
         <div *ngFor="let quoteInfo of quote.quote_infos; let i = index" class="position-relative">
@@ -33,13 +34,19 @@
         </div>
 
         <div *ngIf="attachments" class="mb-2 mt-5">
-            <h4 *ngIf="attachments.length > 0">Attachments</h4>
+            <h4 *ngIf="attachments.length > 0">Attachments / 附件</h4>
             <div class="row" *ngIf="attachments.length > 0">
                 <div class="col-lg-4" *ngFor="let attachment of attachments; let i = index">
                     <app-quote-attachment [attachment]='attachment' [quoteId]='quote.id' [disableRemove]="true"></app-quote-attachment>
                 </div>
             </div>
         </div>
+
+        <!-- <div class="container mt-4"> -->
+            <!-- <div class="row"> -->
+                <h3 class="mt-5">Update your detail / 更新您的详细信息</h3>
+            <!-- </div> -->
+        <!-- </div> -->
 
         <app-edit-user-profile [editUser]="currUser"></app-edit-user-profile>
         
@@ -71,3 +78,30 @@
         <div class="py-5 mb-5"></div>
     </div>
 </div>
+
+<!-- The Modal -->
+<div class="modal" tabindex="-1" role="dialog" style="background: rgb(0 0 0 / 80%);"
+    [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Download Files / 下载文件</h4>
+                <button type="button" class="btn-close" (click)="closePopup()"></button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body text-center">
+                <div *ngIf="!downloadPath">
+                    <h5>Preparing files... / 正在准备文件...</h5>
+                    <img style="width:50px;" src="{{rootService.getBucketUrl()+'load.gif'}}" alt="loading">
+                </div>
+                <a *ngIf="downloadPath" target="_blank" href="{{rootService.devApiBase}}{{downloadPath.path}}">Download ZIP File / 下载 ZIP 文件</a>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="closePopup()">Close / 关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- The Modal END -->

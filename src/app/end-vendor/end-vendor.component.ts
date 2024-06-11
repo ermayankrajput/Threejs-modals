@@ -24,6 +24,8 @@ export class EndVendorComponent {
   attachments!:QuoteAttachment[];
   userResponse:any;
   currUser!:User;
+  displayStyle = "none";
+  downloadPath!:any;
   
   constructor(private quoteInfoFactory:QuoteInfoFactory,private converterService:ConverterService,private quoteService:QuoteService,private route: ActivatedRoute, private router:Router, public rootService:RootService, private userService:UserService) { }
 
@@ -124,4 +126,17 @@ export class EndVendorComponent {
     }));
     return Math.round((totalCost || 0 + parseFloat(this.quote.shipping_cost || '0'))*100)/100;
   }
+
+  downloadAllFiles(){
+    this.displayStyle = "block";
+    const quoteId =  this.route.snapshot.paramMap.get('id');
+    this.quoteService.downloadAllFiles(quoteId).subscribe((response) => {
+      // console.log(response);
+      this.downloadPath = response;
+    });
+    // console.log("🚀 ~ EndVendorComponent ~ downloadAllFiles ~ this.route.snapshot.paramMap.get('id'):", this.route.snapshot.paramMap.get('id'))
+  }
+  closePopup() { 
+    this.displayStyle = "none"; 
+  } 
 }

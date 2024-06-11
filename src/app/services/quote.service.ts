@@ -53,5 +53,9 @@ export class QuoteService extends RootService {
   createUniqueQuote(): Observable<HttpEvent<any>> {
     return this.http.get<any>(this.apiBase + "create-quote",{headers : this.getHeaders()});
   }
+
+  downloadAllFiles(quoteId:any): Observable<HttpEvent<any>> {
+    return this.http.get<any>(this.apiBase + "download-all-files/" + quoteId,{headers : this.getHeaders()});
+  }
   
 }
