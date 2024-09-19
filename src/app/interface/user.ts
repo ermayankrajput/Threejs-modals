@@ -49,3 +49,8 @@ export interface Role{
     name: string;
     status: number;
 }
+
+export interface Exchange{
+    id: number;
+    rate: string;
+}

@@ -40,6 +40,7 @@ import { EnquiryDetailComponent } from './admin/enquiry-detail/enquiry-detail.co
 import { AssignQuoteComponent } from './assign-quote/assign-quote.component';
 import { EndVendorComponent } from './end-vendor/end-vendor.component';
 import { QuoteClientComponent } from './quote-client/quote-client.component';
+import { ExchangeRateComponent } from './exchange-rate/exchange-rate.component';
 
 
 @NgModule({
@@ -73,6 +74,7 @@ import { QuoteClientComponent } from './quote-client/quote-client.component';
     AssignQuoteComponent,
     EndVendorComponent,
     QuoteClientComponent,
+    ExchangeRateComponent,
   ],
   imports: [
     AppRoutingModule,

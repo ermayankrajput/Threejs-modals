@@ -18,8 +18,13 @@ import { EnquiriesComponent } from './admin/enquiries/enquiries.component';
 import { EnquiryDetailComponent } from './admin/enquiry-detail/enquiry-detail.component';
 import { AssignQuoteComponent } from './assign-quote/assign-quote.component';
 import { EndVendorComponent } from './end-vendor/end-vendor.component';
+import { ExchangeRateComponent } from './exchange-rate/exchange-rate.component';
 
 const routes: Routes = [
+  {
+    path:'exchange-rate',
+    component:ExchangeRateComponent
+  },
   {
     path:'vendor-quote/:id',
     component:EndVendorComponent

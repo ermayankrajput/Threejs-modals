@@ -18,7 +18,10 @@
         <span class="form-control vendor-form-control">{{ addCommission(unitQuote.unit_price && unitQuote.quantity ? unitQuote.unit_price
             * unitQuote.quantity : null)}}</span>
     </div>
-    <div class="col-lg-2">
+    <div class="col-lg-2" *ngIf="authService.isAdmin()">
         <input type="number" (change)="update()" class="form-control" id="exampleFormControlInput1" [(ngModel)] = 'unitQuote.lead_time'>
+    </div>
+    <div class="col-lg-2 text-center" *ngIf="!authService.isAdmin()">
+        <span class="form-control vendor-form-control">{{ unitQuote.lead_time }}</span>
     </div>
 </div>

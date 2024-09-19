@@ -21,18 +21,18 @@
         <label class="form-label">Email / 电子邮件</label>
         <span style="background: #dadada;cursor: not-allowed;" class="form-control form-control">{{user.email}}</span>
     </div>
-    <div class="col-4 my-3">
+    <!-- <div class="col-4 my-3">
         <label class="form-label">Secondary Email / 辅助电子邮件</label>
         <input type="text" [(ngModel)]="user.secondary_email" class="form-control form-control" />
-    </div>
+    </div> -->
     <div class="col-4 my-3">
         <label class="form-label">Phone / 电话</label>
         <input type="text" [(ngModel)]="user.phone" class="form-control form-control" />
     </div>
-    <div class="col-4 my-3">
+    <!-- <div class="col-4 my-3">
         <label class="form-label">Secondary Phone / 辅助电话</label>
         <input type="text" [(ngModel)]="user.secondary_phone" class="form-control form-control" />
-    </div>
+    </div> -->
     <div class="col-4 my-3" *ngIf="authService.isSuperAdmin()">
         <label class="form-label">Role / 角色</label>
         <select class="form-select" name="role" [(ngModel)]="user.role_id" required>
@@ -41,12 +41,12 @@
             </ng-container>
         </select>
     </div>
-    <div class="col-4 my-3">
+    <!-- <div class="col-4 my-3">
         <label class="form-label">Age / 年龄</label>
         <select class="form-select" name="age" [(ngModel)]="user.age">
             <option *ngFor="let age of ageList" [value]="age">{{age}}</option>
         </select>
-    </div>
+    </div> -->
     <div class="col-4 my-3">
         <label class="form-label">Designation / 指定</label>
         <input type="text" [(ngModel)]="user.designation" class="form-control form-control" />

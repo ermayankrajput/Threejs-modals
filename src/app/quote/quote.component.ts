@@ -118,7 +118,8 @@ export class QuoteComponent implements OnInit  {
   updateQuote(navigateTo = ''){
     const cloneobj = _.clone(this.quote);
     const newObj = _.omit(cloneobj, ['quote_infos', 'parent_id', 'versions','client','is_version_finalized']);
-    console.log("🚀 ~ QuoteComponent ~ updateQuote ~ this.quote:", this.quote)
+    console.log("🚀 ~ QuoteComponent ~ updateQuote ~ this.quote:", newObj)
+    return false;
     
     this.quoteService.updateQuote(newObj).subscribe((response) => {
       navigateTo ? this.router.navigate([navigateTo]) : '';

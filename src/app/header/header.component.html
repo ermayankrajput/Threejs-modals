@@ -8,6 +8,7 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0" *ngIf="isUserLogin && !authService.isVendor()">
                 <li *ngIf="isNewQuoteVisible && isUserLogin" class="nav-item"><a class="nav-link text-white border py-2 px-3" aria-current="page" role="button" (click)="createUniqueQuote()">New Quote</a></li>
                 <li *ngIf="isUserLogin" class="nav-item"><a class="nav-link text-white" routerLink="/quotes">Quotes</a></li>
+                <li *ngIf="isUserLogin" class="nav-item"><a class="nav-link text-white" routerLink="/exchange-rate">Exchange Rate</a></li>
 
                 <li *ngIf="!isUserLogin" class="nav-item"><a class="nav-link text-white" routerLink="/login">Login</a></li>
                 <!-- <li *ngIf="!isUserLogin" class="nav-item"><a class="nav-link" routerLink="/register">Register</a></li> -->

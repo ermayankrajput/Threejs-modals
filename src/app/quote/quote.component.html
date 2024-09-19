@@ -99,7 +99,9 @@
                 <div class="col-lg-2">Validity (in days): <input (change)="updateQuote()" type="number" class="form-control" [(ngModel)] = 'quote.validity'></div>
                 <div class="col-lg-2">Shipping Cost (in USD): <input (change)="updateQuote()" type="number" class="form-control" [(ngModel)]='quote.shipping_cost'></div>
                 <!-- <div class="col-lg-2">Total Cost (in USD)<br><span class="text-danger fw-bolder">{{quote.grand_total}}</span></div> -->
-                <div class="col-lg-2">USD to RMB Rates: <input (change)="updateQuote()" type="number" class="form-control" [(ngModel)]='quote.usd_to_rmb'></div>
+                <div class="col-lg-2">USD to RMB Rates: <br>
+                    <span style="background-color: rgb(209, 209, 209); cursor: not-allowed;" class="form-control"> {{quote.usd_to_rmb}}</span>
+                </div>
                 <div *ngIf="!authService.isSales()" class="col-lg-2">Commission(in %): <input (change)="updateQuote()" type="number" class="form-control" [(ngModel)]='quote.commission'></div>
                 <div class="col-lg-2 mt-3 text-end">
                     <button class="btn btn-warning mt-2" *ngIf="quote.quote_infos.length > 0" (click)="view()">View</button>

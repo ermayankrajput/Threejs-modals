@@ -6,8 +6,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class RootService {
-    devApiBase = 'http://127.0.0.1:5001/';
-    prodApiBase = "http://127.0.0.1:5001/";
+    devApiBase = 'http://127.0.0.1:5000/';
+    prodApiBase = "http://127.0.0.1:5000/";
     getHeaders(){
         return new HttpHeaders({
             'Content-Type': 'application/json',

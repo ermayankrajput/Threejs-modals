@@ -44,7 +44,8 @@ export class FileUploadComponent implements OnInit {
         const file = item.getAsFile();
         // console.log(`… file[${i}].name = ${file.name}`);
         // console.log(file);
-        this.upload3dfile(file)
+        // this.upload3dfile(file)
+        this.upload(file)
       }
     });
     // this.upload3dfile(ev)
@@ -54,17 +55,18 @@ export class FileUploadComponent implements OnInit {
 
   upload3dfile(event:any){
     // console.log(event.target.files[0]);
-    // this.upload(event.target.files[0]);
+    // this.upload(event);
     // console.log('event',event);
+    // return false;
     const files:File[] = event?.target?.files||event;
 
     // console.log(files, files[0])
-    // this.upload(files[0]);
-    if (files) {
-      for (const file of files) {
-        this.upload(file);
-      }
-    }
+    this.upload(files[0]);
+    // if (files) {
+    //   for (const file of files) {
+    //     this.upload(file);
+    //   }
+    // }
   }
 
   upload(file:File){
